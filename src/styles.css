@@ -129,3 +129,6 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.045em}h1 em{color
 @media(max-width:430px){.songs li{grid-template-columns:24px 1fr 30px;gap:8px}.songs em{display:none}}
 @media(min-width:640px){.uni{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.night h1 em{background:none;background-image:none;color:var(--lime);-webkit-text-fill-color:var(--lime)}
+.paper h1 em{background:none;background-image:none;color:var(--teal);-webkit-text-fill-color:var(--teal)}
