@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-A galeria e os vídeos reais aguardam a seleção de arquivos. As cinco perguntas são provisórias e podem ser ajustadas em `src/main.jsx`.
+A galeria reutiliza três fotos do presente anterior e os recados em vídeo de Laura e Bia. O vídeo da Laura é servido diretamente pelo repositório público original. As cinco perguntas são provisórias e podem ser ajustadas em `src/main.jsx`.
