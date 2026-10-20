@@ -17,10 +17,10 @@ const chapters = [
     ["Por todo esse tempo", "Sempre mais uma história", "Teve Minecraft, fofoca, risada, abraço apertado e conversa que começou pequena e foi longe."]
   ] },
   { id: "memorias", number: "02", title: "Memórias", hint: "As fotos que gosto de guardar", lead: "Queria que você pudesse passar por esses momentos sem pressa.", blocks: [
-    ["Fotos e vídeos", "Nosso álbum vem aqui", "As fotos e os vídeos pessoais serão adicionados depois de escolhermos os arquivos para esta versão."]
+    ["Um pouco de nós", "Fotos que eu gosto de guardar", "Essas são algumas das fotos que estavam no nosso primeiro presente. Lembranças de dias diferentes, todas nossas."]
   ] },
   { id: "recados", number: "03", title: "Recados", hint: "Tem mais gente aqui", lead: "Eu não sou o único querendo te desejar feliz aniversário.", blocks: [
-    ["Laura e Bia", "Um recado de cada uma", "Os vídeos que apareceram no presente antigo podem entrar aqui, com controles simples para assistir pelo celular."]
+    ["Laura e Bia", "Aperte o play", "Eu não quis que você passasse seu aniversário sem ouvir quem também gosta muito de você."]
   ] },
   { id: "universo", number: "04", title: "Seu universo", hint: "Pequenas coisas com a sua cara", lead: "Algumas coisas me fazem lembrar de você na mesma hora.", blocks: [
     ["01", "Uma música", "Taylor Swift tocando e você com a guitarra na mão."],
@@ -92,7 +92,7 @@ function App() {
       </div>
       <div className="welcome-aside" aria-hidden="true">
         <span className="scribble">desde 27.11.21</span>
-        <div className="orbit"><CatLine /></div>
+        <img className="hero-photo" src="/media/juntos-2.jpg" alt="" fetchPriority="high" /><span className="cat-stamp"><CatLine /></span>
         <span className="aside-bottom">um presente só seu <span>↗</span></span>
       </div>
     </main>}
@@ -161,6 +161,15 @@ function App() {
             <div><h2>{title}</h2><p>{body}</p></div>
           </section>)}
       </div>
+      {chapter === 1 && <div className="photo-gallery" aria-label="Fotos nossas">
+        <figure><img src="/media/juntos-1.jpg" alt="Giovanna e Vitor juntos em um passeio" loading="lazy" /><figcaption>Um dia para lembrar.</figcaption></figure>
+        <figure><img src="/media/juntos-2.jpg" alt="Giovanna e Vitor em uma selfie" loading="lazy" /><figcaption>Mais uma para guardar.</figcaption></figure>
+        <figure><img src="/media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" loading="lazy" /><figcaption>E essa também.</figcaption></figure>
+      </div>}
+      {chapter === 2 && <div className="video-gallery">
+        <section><h2>Laura</h2><video controls playsInline preload="none" aria-label="Recado em vídeo da Laura"><source src="https://raw.githubusercontent.com/VitorMateus016/PresenteGiovanna/main/videoLaura.mp4" type="video/mp4" />Seu navegador não conseguiu abrir o vídeo.</video></section>
+        <section><h2>Bia</h2><video controls playsInline preload="none" aria-label="Recado em vídeo da Bia"><source src="/media/recado-bia.mp4" type="video/mp4" />Seu navegador não conseguiu abrir o vídeo.</video></section>
+      </div>}
       <nav className="chapter-nav" aria-label="Navegação dos capítulos">
         <button className="text-link" onClick={() => setPage("home")}>← todos os capítulos</button>
         {chapter < chapters.length - 1 && <button className="text-link" onClick={() => setChapter(chapter + 1)}>próximo capítulo ↗</button>}
