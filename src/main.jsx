@@ -92,7 +92,7 @@ function App() {
       </div>
       <div className="welcome-aside" aria-hidden="true">
         <span className="scribble">desde 27.11.21</span>
-        <img className="hero-photo" src="/media/juntos-2.jpg" alt="" fetchPriority="high" /><span className="cat-stamp"><CatLine /></span>
+        <img className="hero-photo" src="/media/juntos-3.jpg" alt="" fetchPriority="high" /><span className="cat-stamp"><CatLine /></span>
         <span className="aside-bottom">um presente só seu <span>↗</span></span>
       </div>
     </main>}
