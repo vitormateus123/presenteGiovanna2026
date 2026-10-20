@@ -8,36 +8,17 @@ jobs:
   verificar:
     runs-on: ubuntu-latest
     steps:
-      - name: Consultar HTML e recursos públicos
+      - name: Conferir site em navegador
         run: |
+          google-chrome --version
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=5000 --enable-logging=stderr --dump-dom "https://vitormateus123.github.io/presenteGiovanna2026/" > /tmp/giovanna-dom.txt 2> /tmp/giovanna-browser.txt || true
           python - <<'PY'
+          from pathlib import Path
           from html.parser import HTMLParser
-          from urllib.parse import urljoin
-          from urllib.request import Request, urlopen
-          class Links(HTMLParser):
-              def __init__(self):
-                  super().__init__()
-                  self.paths = []
-              def handle_starttag(self, tag, attrs):
-                  a = dict(attrs)
-                  if tag == "script" and a.get("src"):
-                      self.paths.append(a["src"])
-                  if tag == "link" and a.get("rel") == "stylesheet" and a.get("href"):
-                      self.paths.append(a["href"])
-          for url in ("https://vitormateus123.github.io/presenteGiovanna2026/", "https://presentegiovanna.com/"):
-              print("CHECK", url)
-              try:
-                  with urlopen(Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=15) as response:
-                      body = response.read()
-                      final = response.geturl()
-                      print("FINAL", final, "STATUS", response.status, "TYPE", response.headers.get("Content-Type"), "BYTES", len(body))
-                      print("HTML", body[:2000].decode("utf-8", "replace"))
-                      links = Links()
-                      links.feed(body.decode("utf-8", "replace"))
-                      for path in links.paths:
-                          asset = urljoin(final, path)
-                          with urlopen(Request(asset, headers={"User-Agent": "Mozilla/5.0"}), timeout=15) as resource:
-                              print("ASSET", asset, "STATUS", resource.status, "TYPE", resource.headers.get("Content-Type"), "HEAD", repr(resource.read(80)))
-              except Exception as exc:
-                  print("ERROR", type(exc).__name__, str(exc))
+          doc = Path("/tmp/giovanna-dom.txt").read_text(errors="replace")
+          errors = Path("/tmp/giovanna-browser.txt").read_text(errors="replace")
+          print("DOM_LENGTH", len(doc))
+          print("HAS_WELCOME", "Giovanna, hoje o show" in doc)
+          print("DOM_SAMPLE", doc[-3500:])
+          print("BROWSER_ERRORS", "\n".join(line for line in errors.splitlines() if any(word in line.lower() for word in ["error", "uncaught", "fail", "exception"]))[-5500:])
           PY
