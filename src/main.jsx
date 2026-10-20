@@ -92,7 +92,7 @@ function App() {
       </div>
       <div className="welcome-aside" aria-hidden="true">
         <span className="scribble">desde 27.11.21</span>
-        <img className="hero-photo" src="/media/juntos-3.jpg" alt="" fetchPriority="high" /><span className="cat-stamp"><CatLine /></span>
+        <img className="hero-photo" src="./media/juntos-3.jpg" alt="" fetchPriority="high" /><span className="cat-stamp"><CatLine /></span>
         <span className="aside-bottom">um presente só seu <span>↗</span></span>
       </div>
     </main>}
@@ -162,13 +162,13 @@ function App() {
           </section>)}
       </div>
       {chapter === 1 && <div className="photo-gallery" aria-label="Fotos nossas">
-        <figure><img src="/media/juntos-1.jpg" alt="Giovanna e Vitor juntos em um passeio" loading="lazy" /><figcaption>Um dia para lembrar.</figcaption></figure>
-        <figure><img src="/media/juntos-2.jpg" alt="Giovanna e Vitor em uma selfie" loading="lazy" /><figcaption>Mais uma para guardar.</figcaption></figure>
-        <figure><img src="/media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" loading="lazy" /><figcaption>E essa também.</figcaption></figure>
+        <figure><img src="./media/juntos-1.jpg" alt="Giovanna e Vitor juntos em um passeio" loading="lazy" /><figcaption>Um dia para lembrar.</figcaption></figure>
+        <figure><img src="./media/juntos-2.jpg" alt="Giovanna e Vitor em uma selfie" loading="lazy" /><figcaption>Mais uma para guardar.</figcaption></figure>
+        <figure><img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" loading="lazy" /><figcaption>E essa também.</figcaption></figure>
       </div>}
       {chapter === 2 && <div className="video-gallery">
         <section><h2>Laura</h2><video controls playsInline preload="none" aria-label="Recado em vídeo da Laura"><source src="https://raw.githubusercontent.com/VitorMateus016/PresenteGiovanna/main/videoLaura.mp4" type="video/mp4" />Seu navegador não conseguiu abrir o vídeo.</video></section>
-        <section><h2>Bia</h2><video controls playsInline preload="none" aria-label="Recado em vídeo da Bia"><source src="/media/recado-bia.mp4" type="video/mp4" />Seu navegador não conseguiu abrir o vídeo.</video></section>
+        <section><h2>Bia</h2><video controls playsInline preload="none" aria-label="Recado em vídeo da Bia"><source src="./media/recado-bia.mp4" type="video/mp4" />Seu navegador não conseguiu abrir o vídeo.</video></section>
       </div>}
       <nav className="chapter-nav" aria-label="Navegação dos capítulos">
         <button className="text-link" onClick={() => setPage("home")}>← todos os capítulos</button>
