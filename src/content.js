@@ -25,6 +25,16 @@ export const results = [
   { min: 0, t: "Pista", d: "Tudo bem. Esse site existe justamente para lembrar." },
 ];
 
+// Envelope que abre ao toque, entre o soundcheck e o setlist
+export const gift = {
+  kicker: "Antes do setlist", title: "Chegou uma", em: "carta pra você.", hint: "toque no envelope para abrir",
+  photo: "./media/juntos-1.jpg", alt: "Giovanna e Vitor juntos em um passeio", to: "Gi,",
+  text: [
+    "Feliz aniversário. Esse cantinho foi feito para celebrar você e tudo de bom que cabe na nossa história.",
+    "Vai com calma: tem fotos, recados em vídeo, músicas e uma carta esperando no final.",
+  ],
+};
+
 // c = cor (paleta no styles.css) | i = ícone
 export const chapters = [
   { id: "historia", i: "feather", c: "fusion", title: "Como começou", hint: "27.11.2021, o rolê da igreja", lead: "Toda turnê tem uma primeira data. A nossa tem dia, mês e ano." },
@@ -38,7 +48,8 @@ export const chapters = [
 export const story = [
   { d: "27.11.2021", t: "O rolê da igreja", p: "Foi a data que escolhi para começar a contar. Eu não sabia ainda, mas aquele dia ia virar contador, site e presente." },
   { d: "Etec e 9 de Julho", t: "A fase dos cafés", p: "Conversa depois da aula, “vamos tomar um café” como desculpa para ficar mais um tempo. Dias comuns que só ficaram bons porque você estava." },
-  { d: "Desde então", t: "Minecraft, fofoca e abraço apertado", p: "Conversa que começa pequena e vai longe, dentro ou fora do jogo." },
+  { d: "Desde então", t: "Minecraft, fofoca e abraço apertado", p: "Conversa que começa pequena e vai longe, dentro ou fora do jogo.",
+    img: "./media/juntos-3.jpg", alt: "Giovanna e Vitor em uma foto ao ar livre", cap: "e a história continua" },
 ];
 
 export const photos = [
@@ -91,3 +102,5 @@ export const letter = [
   "Gosto muito de ter você por perto. Que o seu próximo ano venha cheio de história para contar, música para tocar e motivo para rir.",
   "Te amo.",
 ];
+
+export const letterPhoto = { src: "./media/juntos-2.jpg", alt: "Vitor e Giovanna em uma selfie", cap: "nós dois" };
