@@ -11,7 +11,7 @@ jobs:
       - name: Conferir site em navegador
         run: |
           google-chrome --version
-          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=5000 --enable-logging=stderr --dump-dom "https://vitormateus123.github.io/presenteGiovanna2026/" > /tmp/giovanna-dom.txt 2> /tmp/giovanna-browser.txt || true
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --virtual-time-budget=6000 --enable-logging=stderr --dump-dom "https://vitormateus123.github.io/presenteGiovanna2026/" > /tmp/giovanna-dom.txt 2> /tmp/giovanna-browser.txt || true
           python - <<'PY'
           from pathlib import Path
           from html.parser import HTMLParser
@@ -19,6 +19,7 @@ jobs:
           errors = Path("/tmp/giovanna-browser.txt").read_text(errors="replace")
           print("DOM_LENGTH", len(doc))
           print("HAS_WELCOME", "Giovanna, hoje o show" in doc)
+          print("HAS_CARDS", "Começar o soundcheck" in doc)
           print("DOM_SAMPLE", doc[-3500:])
           print("BROWSER_ERRORS", "\n".join(line for line in errors.splitlines() if any(word in line.lower() for word in ["error", "uncaught", "fail", "exception"]))[-5500:])
           PY
