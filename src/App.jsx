@@ -71,17 +71,19 @@ const Top = ({ back }) => (
 
 const Welcome = () => (
   <main className="wrap hero">
-    <div className="hero-copy rise">
-      <p className="kicker"><span className="kicker-mark" /> Um presente feito pra você</p>
-      <h1>Feliz aniversário,<br /><em>Giovanna.</em></h1>
-      <p className="lead">Guardei algumas lembranças, recados e coisas que me fazem pensar em você. Fiz tudo com carinho. Espero que goste.</p>
-      <button className="btn" onClick={() => go("soundcheck")}>Quero ver <Icon n="arrow" /></button>
-      <p className="hero-date">desde 27 de novembro de 2021</p>
+    <div className="rise">
+      <p className="kicker">Abre as cortinas</p>
+      <h1 style={{ marginTop: 18 }}>Giovanna, hoje o show é <em>seu.</em></h1>
+      <p className="lead">Antes de abrir o palco, um soundcheck rápido: cinco perguntas sobre a gente. Errar não barra ninguém. Só quero ver quem lembra mais do rolê da igreja.</p>
+      <button className="btn" onClick={() => go("soundcheck")}>Começar o soundcheck <Icon n="arrow" /></button>
     </div>
-    <figure className="hero-photo rise">
-      <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor juntos em uma foto ao ar livre" fetchPriority="high" />
-      <figcaption>um dia que virou lembrança boa</figcaption>
-    </figure>
+    <div className="polaroid rise">
+      <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" fetchPriority="high" />
+      <span>desde 27.11.21</span>
+      <i className="sticker s1"><Icon n="pick" /></i>
+      <i className="sticker s2"><Icon n="cat" /></i>
+      <i className="sticker s3"><Icon n="spark" /></i>
+    </div>
   </main>
 );
 
@@ -91,11 +93,11 @@ function Quiz() {
     const r = results.find((x) => score >= x.min);
     return (
       <main className="wrap stage rise">
-        <p className="kicker"><span className="kicker-mark" /> Prontinho</p>
+        <p className="kicker">Soundcheck concluído</p>
         <div className="score">{score}<small>/{quiz.length}</small></div>
-        <h1 className="result-title">{score === quiz.length ? <>Você lembra de <em>tudo.</em></> : <>A gente tem <em>história.</em></>}</h1>
-        <p className="lead result-lead">{r.d}</p>
-        <div><button className="btn" onClick={() => go("presente")}>Abrir o presente <Icon n="arrow" /></button></div>
+        <h1 style={{ fontSize: "clamp(36px,7vw,60px)" }}>Ingresso: <em>{r.t}</em></h1>
+        <p className="lead" style={{ margin: "16px 0 30px" }}>{r.d}</p>
+        <div><button className="btn" onClick={() => go("setlist")}>Abrir o setlist <Icon n="arrow" /></button></div>
       </main>
     );
   }
@@ -124,40 +126,6 @@ function Quiz() {
   );
 }
 
-function Gift() {
-  const [open, setOpen] = useState(false);
-  return (
-    <main className="wrap gift-page">
-      <header className="gift-heading rise">
-        <p className="kicker"><span className="kicker-mark" /> Antes de continuar</p>
-        <h1>Um bilhete <em>pra você.</em></h1>
-        <p className="lead">Uma pequena pausa antes de abrir as lembranças.</p>
-      </header>
-      <article className={"gift-note rise" + (open ? " is-open" : "")}>
-        <figure className="note-photo">
-          <img src="./media/juntos-1.jpg" alt="Giovanna e Vitor em uma lembrança juntos" loading="lazy" />
-          <figcaption>com carinho, Vitor</figcaption>
-        </figure>
-        <div className="note-copy">
-          <span className="hand">Gi,</span>
-          {open ? (
-            <>
-              <p>Feliz aniversário. Preparei esse cantinho para celebrar você e tudo de bom que existe na nossa história.</p>
-              <p>Vai com calma. Tem fotos, recados e uma carta esperando no final.</p>
-              <button className="btn" onClick={() => go("setlist")}>Entrar no presente <Icon n="arrow" /></button>
-            </>
-          ) : (
-            <>
-              <p>Tem uma mensagem escondida neste bilhete.</p>
-              <button className="btn btn-small" onClick={() => setOpen(true)} aria-expanded={open}>Revelar mensagem <Icon n="arrow" /></button>
-            </>
-          )}
-        </div>
-      </article>
-    </main>
-  );
-}
-
 function Setlist() {
   const days = useMemo(() => {
     const n = new Date();
@@ -166,18 +134,19 @@ function Setlist() {
   return (
     <main className="wrap">
       <section className="set-hero rise">
-        <p className="kicker"><span className="kicker-mark" /> Escolhe por onde começar</p>
-        <h1>Um pouco <em>da gente.</em></h1>
-        <p className="lead">Histórias, fotos, recados e outras coisas que guardei pra você.</p>
-        <div className="stub"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde aquele<br />rolê da igreja</span></div>
+        <p className="kicker">Ingresso liberado</p>
+        <h1 style={{ marginTop: 14 }}>Seu <em>setlist.</em></h1>
+        <p className="lead">Seis faixas. Começa pela primeira ou pula direto para o refrão. A carta fica para o final.</p>
+        <div className="stub"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
       </section>
       <ol className="tracks">
         {chapters.map((c, k) => (
           <li key={c.id}>
             <a className={"track c-" + c.c} href={"#/faixa/" + c.id}>
+              <span className="tk-ic"><Icon n={c.i} /></span>
               <span className="tk-n">{String(k + 1).padStart(2, "0")}</span>
               <span className="tk-t"><strong>{c.title}</strong><small>{c.hint}</small></span>
-              <span className="track-arrow"><Icon n="arrow" /></span>
+              <Icon n="arrow" />
             </a>
           </li>
         ))}
@@ -204,38 +173,19 @@ const Videos = () => (
   )} />
 );
 const Mixtape = () => (
-  <div className="mixtape">
-    <div className="mixtape-intro">
-      <span className="mixtape-icon"><Icon n="note" size={25} /></span>
-      <div><p className="kicker">pra ouvir por aí</p><h2>Uma trilha com a sua cara.</h2></div>
-    </div>
-    {SPOTIFY_PLAYLIST_ID
-      ? <iframe className="spot" title="Playlist da Giovanna" loading="lazy"
-          src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator`}
-          allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" />
-      : <p className="playlist-note">Separei algumas músicas que me lembram você. Toque em uma para procurar e ouvir.</p>}
-    <ol className="songs">{tracks.map(([t, a, r], k) => (
-      <li key={t}>
-        <span>{String(k + 1).padStart(2, "0")}</span>
-        <div><strong>{t}</strong><small>{a}</small></div>
-        <em>{r}</em>
-        <a className="song-link" href={`https://open.spotify.com/search/${encodeURIComponent(t + " " + a)}`}
-          target="_blank" rel="noreferrer" aria-label={`Buscar ${t} de ${a} no Spotify`}><Icon n="arrow" size={18} /></a>
-      </li>
-    ))}</ol>
-  </div>
+  <>
+    {SPOTIFY_PLAYLIST_ID && <iframe className="spot" title="Playlist da Giovanna" loading="lazy"
+      src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator`}
+      allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" />}
+    <ol className="songs">{tracks.map(([t, a, r], k) => <li key={t}><span>{k + 1}</span><div><strong>{t}</strong><small>{a}</small></div><em>{r}</em></li>)}</ol>
+  </>
 );
-
 const Universe = () => (
   <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}><Icon n={u.i} /><h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
 );
 const Letter = () => (
-  <article className="letter">
-    <figure className="letter-photo"><img src="./media/juntos-2.jpg" alt="Vitor e Giovanna em uma foto juntos" loading="lazy" /><figcaption>uma lembrança nossa</figcaption></figure>
-    <div className="letter-copy">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></div>
-  </article>
+  <article className="letter">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
 );
-
 const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, carta: Letter };
 
 function Track({ id }) {
@@ -246,13 +196,13 @@ function Track({ id }) {
     <main className="wrap chap">
       <header className="rise">
         <span className={"chip c-" + c.c}><Icon n={c.i} size={26} /></span>
-        <p className="kicker">Capítulo {k + 1} de {chapters.length}</p>
+        <p className="kicker">Faixa {k + 1} de {chapters.length}</p>
         <h1>{c.title}</h1>
         <p className="lead">{c.lead}</p>
       </header>
       <Body />
-      <nav className="pager" aria-label="Navegação entre capítulos">
-        <a href="#/setlist">← todos os capítulos</a>
+      <nav className="pager" aria-label="Navegação entre faixas">
+        <a href="#/setlist">← setlist</a>
         {next && <a href={"#/faixa/" + next.id}>{next.title} →</a>}
       </nav>
     </main>
@@ -278,11 +228,11 @@ export default function App() {
     const c = chapters.find((x) => x.id === b);
     document.title = light && c ? c.title + " · Giovanna 2026" : "Giovanna 2026";
   }, [a, b]);
-  const back = a === "soundcheck" ? "" : a === "presente" ? "soundcheck" : light ? "setlist" : null;
+  const back = a === "soundcheck" ? "" : light ? "setlist" : null;
   return (
     <div className={"app " + (light ? "paper" : "night")}>
       <Top back={back} />
-      {a === "soundcheck" ? <Quiz /> : a === "presente" ? <Gift /> : a === "setlist" ? <Setlist /> : light ? <Track id={b} /> : <Welcome />}
+      {a === "soundcheck" ? <Quiz /> : a === "setlist" ? <Setlist /> : light ? <Track id={b} /> : <Welcome />}
       <Foot />
     </div>
   );
