@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, story, photos, videos, tracks, universe, letter } from "./content.js";
 
 const PATHS = {
