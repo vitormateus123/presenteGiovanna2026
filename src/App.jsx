@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, gift, chapters, story, photos, videos, tracks, universe, letter, letterPhoto } from "./content.js";
+import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, gift, chapters, story, photos, videos, tracks, universe, letter, letterPhoto, intro } from "./content.js";
 
 const PATHS = {
   pick: "M12 3c5 0 8 3 8 7 0 6-5 11-8 11s-8-5-8-11c0-4 3-7 8-7z",
@@ -72,10 +72,10 @@ const Top = ({ back }) => (
 const Welcome = () => (
   <main className="wrap hero">
     <div className="rise">
-      <p className="kicker">Abre as cortinas</p>
-      <h1 style={{ marginTop: 18 }}>Giovanna, hoje o show é <em>seu.</em></h1>
-      <p className="lead">Antes de abrir o palco, um soundcheck rápido: cinco perguntas sobre a gente. Errar não barra ninguém. Só quero ver quem lembra mais do rolê da igreja.</p>
-      <button className="btn" onClick={() => go("soundcheck")}>Começar o soundcheck <Icon n="arrow" /></button>
+      <p className="kicker">Para a Giovanna</p>
+      <h1 style={{ marginTop: 18 }}>Feliz aniversário, <em>Giovanna.</em></h1>
+      <p className="lead">Fiz isso para guardar o que a gente viveu e dizer, com calma, o quanto você importa pra mim. Antes de abrir, cinco perguntas sobre a gente. Errar não tem problema. Só quero ver quem lembra mais do rolê da igreja.</p>
+      <button className="btn" onClick={() => go("perguntas")}>Começar <Icon n="arrow" /></button>
     </div>
     <div className="polaroid rise">
       <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" fetchPriority="high" />
@@ -93,9 +93,9 @@ function Quiz() {
     const r = results.find((x) => score >= x.min);
     return (
       <main className="wrap stage rise">
-        <p className="kicker">Soundcheck concluído</p>
+        <p className="kicker">Perguntas respondidas</p>
         <div className="score">{score}<small>/{quiz.length}</small></div>
-        <h1 style={{ fontSize: "clamp(36px,7vw,60px)" }}>Ingresso: <em>{r.t}</em></h1>
+        <h1 style={{ fontSize: "clamp(36px,7vw,60px)" }}><em>{r.t}</em></h1>
         <p className="lead" style={{ margin: "16px 0 30px" }}>{r.d}</p>
         <div><button className="btn" onClick={() => go("presente")}>Abrir o envelope <Icon n="arrow" /></button></div>
       </main>
@@ -149,7 +149,7 @@ function Gift() {
           <div className="note-copy">
             <span className="hand">{gift.to}</span>
             {gift.text.map((t, k) => <p key={k}>{t}</p>)}
-            <button className="btn" onClick={() => go("setlist")}>Entrar no presente <Icon n="arrow" /></button>
+            <button className="btn" onClick={() => go("nos")}>Entrar no presente <Icon n="arrow" /></button>
           </div>
         </article>
       )}
@@ -157,31 +157,32 @@ function Gift() {
   );
 }
 
-function Setlist() {
+function Scroll() {
   const days = useMemo(() => {
     const n = new Date();
     return Math.max(0, Math.floor((new Date(n.getFullYear(), n.getMonth(), n.getDate()) - SINCE) / 86400000));
   }, []);
   return (
-    <main className="wrap">
-      <section className="set-hero rise">
-        <p className="kicker">Ingresso liberado</p>
-        <h1 style={{ marginTop: 14 }}>Seu <em>setlist.</em></h1>
-        <p className="lead">Seis faixas. Começa pela primeira ou pula direto para o refrão. A carta fica para o final.</p>
-        <div className="stub"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
+    <main className="wrap scroll">
+      <section className="intro rise">
+        <p className="kicker">{intro.kicker}</p>
+        <h1 style={{ marginTop: 14 }}>{intro.title} <em>{intro.em}</em></h1>
+        <p className="lead">{intro.lead}</p>
+        <div className="count"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
       </section>
-      <ol className="tracks">
-        {chapters.map((c, k) => (
-          <li key={c.id}>
-            <a className={"track c-" + c.c} href={"#/faixa/" + c.id}>
-              <span className="tk-ic"><Icon n={c.i} /></span>
-              <span className="tk-n">{String(k + 1).padStart(2, "0")}</span>
-              <span className="tk-t"><strong>{c.title}</strong><small>{c.hint}</small></span>
-              <Icon n="arrow" />
-            </a>
-          </li>
-        ))}
-      </ol>
+      {chapters.map((c) => {
+        const Body = BODY[c.id];
+        return (
+          <section className="part" id={c.id} key={c.id} aria-labelledby={"t-" + c.id}>
+            <header>
+              <span className={"chip c-" + c.c}><Icon n={c.i} size={26} /></span>
+              <h2 className="part-title" id={"t-" + c.id}>{c.title}</h2>
+              <p className="lead">{c.lead}</p>
+            </header>
+            <Body />
+          </section>
+        );
+      })}
     </main>
   );
 }
@@ -237,27 +238,6 @@ const Letter = () => (
 );
 const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, carta: Letter };
 
-function Track({ id }) {
-  const k = chapters.findIndex((c) => c.id === id);
-  if (k < 0) return <Setlist />;
-  const c = chapters[k], next = chapters[k + 1], Body = BODY[id];
-  return (
-    <main className="wrap chap">
-      <header className="rise">
-        <span className={"chip c-" + c.c}><Icon n={c.i} size={26} /></span>
-        <p className="kicker">Faixa {k + 1} de {chapters.length}</p>
-        <h1>{c.title}</h1>
-        <p className="lead">{c.lead}</p>
-      </header>
-      <Body />
-      <nav className="pager" aria-label="Navegação entre faixas">
-        <a href="#/setlist">← setlist</a>
-        {next && <a href={"#/faixa/" + next.id}>{next.title} →</a>}
-      </nav>
-    </main>
-  );
-}
-
 function Foot() {
   const [m, setM] = useState(false);
   return (
@@ -271,17 +251,13 @@ function Foot() {
 }
 
 export default function App() {
-  const [a, b] = useRoute();
-  const light = a === "faixa";
-  useEffect(() => {
-    const c = chapters.find((x) => x.id === b);
-    document.title = light && c ? c.title + " · Giovanna 2026" : "Giovanna 2026";
-  }, [a, b]);
-  const back = a === "soundcheck" ? "" : a === "presente" ? "soundcheck" : light ? "setlist" : null;
+  const [a] = useRoute();
+  const light = a === "nos";
+  const back = a === "perguntas" ? "" : a === "presente" ? "perguntas" : light ? "presente" : null;
   return (
     <div className={"app " + (light ? "paper" : "night")}>
       <Top back={back} />
-      {a === "soundcheck" ? <Quiz /> : a === "presente" ? <Gift /> : a === "setlist" ? <Setlist /> : light ? <Track id={b} /> : <Welcome />}
+      {a === "perguntas" ? <Quiz /> : a === "presente" ? <Gift /> : light ? <Scroll /> : <Welcome />}
       <Foot />
     </div>
   );

@@ -20,14 +20,20 @@ export const quiz = [
 ];
 
 export const results = [
-  { min: 5, t: "Camarote", d: "Cinco de cinco. Você guarda tudo, até o que eu já tinha esquecido." },
-  { min: 3, t: "Pista premium", d: "Nada mal. O que escapou eu conto lá dentro." },
-  { min: 0, t: "Pista", d: "Tudo bem. Esse site existe justamente para lembrar." },
+  { min: 5, t: "Cinco de cinco.", d: "Você guarda tudo, até o que eu já tinha esquecido." },
+  { min: 3, t: "Quase tudo.", d: "Nada mal. O que escapou eu conto lá dentro." },
+  { min: 0, t: "Tudo bem.", d: "Esse site existe justamente para lembrar." },
 ];
 
-// Envelope que abre ao toque, entre o soundcheck e o setlist
+// Abertura da página de rolagem contínua
+export const intro = {
+  kicker: "Nossa história", title: "Um pouco", em: "da gente.",
+  lead: "Lembranças, fotos, recados e as coisas que me fazem pensar em você. É só descer, no seu tempo.",
+};
+
+// Envelope que abre ao toque, entre as perguntas e a página principal
 export const gift = {
-  kicker: "Antes do setlist", title: "Chegou uma", em: "carta pra você.", hint: "toque no envelope para abrir",
+  kicker: "Antes de continuar", title: "Chegou uma", em: "carta pra você.", hint: "toque no envelope para abrir",
   photo: "./media/juntos-1.jpg", alt: "Giovanna e Vitor juntos em um passeio", to: "Gi,",
   text: [
     "Feliz aniversário. Esse cantinho foi feito para celebrar você e tudo de bom que cabe na nossa história.",
@@ -37,12 +43,12 @@ export const gift = {
 
 // c = cor (paleta no styles.css) | i = ícone
 export const chapters = [
-  { id: "historia", i: "feather", c: "fusion", title: "Como começou", hint: "27.11.2021, o rolê da igreja", lead: "Toda turnê tem uma primeira data. A nossa tem dia, mês e ano." },
-  { id: "fotos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Passa o dedo, tem mais", lead: "Algumas das fotos que guardei do nosso primeiro presente." },
-  { id: "recados", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo cantar parabéns. Aperte o play." },
-  { id: "mixtape", i: "note", c: "bubble", title: "Mixtape", hint: "Para ouvir no fone e tocar na guitarra", lead: "Trilha sonora do seu aniversário, com a sua cara." },
-  { id: "universo", i: "spark", c: "gold", title: "Seu universo", hint: "Tudo que me lembra você", lead: "Doze coisas que me fazem pensar em você na hora." },
-  { id: "carta", i: "mail", c: "teal", title: "A carta", hint: "A última faixa. Lê com calma", lead: "O bis do show." },
+  { id: "historia", i: "feather", c: "fusion", title: "Como começou", lead: "Toda história tem uma primeira data. A nossa tem dia, mês e ano." },
+  { id: "fotos", i: "camera", c: "ruby", title: "Nós, em foto", lead: "Algumas das fotos que guardei do nosso primeiro presente." },
+  { id: "recados", i: "heart", c: "sapphire", title: "Recados", lead: "Eu não sou o único que gosta de você. Aperte o play." },
+  { id: "mixtape", i: "note", c: "bubble", title: "Músicas", lead: "Algumas músicas que me lembram você." },
+  { id: "universo", i: "spark", c: "gold", title: "Seu universo", lead: "Doze coisas que me fazem pensar em você na hora." },
+  { id: "carta", i: "mail", c: "teal", title: "A carta", lead: "Lê com calma." },
 ];
 
 export const story = [

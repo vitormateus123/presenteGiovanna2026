@@ -50,19 +50,6 @@ h1 em,.mark i{font-style:italic;background:var(--grad);-webkit-background-clip:t
 .opt.right{opacity:1;border-color:var(--teal);background:rgba(60,207,180,.16)}.opt.wrong{opacity:1;border-color:var(--ruby);background:rgba(226,59,90,.2)}
 .react{margin:18px 0 20px;padding:16px 18px;border-radius:16px;background:rgba(255,255,255,.09);line-height:1.5}
 .score{font-family:var(--display);font-size:clamp(90px,24vw,170px);line-height:1;letter-spacing:-.05em;margin:6px 0 10px}.score small{font-size:.35em;opacity:.55}
-/* setlist */
-.set-hero{padding:36px 0 34px}.set-hero .lead{margin-top:20px}
-.stub{display:inline-flex;align-items:center;gap:16px;margin-top:32px;padding:14px 22px;border:1.5px dashed rgba(255,255,255,.35);border-radius:14px}
-.stub b{font-family:var(--display);font-size:clamp(40px,9vw,64px);line-height:1;letter-spacing:-.04em}.stub span{font-size:13px;line-height:1.4;opacity:.8}
-.tracks{list-style:none;padding:0 0 72px;display:grid;gap:12px}
-.track{display:grid;grid-template-columns:auto auto 1fr auto;gap:14px;align-items:center;padding:16px 18px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);text-decoration:none;transition:.2s}
-.track:hover{transform:translateY(-2px);background:rgba(255,255,255,.11);border-color:var(--c)}
-.tk-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:14px;background:var(--c);color:var(--on)}
-.tk-n{font-size:12px;opacity:.6}
-.tk-t strong{display:block;font-family:var(--display);font-size:clamp(20px,4vw,26px);font-weight:600}.tk-t small{opacity:.7;font-size:14px}
-@media(min-width:820px){.tracks{grid-template-columns:1fr 1fr}}
-/* capítulos */
-.chap{padding:16px 0 72px}.chap header{margin-bottom:40px}.chap h1{margin:10px 0 16px}
 .chip{display:inline-grid;place-items:center;width:54px;height:54px;border-radius:16px;background:var(--c);color:var(--on);margin-bottom:18px}
 .story{list-style:none;padding:0;max-width:760px}
 .story li{display:grid;grid-template-columns:160px 1fr;gap:24px;padding:30px 0;border-top:1.5px solid rgba(28,21,51,.14)}
@@ -90,8 +77,6 @@ h1 em,.mark i{font-style:italic;background:var(--grad);-webkit-background-clip:t
 .letter{max-width:640px;margin:0 auto;padding:36px clamp(22px,5vw,48px);background:#fff;border-radius:6px;box-shadow:0 24px 50px -28px rgba(28,21,51,.5);font-family:var(--display);font-size:clamp(18px,2.6vw,21px);line-height:1.75;transform:rotate(-.5deg)}
 .letter p+p{margin-top:1em}.letter p:first-child{font-size:1.4em;font-style:italic}
 .sign{display:block;margin-top:24px;font-family:var(--hand);font-size:36px;color:var(--fusion)}
-.pager{display:flex;justify-content:space-between;gap:16px;margin-top:56px;padding-top:22px;border-top:1.5px solid rgba(28,21,51,.14);font-weight:600}
-.pager a{padding:10px 0;text-decoration:none}.pager a:hover{text-decoration:underline;text-underline-offset:4px}
 .foot{display:flex;justify-content:space-between;align-items:center;padding:20px 0 32px;font-size:13px;opacity:.75}
 .foot button{display:flex;gap:8px;align-items:center;padding:6px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.car-track{scroll-behavior:auto}}
@@ -137,3 +122,12 @@ h1 em,.mark i{font-style:italic;background:var(--grad);-webkit-background-clip:t
 .letter .polaroid span{inset:auto 0 8px;font-size:22px}
 .letter::after{content:"";display:block;clear:both}
 @media(max-width:520px){.letter .polaroid{float:none;margin:0 auto 22px}}
+
+/* página de rolagem contínua */
+.scroll{padding-bottom:72px}
+.intro{padding:28px 0 8px;max-width:760px}.intro .lead{margin-top:20px}
+.count{display:flex;align-items:center;gap:16px;margin-top:30px}
+.count b{font-family:var(--display);font-size:clamp(44px,10vw,72px);line-height:1;letter-spacing:-.04em;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.count span{font-size:13px;line-height:1.4;color:var(--muted)}
+.part{padding:64px 0 8px;scroll-margin-top:16px}.part>header{margin-bottom:34px}
+.part-title{margin:10px 0 14px;font-family:var(--display);font-weight:600;font-size:clamp(34px,7vw,56px);line-height:1.05;letter-spacing:-.035em}
