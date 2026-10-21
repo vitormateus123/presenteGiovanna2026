@@ -98,7 +98,7 @@ h1 em,.mark i{font-style:italic;background:var(--grad);-webkit-background-clip:t
 
 /* ideias das referências: capa oval com estrelas, surpresa do bolo, envelope, mural, vinil */
 .oval{position:relative;justify-self:center;width:min(68%,320px);aspect-ratio:3/4;margin-bottom:46px}
-.oval img{width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid var(--gold);outline:2px solid rgba(245,207,92,.45);outline-offset:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
+.oval>img:first-child{width:100%;height:100%;object-fit:cover;border-radius:50%;border:5px solid var(--gold);outline:2px solid rgba(245,207,92,.45);outline-offset:10px;box-shadow:0 30px 60px -20px rgba(0,0,0,.7)}
 .oval span{position:absolute;inset:auto 0 -46px;text-align:center;font-family:var(--hand);font-size:30px;color:var(--gold)}
 .st{position:absolute;color:var(--gold);filter:drop-shadow(0 0 8px rgba(245,207,92,.6))}.st1{top:-4px;right:-12px}.st2{bottom:70px;left:-28px}.st3{top:42%;right:-34px}
 .app.stars{background-color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cpath fill='%234560e6' transform='translate%2830 30%29 scale%281.3%29' d='M0-9l2.6 6 6.4.6-4.9 4.2 1.5 6.3L0 4.3-5.6 8.1l1.5-6.3-4.9-4.2 6.4-.6z'/%3E%3Cpath fill='%23e23b5a' transform='translate%28120 60%29 scale%281%29' d='M0-9l2.6 6 6.4.6-4.9 4.2 1.5 6.3L0 4.3-5.6 8.1l1.5-6.3-4.9-4.2 6.4-.6z'/%3E%3Cpath fill='%23f5cf5c' transform='translate%2870 130%29 scale%281.4%29' d='M0-9l2.6 6 6.4.6-4.9 4.2 1.5 6.3L0 4.3-5.6 8.1l1.5-6.3-4.9-4.2 6.4-.6z'/%3E%3Cpath fill='%233ccfb4' transform='translate%28170 150%29 scale%281.1%29' d='M0-9l2.6 6 6.4.6-4.9 4.2 1.5 6.3L0 4.3-5.6 8.1l1.5-6.3-4.9-4.2 6.4-.6z'/%3E%3Cpath fill='%23ff9ccf' transform='translate%28190 20%29 scale%280.9%29' d='M0-9l2.6 6 6.4.6-4.9 4.2 1.5 6.3L0 4.3-5.6 8.1l1.5-6.3-4.9-4.2 6.4-.6z'/%3E%3Cpath fill='%238b4fd8' transform='translate%2820 180%29 scale%281%29' d='M0-9l2.6 6 6.4.6-4.9 4.2 1.5 6.3L0 4.3-5.6 8.1l1.5-6.3-4.9-4.2 6.4-.6z'/%3E%3C/svg%3E")}
@@ -136,3 +136,28 @@ h1 em,.mark i{font-style:italic;background:var(--grad);-webkit-background-clip:t
 .vinyl{flex:none;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle,var(--ruby) 0 20%,#111 21% 100%);box-shadow:inset 0 0 0 6px #222;animation:spin 6s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
 .feat{margin:0 0 16px}.feat h2{font-family:var(--display);font-size:26px;margin:6px 0}.feat h2 small{font-family:var(--ui);font-size:15px;color:var(--muted);font-weight:400}.feat p+iframe,.feat h2+iframe{margin-top:12px}
 .feat iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:16px}
+
+/* figurinhas */
+.sk{display:block;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(19,15,42,.35));pointer-events:none;user-select:none}
+.fl{position:absolute;z-index:1}.f1{left:-20%;top:4%;transform:rotate(-10deg)}.f2{left:-14%;bottom:12%;transform:rotate(8deg)}.f3{right:-18%;bottom:0;transform:rotate(6deg)}.f4{right:-16%;top:22%;transform:rotate(-6deg)}
+.react{display:flex;gap:14px;align-items:center}.react p{margin:0}.react .sk{flex:none}
+.track{grid-template-columns:auto auto 1fr auto auto}.tk-st{transform:rotate(7deg)}
+@media(max-width:520px){.tk-n{display:none}.track{grid-template-columns:auto 1fr auto auto}}
+.collage{display:flex;gap:6px;margin-top:22px}.collage .sk{width:56px;height:56px;transform:rotate(calc(var(--i) * 7deg - 10deg))}
+@media(min-width:900px){.set-hero{position:relative}.collage{position:absolute;right:0;top:20px;width:400px;height:320px;margin:0}
+ .collage .sk{position:absolute;width:130px;height:130px}.collage .sk:nth-child(1){left:10px;top:20px}.collage .sk:nth-child(2){left:150px;top:0}.collage .sk:nth-child(3){left:270px;top:60px}.collage .sk:nth-child(4){left:50px;top:170px}.collage .sk:nth-child(5){left:200px;top:180px}}
+.mx{margin:0 auto 14px}.msg-sk{position:absolute;top:-38px;right:-12px;transform:rotate(10deg)}
+.card-sk{margin-bottom:8px}.card-sk.sk{filter:drop-shadow(0 4px 6px rgba(19,15,42,.25))}
+.sc{position:absolute;z-index:2}.sc.a{right:-10px;bottom:-8px;transform:rotate(8deg)}.sc.b{left:-14px;top:-6px;transform:rotate(-8deg)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 14px;margin-bottom:6px;scrollbar-width:none}.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;padding:8px 14px;border-radius:99px;border:1.5px solid rgba(28,21,51,.2);background:#fff;font-size:14px;font-weight:600}
+.chips [aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.album{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:10px}
+.tile{display:grid;place-items:center;aspect-ratio:1;padding:6px;border-radius:16px;background:#fff;box-shadow:0 6px 16px -10px rgba(28,21,51,.45);transform:rotate(var(--r,0deg));transition:transform .2s}
+.tile:hover{transform:rotate(0) scale(1.08);z-index:1}.tile img{max-width:100%;max-height:100%;object-fit:contain}
+.more{margin:24px auto 0}
+.lightbox{position:fixed;inset:0;z-index:50;display:grid;place-content:center;justify-items:center;gap:14px;padding:24px;background:rgba(19,15,42,.88);color:#fff;text-align:center}
+.lightbox img{max-width:min(80vw,360px);max-height:58svh;filter:drop-shadow(0 10px 24px rgba(0,0,0,.5))}
+
+.scene{padding-top:0}.scene .letter{margin-top:46px}
+@media(max-width:600px){.scene .letter p:first-child{padding:0 92px 0 40px;font-size:1.25em}.pol{width:96px}}

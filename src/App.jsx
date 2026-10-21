@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, story, photos, videos, tracks, universe, letter, wish, nos, FEATURED_SONG } from "./content.js";
+import { themes, label, items, src, sticker } from "./stickers.js";
 
 const PATHS = {
   pick: "M12 3c5 0 8 3 8 7 0 6-5 11-8 11s-8-5-8-11c0-4 3-7 8-7z",
@@ -22,6 +23,12 @@ const PATHS = {
 const Icon = ({ n, size = 24 }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={PATHS[n]} /></svg>
 );
+
+const Stk = ({ t, k = 0, size, className = "", style }) => (
+  <img className={"sk " + className} src={sticker(t, k)} alt="" decoding="async" loading="lazy"
+    style={size ? { width: size, height: size, ...style } : style} />
+);
+const RX = ["volei", "gatos", "coca", "gatos", "jiu"];
 
 const hash = () => location.hash.replace(/^#\/?/, "");
 const go = (p) => { location.hash = "/" + p; };
@@ -94,6 +101,7 @@ function Surprise() {
   return (
     <main className="wrap stage surprise">
       {step === 0 && <div className="rise">
+        <Stk t="gatos" k={4} size={120} className="mx" />
         <p className="kicker">Antes do show</p>
         <h1 style={{ fontSize: "clamp(38px,8vw,68px)", marginTop: 14 }}>Tenho uma surpresa. <em>Quer ver?</em></h1>
         <div className="row">
@@ -111,6 +119,7 @@ function Surprise() {
           <img className="circ a" src={photos[0].src} alt="" />
           <img className="circ b" src={photos[1].src} alt="" />
           <span className="stk"><Cake /></span>
+          <Stk t="gatos" k={7} size={84} className="msg-sk" />
           <Typed text={wish} />
         </div>
         <button className="btn" onClick={() => go("setlist")}>Entrar no show <Icon n="arrow" /></button>
@@ -140,6 +149,10 @@ const Welcome = () => (
       <i className="st st1"><Icon n="spark" size={38} /></i>
       <i className="st st2"><Icon n="spark" size={30} /></i>
       <i className="st st3"><Icon n="spark" size={22} /></i>
+      <Stk t="taylor" k={1} size={92} className="fl f1" />
+      <Stk t="gatos" k={3} size={84} className="fl f2" />
+      <Stk t="kate" k={2} size={96} className="fl f3" />
+      <Stk t="volei" k={1} size={80} className="fl f4" />
     </div>
   </main>
 );
@@ -175,7 +188,7 @@ function Quiz() {
       </div>
       {locked && (
         <div aria-live="polite">
-          <p className="react rise">{pick === q.c ? q.ok : q.no}</p>
+          <div className="react rise"><Stk t={RX[i % RX.length]} k={i * 2 + (pick === q.c ? 0 : 1)} size={72} /><p>{pick === q.c ? q.ok : q.no}</p></div>
           <button className="btn" onClick={() => { setPick(null); setI(i + 1); }}>{i + 1 === quiz.length ? "Ver resultado" : "Próxima"} <Icon n="arrow" /></button>
         </div>
       )}
@@ -193,8 +206,11 @@ function Setlist() {
       <section className="set-hero rise">
         <p className="kicker">Ingresso liberado</p>
         <h1 style={{ marginTop: 14 }}>Seu <em>setlist.</em></h1>
-        <p className="lead">Seis faixas. Começa pela primeira ou pula direto para o refrão. A carta fica para o final.</p>
+        <p className="lead">{chapters.length} faixas. Começa pela primeira ou pula direto para o refrão. A carta fica para o final.</p>
         <div className="stub"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
+        <div className="collage" aria-hidden="true">
+          {[["taylor", 2], ["su", 1], ["kate", 0], ["toh", 4], ["tlou", 1]].map(([t, k], n) => <Stk key={t} t={t} k={k} style={{ "--i": n }} />)}
+        </div>
       </section>
       <ol className="tracks">
         {chapters.map((c, k) => (
@@ -203,6 +219,7 @@ function Setlist() {
               <span className="tk-ic"><Icon n={c.i} /></span>
               <span className="tk-n">{String(k + 1).padStart(2, "0")}</span>
               <span className="tk-t"><strong>{c.title}</strong><small>{c.hint}</small></span>
+              <Stk t={c.th} k={k} size={56} className="tk-st" />
               <Icon n="arrow" />
             </a>
           </li>
@@ -256,7 +273,7 @@ const Mixtape = () => (
   </>
 );
 const Universe = () => (
-  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}><Icon n={u.i} /><h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
+  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}>{u.th ? <Stk t={u.th} k={u.k || 0} size={84} className="card-sk" /> : <Icon n={u.i} />}<h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
 );
 function Letter() {
   const [open, setOpen] = useState(false);
@@ -273,10 +290,39 @@ function Letter() {
       <article className="letter">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
       <figure className="pol"><img src={photos[0].src} alt="" /></figure>
       <Flower />
+      <Stk t="sdpm" k={3} size={88} className="sc a" />
+      <Stk t="kate" k={1} size={88} className="sc b" />
     </div>
   );
 }
-const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, carta: Letter };
+function Album() {
+  const [t, setT] = useState("todos"), [n, setN] = useState(48), [sel, setSel] = useState(null);
+  const all = t === "todos" ? themes.flatMap((k) => items(k).map((i) => [k, i])) : items(t).map((i) => [t, i]);
+  const pickTheme = (k) => { setT(k); setN(48); };
+  return (
+    <>
+      <div className="chips" role="group" aria-label="Filtrar por tema">
+        <button aria-pressed={t === "todos"} onClick={() => pickTheme("todos")}>Todos</button>
+        {themes.map((k) => <button key={k} aria-pressed={t === k} onClick={() => pickTheme(k)}>{label(k)}</button>)}
+      </div>
+      <div className="album">
+        {all.slice(0, n).map(([k, i], x) => (
+          <button key={k + i.f} className="tile" style={{ "--r": ((x * 7) % 9) - 4 + "deg" }} onClick={() => setSel([k, i])} aria-label={"Ampliar figurinha de " + label(k)}>
+            <img src={src(k, i.f)} alt="" loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+      {n < all.length && <button className="btn more" onClick={() => setN(n + 48)}>Mostrar mais ({all.length - n})</button>}
+      {sel && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Figurinha ampliada" onClick={() => setSel(null)}>
+          <img src={src(sel[0], sel[1].f)} alt="" /><p>{label(sel[0])}</p>
+          <button className="btn" onClick={() => setSel(null)}>Fechar</button>
+        </div>
+      )}
+    </>
+  );
+}
+const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, album: Album, carta: Letter };
 
 function Track({ id }) {
   const k = chapters.findIndex((c) => c.id === id);
