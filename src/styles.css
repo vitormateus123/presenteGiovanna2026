@@ -131,3 +131,37 @@ h1 em,.mark i{font-style:italic;background:var(--grad);-webkit-background-clip:t
 .count span{font-size:13px;line-height:1.4;color:var(--muted)}
 .part{padding:64px 0 8px;scroll-margin-top:16px}.part>header{margin-bottom:34px}
 .part-title{margin:10px 0 14px;font-family:var(--display);font-weight:600;font-size:clamp(34px,7vw,56px);line-height:1.05;letter-spacing:-.035em}
+/* Recortes do acervo pessoal: espaço próprio para não cobrir texto nem controles. */
+.cutout{display:block;flex:0 1 auto;width:100px;height:110px;object-fit:contain;pointer-events:none;user-select:none;filter:drop-shadow(0 3px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 6px 5px #1c15331a);transform:rotate(-7deg)}
+.sticker-strip{display:flex;align-items:center;justify-content:center;gap:12px}
+.sticker-strip .cutout:nth-child(2n){transform:rotate(8deg) translateY(6px)}
+.sticker-strip .cutout:nth-child(3n){transform:rotate(-3deg) translateY(-4px)}
+.polaroid .hero-sticker{position:absolute;width:105px;height:115px;aspect-ratio:auto;object-fit:contain;border-radius:0}
+.hero-sticker-love{right:-25px;top:-32px;transform:rotate(13deg)}
+.hero-sticker-cat{left:-35px;bottom:35px;transform:rotate(-14deg)}
+.polaroid .hero-sticker-star{right:-24px;top:49%;width:64px;height:64px;transform:rotate(8deg)}
+.quiz-stickers{justify-content:flex-end;margin-bottom:24px;gap:20px}.quiz-stickers .cutout{width:70px;height:70px}
+.envelope-sticker{position:absolute;z-index:3;width:72px;height:72px;right:12px;bottom:8px;transform:rotate(12deg)}
+.intro-stickers{justify-content:flex-start;margin:28px 0 8px;gap:22px}.intro-stickers .cutout{width:84px;height:84px}
+.part>header{position:relative;padding-right:290px;min-height:170px}
+.chapter-stickers{position:absolute;right:10px;top:25px;width:250px;gap:8px}.chapter-stickers .cutout{width:100px;max-width:32%;height:120px}
+#universo>header{padding-right:0;min-height:0}
+.uni{grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 28px}
+.uni .card{min-width:0;border:0;border-radius:0;padding:0 8px 24px;background:transparent;border-bottom:1px solid #1c15331c}
+.uni .card h3{font-family:var(--display);font-size:23px;font-weight:600;line-height:1.15;margin:18px 0 9px}
+.universe-stickers{min-height:172px;padding:12px 2px;gap:3px;flex-wrap:wrap;align-content:center;background:radial-gradient(ellipse,color-mix(in srgb,var(--c) 10%,transparent),transparent 70%)}
+.universe-stickers .cutout{width:30%;height:125px;max-width:125px}
+.universe-stickers .cutout:only-child{width:65%;max-width:190px}
+.universe-stickers .cutout:first-child:nth-last-child(2),.universe-stickers .cutout:first-child:nth-last-child(2)~.cutout{width:44%;height:145px}
+.universe-stickers:has(.cutout:nth-child(4)) .cutout{height:88px;width:28%}
+.letter-stickers{clear:both;justify-content:flex-end;margin:22px 0 0;gap:12px}.letter-stickers .cutout{width:70px;height:75px}
+@media(max-width:820px){.uni{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 18px}.part>header{padding-right:220px}.chapter-stickers{width:200px}.chapter-stickers .cutout{height:100px}}
+@media(max-width:540px){
+ .part{padding-top:50px}.part>header{padding-right:0;min-height:0}.chapter-stickers{position:static;justify-content:flex-end;width:100%;margin-bottom:18px;padding-right:8px}.chapter-stickers .cutout{width:74px;height:80px;max-width:28%}
+ .uni{gap:26px 12px}.uni .card{padding:0 2px 20px}.uni .card h3{font-size:21px}.uni .card p{font-size:14px;line-height:1.6}
+ .universe-stickers{min-height:132px;gap:2px;padding:10px 0}.universe-stickers .cutout{height:80px;width:31%}.universe-stickers .cutout:first-child:nth-last-child(2),.universe-stickers .cutout:first-child:nth-last-child(2)~.cutout{height:95px}
+ .universe-stickers:has(.cutout:nth-child(4)) .cutout{height:58px;width:30%}
+ .polaroid .hero-sticker{width:85px;height:95px}.hero-sticker-love{right:-20px;top:-24px}.hero-sticker-cat{left:-27px}
+ .intro-stickers .cutout{width:70px;height:78px}.quiz-stickers{margin-bottom:18px}.quiz-stickers .cutout{height:56px;width:60px}
+}
+@media(max-width:360px){.uni{grid-template-columns:1fr}.universe-stickers .cutout{height:120px}.universe-stickers{min-height:150px}}
