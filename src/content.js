@@ -91,3 +91,10 @@ export const letter = [
   "Gosto muito de ter você por perto. Que o seu próximo ano venha cheio de história para contar, música para tocar e motivo para rir.",
   "Te amo.",
 ];
+
+// Mensagem digitada na surpresa do bolo
+export const wish = "Feliz aniversário, Giovanna. Hoje o palco é seu: tem foto, música, recado de gente que te ama e uma carta no final. Entra.";
+export const nos = ["Agora não", "Tem certeza?", "Pensa de novo…", "Tá bom, mostra"];
+
+// Opcional: música da gente em destaque na Mixtape. Exemplo: { t: "Título", a: "Artista", note: "Por que é nossa", youtubeId: "ID_DO_VIDEO" }
+export const FEATURED_SONG = null;

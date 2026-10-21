@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, story, photos, videos, tracks, universe, letter } from "./content.js";
+import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, story, photos, videos, tracks, universe, letter, wish, nos, FEATURED_SONG } from "./content.js";
 
 const PATHS = {
   pick: "M12 3c5 0 8 3 8 7 0 6-5 11-8 11s-8-5-8-11c0-4 3-7 8-7z",
@@ -62,6 +62,63 @@ function Carousel({ items, render, label, wide }) {
   );
 }
 
+function Typed({ text }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setN(text.length); return; }
+    const t = setInterval(() => setN((x) => { if (x >= text.length) { clearInterval(t); return x; } return x + 1; }), 32);
+    return () => clearInterval(t);
+  }, [text]);
+  return <><span className="sr">{text}</span><span aria-hidden="true">{text.slice(0, n)}<i className="caret" /></span></>;
+}
+
+const Cake = ({ lit }) => (
+  <svg viewBox="0 0 120 120" width="100%" aria-hidden="true">
+    <rect x="20" y="70" width="80" height="34" rx="8" fill="#e23b5a" />
+    <rect x="28" y="50" width="64" height="26" rx="8" fill="#ff9ccf" />
+    <path d="M20 78c8 8 14-6 22 0s14-6 22 0 14-6 22 0 10 4 14-1" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+    <rect x="57" y="30" width="6" height="22" rx="3" fill="#4560e6" />
+    {lit && <path className="flame" d="M60 12c6 7 7 11 0 16-7-5-6-9 0-16z" fill="#f5cf5c" />}
+  </svg>
+);
+
+const Flower = () => (
+  <svg className="flower" viewBox="0 0 100 100" aria-hidden="true">
+    {[0, 60, 120, 180, 240, 300].map((r) => <ellipse key={r} cx="50" cy="26" rx="11" ry="22" fill="#fff" stroke="#e8dfd0" strokeWidth="1.5" transform={`rotate(${r} 50 50)`} />)}
+    <circle cx="50" cy="50" r="10" fill="#f5cf5c" />
+  </svg>
+);
+
+function Surprise() {
+  const [step, setStep] = useState(0), [no, setNo] = useState(0);
+  return (
+    <main className="wrap stage surprise">
+      {step === 0 && <div className="rise">
+        <p className="kicker">Antes do show</p>
+        <h1 style={{ fontSize: "clamp(38px,8vw,68px)", marginTop: 14 }}>Tenho uma surpresa. <em>Quer ver?</em></h1>
+        <div className="row">
+          <button className="btn" style={{ transform: `scale(${1 + no * 0.08})` }} onClick={() => setStep(1)}>Quero!</button>
+          <button className="ghost" onClick={() => (no === nos.length - 1 ? setStep(1) : setNo(no + 1))}>{nos[no]}</button>
+        </div>
+      </div>}
+      {step === 1 && <div className="rise">
+        <p className="kicker">Primeiro, o bolo</p>
+        <button className="cake" onClick={() => setStep(2)} aria-label="Tocar no bolo para abrir o presente"><Cake lit /></button>
+        <p className="lead" style={{ margin: "0 auto" }}>Toque no bolo para abrir o presente.</p>
+      </div>}
+      {step === 2 && <div className="rise">
+        <div className="msg">
+          <img className="circ a" src={photos[0].src} alt="" />
+          <img className="circ b" src={photos[1].src} alt="" />
+          <span className="stk"><Cake /></span>
+          <Typed text={wish} />
+        </div>
+        <button className="btn" onClick={() => go("setlist")}>Entrar no show <Icon n="arrow" /></button>
+      </div>}
+    </main>
+  );
+}
+
 const Top = ({ back }) => (
   <header className="wrap top">
     <a className="mark" href="#/">Giovanna <i>2026</i></a>
@@ -77,12 +134,12 @@ const Welcome = () => (
       <p className="lead">Antes de abrir o palco, um soundcheck rápido: cinco perguntas sobre a gente. Errar não barra ninguém. Só quero ver quem lembra mais do rolê da igreja.</p>
       <button className="btn" onClick={() => go("soundcheck")}>Começar o soundcheck <Icon n="arrow" /></button>
     </div>
-    <div className="polaroid rise">
+    <div className="oval rise">
       <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" fetchPriority="high" />
       <span>desde 27.11.21</span>
-      <i className="sticker s1"><Icon n="pick" /></i>
-      <i className="sticker s2"><Icon n="cat" /></i>
-      <i className="sticker s3"><Icon n="spark" /></i>
+      <i className="st st1"><Icon n="spark" size={38} /></i>
+      <i className="st st2"><Icon n="spark" size={30} /></i>
+      <i className="st st3"><Icon n="spark" size={22} /></i>
     </div>
   </main>
 );
@@ -97,7 +154,7 @@ function Quiz() {
         <div className="score">{score}<small>/{quiz.length}</small></div>
         <h1 style={{ fontSize: "clamp(36px,7vw,60px)" }}>Ingresso: <em>{r.t}</em></h1>
         <p className="lead" style={{ margin: "16px 0 30px" }}>{r.d}</p>
-        <div><button className="btn" onClick={() => go("setlist")}>Abrir o setlist <Icon n="arrow" /></button></div>
+        <div><button className="btn" onClick={() => go("surpresa")}>Abrir o presente <Icon n="arrow" /></button></div>
       </main>
     );
   }
@@ -158,9 +215,20 @@ function Setlist() {
 const Story = () => (
   <ol className="story">{story.map((s) => <li key={s.d}><span className="hand">{s.d}</span><div><h2>{s.t}</h2><p>{s.p}</p></div></li>)}</ol>
 );
-const Photos = () => (
-  <Carousel label="Fotos" items={photos} render={(p) => <figure className="photo"><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>} />
-);
+function Photos() {
+  const [mural, setMural] = useState(false);
+  return (
+    <>
+      <div className="seg" role="group" aria-label="Modo de exibição">
+        <button aria-pressed={!mural} onClick={() => setMural(false)}>Carrossel</button>
+        <button aria-pressed={mural} onClick={() => setMural(true)}>Mural</button>
+      </div>
+      {mural
+        ? <div className="mural">{photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>)}</div>
+        : <Carousel label="Fotos" items={photos} render={(p) => <figure className="photo"><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>} />}
+    </>
+  );
+}
 const Videos = () => (
   <Carousel wide label="Recados em vídeo" items={videos} render={(v) => (
     <figure className="photo">
@@ -174,6 +242,13 @@ const Videos = () => (
 );
 const Mixtape = () => (
   <>
+    <div className="deck"><span className="vinyl" /><div><strong>Lado A</strong><small>{tracks.length} faixas escolhidas para você</small></div></div>
+    {FEATURED_SONG && <div className="feat">
+      <p className="kicker">Nossa música</p>
+      <h2>{FEATURED_SONG.t} <small>{FEATURED_SONG.a}</small></h2>
+      {FEATURED_SONG.note && <p>{FEATURED_SONG.note}</p>}
+      {FEATURED_SONG.youtubeId && <iframe title={FEATURED_SONG.t} loading="lazy" allow="encrypted-media; picture-in-picture" allowFullScreen src={`https://www.youtube-nocookie.com/embed/${FEATURED_SONG.youtubeId}`} />}
+    </div>}
     {SPOTIFY_PLAYLIST_ID && <iframe className="spot" title="Playlist da Giovanna" loading="lazy"
       src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator`}
       allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" />}
@@ -183,9 +258,24 @@ const Mixtape = () => (
 const Universe = () => (
   <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}><Icon n={u.i} /><h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
 );
-const Letter = () => (
-  <article className="letter">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
-);
+function Letter() {
+  const [open, setOpen] = useState(false);
+  if (!open) return (
+    <div className="env-wrap">
+      <button className="env" onClick={() => setOpen(true)} aria-label="Abrir o envelope">
+        <span className="flap" /><span className="seal"><Icon n="heart" /></span><em>Para Giovanna</em>
+      </button>
+      <p className="hint">toque no envelope para abrir</p>
+    </div>
+  );
+  return (
+    <div className="scene rise">
+      <article className="letter">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
+      <figure className="pol"><img src={photos[0].src} alt="" /></figure>
+      <Flower />
+    </div>
+  );
+}
 const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, carta: Letter };
 
 function Track({ id }) {
@@ -224,15 +314,16 @@ function Foot() {
 export default function App() {
   const [a, b] = useRoute();
   const light = a === "faixa";
+  const cls = light ? "paper" : a === "surpresa" ? "paper stars" : "night";
   useEffect(() => {
     const c = chapters.find((x) => x.id === b);
     document.title = light && c ? c.title + " · Giovanna 2026" : "Giovanna 2026";
   }, [a, b]);
   const back = a === "soundcheck" ? "" : light ? "setlist" : null;
   return (
-    <div className={"app " + (light ? "paper" : "night")}>
+    <div className={"app " + cls}>
       <Top back={back} />
-      {a === "soundcheck" ? <Quiz /> : a === "setlist" ? <Setlist /> : light ? <Track id={b} /> : <Welcome />}
+      {a === "soundcheck" ? <Quiz /> : a === "surpresa" ? <Surprise /> : a === "setlist" ? <Setlist /> : light ? <Track id={b} /> : <Welcome />}
       <Foot />
     </div>
   );
