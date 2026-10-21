@@ -1,6 +1,16 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, gift, chapters, story, photos, videos, tracks, universe, letter, letterPhoto, intro } from "./content.js";
 
+import { universeStickers, chapterStickers } from "./stickers.js";
+
+function Sticker({ name, className = "", eager = false }) {
+  return <img className={"cutout " + className} src={`${import.meta.env.BASE_URL}stickers/${name}.webp`}
+    alt="" aria-hidden="true" loading={eager ? "eager" : "lazy"} decoding="async" draggable="false" width="160" height="160" />;
+}
+function StickerStrip({ names, className = "" }) {
+  return <div className={"sticker-strip " + className} aria-hidden="true">{names.map((name) => <Sticker key={name} name={name} />)}</div>;
+}
+
 const PATHS = {
   pick: "M12 3c5 0 8 3 8 7 0 6-5 11-8 11s-8-5-8-11c0-4 3-7 8-7z",
   feather: "M20 4c-8 0-13 5-13 11l-3 5M7 15h7M9 11h8M12 8h7",
@@ -80,9 +90,9 @@ const Welcome = () => (
     <div className="polaroid rise">
       <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" fetchPriority="high" />
       <span>desde 27.11.21</span>
-      <i className="sticker s1"><Icon n="pick" /></i>
-      <i className="sticker s2"><Icon n="cat" /></i>
-      <i className="sticker s3"><Icon n="spark" /></i>
+      <Sticker name="rubi-safira" className="hero-sticker hero-sticker-love" eager />
+      <Sticker name="gato-volei" className="hero-sticker hero-sticker-cat" eager />
+      <Sticker name="stardew-estrela" className="hero-sticker hero-sticker-star" eager />
     </div>
   </main>
 );
@@ -105,6 +115,7 @@ function Quiz() {
   const choose = (k) => { if (locked) return; setPick(k); if (k === q.c) setScore((s) => s + 1); };
   return (
     <main className="wrap stage" key={i}>
+      <StickerStrip names={["gato-rdr", "minecraft-bolo"]} className="quiz-stickers" />
       <div className="meta"><span>Pergunta {i + 1} de {quiz.length}</span><span>sem pressão</span></div>
       <div className="bars" aria-hidden="true">{quiz.map((_, k) => <i key={k} className={k <= i ? "on" : ""} />)}</div>
       <h1 className="qh rise">{q.q}</h1>
@@ -137,6 +148,7 @@ function Gift() {
       <button type="button" className={"envelope" + (open ? " open" : "")} onClick={() => setOpen((o) => !o)}
         aria-expanded={open} aria-label={open ? "Fechar o envelope" : "Abrir o envelope"}>
         <span className="env-flap" /><span className="env-pocket" />
+        <Sticker name="gato-morango" className="envelope-sticker" eager />
         <span className="env-seal"><Icon n="heart" size={22} /></span>
       </button>
       <p className="env-hint" aria-hidden={open}>{open ? "\u00a0" : gift.hint}</p>
@@ -168,6 +180,7 @@ function Scroll() {
         <p className="kicker">{intro.kicker}</p>
         <h1 style={{ marginTop: 14 }}>{intro.title} <em>{intro.em}</em></h1>
         <p className="lead">{intro.lead}</p>
+        <StickerStrip names={["luz", "gato-coca", "stardew-estrela"]} className="intro-stickers" />
         <div className="count"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
       </section>
       {chapters.map((c) => {
@@ -175,6 +188,7 @@ function Scroll() {
         return (
           <section className="part" id={c.id} key={c.id} aria-labelledby={"t-" + c.id}>
             <header>
+              {chapterStickers[c.id] && <StickerStrip names={chapterStickers[c.id]} className="chapter-stickers" />}
               <span className={"chip c-" + c.c}><Icon n={c.i} size={26} /></span>
               <h2 className="part-title" id={"t-" + c.id}>{c.title}</h2>
               <p className="lead">{c.lead}</p>
@@ -231,10 +245,13 @@ const Mixtape = () => (
   </>
 );
 const Universe = () => (
-  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}><Icon n={u.i} /><h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
+  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}>
+    <StickerStrip names={universeStickers[u.t] || []} className="universe-stickers" />
+    <h3>{u.t}</h3><p>{u.d}</p>
+  </article>)}</div>
 );
 const Letter = () => (
-  <article className="letter"><figure className="polaroid"><img src={letterPhoto.src} alt={letterPhoto.alt} loading="lazy" /><span>{letterPhoto.cap}</span></figure>{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
+  <article className="letter"><figure className="polaroid"><img src={letterPhoto.src} alt={letterPhoto.alt} loading="lazy" /><span>{letterPhoto.cap}</span></figure>{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span><StickerStrip names={["gato-jiu", "volei", "f1"]} className="letter-stickers" /></article>
 );
 const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, carta: Letter };
 

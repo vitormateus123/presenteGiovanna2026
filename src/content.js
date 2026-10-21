@@ -47,7 +47,7 @@ export const chapters = [
   { id: "fotos", i: "camera", c: "ruby", title: "Nós, em foto", lead: "Algumas das fotos que guardei do nosso primeiro presente." },
   { id: "recados", i: "heart", c: "sapphire", title: "Recados", lead: "Eu não sou o único que gosta de você. Aperte o play." },
   { id: "mixtape", i: "note", c: "bubble", title: "Músicas", lead: "Algumas músicas que me lembram você." },
-  { id: "universo", i: "spark", c: "gold", title: "Seu universo", lead: "Doze coisas que me fazem pensar em você na hora." },
+  { id: "universo", i: "spark", c: "gold", title: "Seu universo", lead: "Coisas que me fazem pensar em você na hora." },
   { id: "carta", i: "mail", c: "teal", title: "A carta", lead: "Lê com calma." },
 ];
 
@@ -88,6 +88,7 @@ export const tracks = [
 ];
 
 export const universe = [
+  { c: "sapphire", i: "spark", t: "Brooklyn Nine-Nine", d: "Só mais um episódio do Nine-Nine." },
   { c: "ruby", i: "gem", t: "Rubi & Safira", d: "Duas cores, uma fusão, zero medo. Steven Universo inteiro cabe nelas." },
   { c: "teal", i: "heart", t: "Luz & Amity", d: "Começou em rivalidade, terminou em Lumity. Final feliz merecido." },
   { c: "fusion", i: "bow", t: "Kate Bishop", d: "A mira mais certeira da Marvel e a que você mais defende." },
