@@ -20,42 +20,26 @@ export const quiz = [
 ];
 
 export const results = [
-  { min: 5, t: "Cinco de cinco.", d: "Você guarda tudo, até o que eu já tinha esquecido." },
-  { min: 3, t: "Quase tudo.", d: "Nada mal. O que escapou eu conto lá dentro." },
-  { min: 0, t: "Tudo bem.", d: "Esse site existe justamente para lembrar." },
+  { min: 5, t: "Camarote", d: "Cinco de cinco. Você guarda tudo, até o que eu já tinha esquecido." },
+  { min: 3, t: "Pista premium", d: "Nada mal. O que escapou eu conto lá dentro." },
+  { min: 0, t: "Pista", d: "Tudo bem. Esse site existe justamente para lembrar." },
 ];
-
-// Abertura da página de rolagem contínua
-export const intro = {
-  kicker: "Nossa história", title: "Um pouco", em: "da gente.",
-  lead: "Lembranças, fotos, recados e as coisas que me fazem pensar em você. É só descer, no seu tempo.",
-};
-
-// Envelope que abre ao toque, entre as perguntas e a página principal
-export const gift = {
-  kicker: "Antes de continuar", title: "Chegou uma", em: "carta pra você.", hint: "toque no envelope para abrir",
-  photo: "./media/juntos-1.jpg", alt: "Giovanna e Vitor juntos em um passeio", to: "Gi,",
-  text: [
-    "Feliz aniversário. Esse cantinho foi feito para celebrar você e tudo de bom que cabe na nossa história.",
-    "Vai com calma: tem fotos, recados em vídeo, músicas e uma carta esperando no final.",
-  ],
-};
 
 // c = cor (paleta no styles.css) | i = ícone
 export const chapters = [
-  { id: "historia", i: "feather", c: "fusion", title: "Como começou", lead: "Toda história tem uma primeira data. A nossa tem dia, mês e ano." },
-  { id: "fotos", i: "camera", c: "ruby", title: "Nós, em foto", lead: "Algumas das fotos que guardei do nosso primeiro presente." },
-  { id: "recados", i: "heart", c: "sapphire", title: "Recados", lead: "Eu não sou o único que gosta de você. Aperte o play." },
-  { id: "mixtape", i: "note", c: "bubble", title: "Músicas", lead: "Algumas músicas que me lembram você." },
-  { id: "universo", i: "spark", c: "gold", title: "Seu universo", lead: "Coisas que me fazem pensar em você na hora." },
-  { id: "carta", i: "mail", c: "teal", title: "A carta", lead: "Lê com calma." },
+  { id: "historia", th: "sdpm", i: "feather", c: "fusion", title: "Como começou", hint: "27.11.2021, o rolê da igreja", lead: "Toda turnê tem uma primeira data. A nossa tem dia, mês e ano." },
+  { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Passa o dedo, tem mais", lead: "Algumas das fotos que guardei do nosso primeiro presente." },
+  { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo cantar parabéns. Aperte o play." },
+  { id: "mixtape", th: "taylor", i: "note", c: "bubble", title: "Mixtape", hint: "Para ouvir no fone e tocar na guitarra", lead: "Trilha sonora do seu aniversário, com a sua cara." },
+  { id: "universo", th: "su", i: "spark", c: "gold", title: "Seu universo", hint: "Tudo que me lembra você", lead: "As coisas que me fazem pensar em você na hora." },
+  { id: "album", i: "gem", c: "teal", th: "arcane", title: "Álbum de figurinhas", hint: "Tudo o que é a sua cara, em figurinha", lead: "Uma coleção inteira por tema. Toque em uma figurinha para ver maior." },
+  { id: "carta", th: "kate", i: "mail", c: "ruby", title: "A carta", hint: "A última faixa. Lê com calma", lead: "O bis do show." },
 ];
 
 export const story = [
   { d: "27.11.2021", t: "O rolê da igreja", p: "Foi a data que escolhi para começar a contar. Eu não sabia ainda, mas aquele dia ia virar contador, site e presente." },
   { d: "Etec e 9 de Julho", t: "A fase dos cafés", p: "Conversa depois da aula, “vamos tomar um café” como desculpa para ficar mais um tempo. Dias comuns que só ficaram bons porque você estava." },
-  { d: "Desde então", t: "Minecraft, fofoca e abraço apertado", p: "Conversa que começa pequena e vai longe, dentro ou fora do jogo.",
-    img: "./media/juntos-3.jpg", alt: "Giovanna e Vitor em uma foto ao ar livre", cap: "e a história continua" },
+  { d: "Desde então", t: "Minecraft, fofoca e abraço apertado", p: "Conversa que começa pequena e vai longe, dentro ou fora do jogo." },
 ];
 
 export const photos = [
@@ -88,19 +72,26 @@ export const tracks = [
 ];
 
 export const universe = [
-  { c: "sapphire", i: "spark", t: "Brooklyn Nine-Nine", d: "Só mais um episódio do Nine-Nine." },
-  { c: "ruby", i: "gem", t: "Rubi & Safira", d: "Duas cores, uma fusão, zero medo. Steven Universo inteiro cabe nelas." },
-  { c: "teal", i: "heart", t: "Luz & Amity", d: "Começou em rivalidade, terminou em Lumity. Final feliz merecido." },
-  { c: "fusion", i: "bow", t: "Kate Bishop", d: "A mira mais certeira da Marvel e a que você mais defende." },
-  { c: "gold", i: "note", t: "Ellie", d: "Violão no colo, humor afiado e coragem de sobra. Combina." },
-  { c: "bubble", i: "note", t: "Trilha oficial", d: "Taylor, Sabrina, Chappell, KATSEYE. E a guitarra para tocar junto." },
+  { c: "ruby", th: "su", t: "Rubi & Safira", d: "Duas cores, uma fusão, zero medo. Steven Universo inteiro cabe nelas." },
+  { c: "teal", th: "toh", t: "Luz & Amity", d: "Começou em rivalidade, terminou em Lumity. Final feliz merecido." },
+  { c: "fusion", th: "kate", t: "Kate Bishop", d: "A mira mais certeira da Marvel e a que você mais defende." },
+  { c: "gold", th: "tlou", t: "Ellie", d: "Violão no colo, humor afiado e coragem de sobra. Combina." },
+  { c: "bubble", th: "taylor", t: "Trilha oficial", d: "Taylor, Sabrina, Chappell, KATSEYE. E a guitarra para tocar junto." },
   { c: "sapphire", i: "wave", t: "Praia", d: "Lugar bom é perto da água. Percy Jackson concorda." },
-  { c: "gold", i: "cat", t: "Gatos", d: "Se tem gato por perto, o resto do assunto espera." },
-  { c: "ruby", i: "can", t: "Coquinha gelada", d: "A resposta certa para quase toda pergunta." },
-  { c: "fusion", i: "ball", t: "Vôlei, jiu-jitsu e F1", d: "Seleção em quadra, kimono no tatame e eu aprendendo Fórmula 1 por sua causa." },
-  { c: "teal", i: "gamepad", t: "Stardew, FNF, Red Dead", d: "E o Minecraft, claro: o servidor mais longo da nossa história." },
-  { c: "bubble", i: "feather", t: "Dickinson e os Poetas", d: "“Hope is the thing with feathers.” Carpe diem, Giovanna." },
-  { c: "ruby", i: "spark", t: "Maratonas", d: "Rebelde, Stranger Things, Arcane, Jogos Vorazes, Como Treinar o Seu Dragão." },
+  { c: "gold", th: "gatos", t: "Gatos", d: "Se tem gato por perto, o resto do assunto espera." },
+  { c: "ruby", th: "coca", t: "Coquinha gelada", d: "A resposta certa para quase toda pergunta." },
+  { c: "fusion", th: "volei", t: "Vôlei", d: "A seleção feminina em quadra e o gato de bola de vôlei em casa." },
+  { c: "sapphire", th: "jiu", k: 2, t: "Jiu-jitsu", d: "Kimono, faixa e a calma de quem sabe cair." },
+  { c: "teal", th: "f1", t: "Fórmula 1", d: "Eu aprendi a gostar por sua causa. Box, box." },
+  { c: "bubble", th: "stardew", t: "Stardew, FNF e Red Dead", d: "Três jeitos diferentes de perder a tarde jogando." },
+  { c: "gold", th: "minecraft", t: "Minecraft", d: "O servidor mais longo da nossa história." },
+  { c: "bubble", th: "sdpm", t: "Dickinson e os Poetas", d: "“Hope is the thing with feathers.” Carpe diem, Giovanna." },
+  { c: "ruby", th: "rebelde", t: "Rebelde", d: "Elite Way School, gravata vermelha e todas as músicas decoradas." },
+  { c: "fusion", th: "arcane", t: "Arcane", d: "Piltover, Zaun e uma temporada que ninguém esquece." },
+  { c: "teal", th: "hg", t: "Jogos Vorazes", d: "Katniss, tordo e a mira que não erra." },
+  { c: "gold", th: "httyd", t: "Como Treinar o Seu Dragão", d: "Para quem sabe que todo bicho merece um amigo." },
+  { c: "ruby", th: "st", t: "Stranger Things", d: "Hawkins, Onze e noite de maratona." },
+  { c: "sapphire", th: "b99", t: "Brooklyn Nine-Nine", d: "Humor de delegacia e um corgi que roubou a cena." },
 ];
 
 export const letter = [
@@ -110,4 +101,9 @@ export const letter = [
   "Te amo.",
 ];
 
-export const letterPhoto = { src: "./media/juntos-2.jpg", alt: "Vitor e Giovanna em uma selfie", cap: "nós dois" };
+// Mensagem digitada na surpresa do bolo
+export const wish = "Feliz aniversário, Giovanna. Hoje o palco é seu: tem foto, música, recado de gente que te ama e uma carta no final. Entra.";
+export const nos = ["Agora não", "Tem certeza?", "Pensa de novo…", "Tá bom, mostra"];
+
+// Opcional: música da gente em destaque na Mixtape. Exemplo: { t: "Título", a: "Artista", note: "Por que é nossa", youtubeId: "ID_DO_VIDEO" }
+export const FEATURED_SONG = null;

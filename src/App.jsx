@@ -1,15 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, gift, chapters, story, photos, videos, tracks, universe, letter, letterPhoto, intro } from "./content.js";
-
-import { universeStickers, chapterStickers } from "./stickers.js";
-
-function Sticker({ name, className = "", eager = false }) {
-  return <img className={"cutout " + className} src={`${import.meta.env.BASE_URL}stickers/${name}.webp`}
-    alt="" aria-hidden="true" loading={eager ? "eager" : "lazy"} decoding="async" draggable="false" width="160" height="160" />;
-}
-function StickerStrip({ names, className = "" }) {
-  return <div className={"sticker-strip " + className} aria-hidden="true">{names.map((name) => <Sticker key={name} name={name} />)}</div>;
-}
+import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, story, photos, videos, tracks, universe, letter, wish, nos, FEATURED_SONG } from "./content.js";
+import { themes, label, items, src, sticker } from "./stickers.js";
 
 const PATHS = {
   pick: "M12 3c5 0 8 3 8 7 0 6-5 11-8 11s-8-5-8-11c0-4 3-7 8-7z",
@@ -32,6 +23,12 @@ const PATHS = {
 const Icon = ({ n, size = 24 }) => (
   <svg viewBox="0 0 24 24" width={size} height={size} fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={PATHS[n]} /></svg>
 );
+
+const Stk = ({ t, k = 0, size, className = "", style }) => (
+  <img className={"sk " + className} src={sticker(t, k)} alt="" decoding="async" loading="lazy"
+    style={size ? { width: size, height: size, ...style } : style} />
+);
+const RX = ["volei", "gatos", "coca", "gatos", "jiu"];
 
 const hash = () => location.hash.replace(/^#\/?/, "");
 const go = (p) => { location.hash = "/" + p; };
@@ -72,6 +69,65 @@ function Carousel({ items, render, label, wide }) {
   );
 }
 
+function Typed({ text }) {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setN(text.length); return; }
+    const t = setInterval(() => setN((x) => { if (x >= text.length) { clearInterval(t); return x; } return x + 1; }), 32);
+    return () => clearInterval(t);
+  }, [text]);
+  return <><span className="sr">{text}</span><span aria-hidden="true">{text.slice(0, n)}<i className="caret" /></span></>;
+}
+
+const Cake = ({ lit }) => (
+  <svg viewBox="0 0 120 120" width="100%" aria-hidden="true">
+    <rect x="20" y="70" width="80" height="34" rx="8" fill="#e23b5a" />
+    <rect x="28" y="50" width="64" height="26" rx="8" fill="#ff9ccf" />
+    <path d="M20 78c8 8 14-6 22 0s14-6 22 0 14-6 22 0 10 4 14-1" fill="none" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+    <rect x="57" y="30" width="6" height="22" rx="3" fill="#4560e6" />
+    {lit && <path className="flame" d="M60 12c6 7 7 11 0 16-7-5-6-9 0-16z" fill="#f5cf5c" />}
+  </svg>
+);
+
+const Flower = () => (
+  <svg className="flower" viewBox="0 0 100 100" aria-hidden="true">
+    {[0, 60, 120, 180, 240, 300].map((r) => <ellipse key={r} cx="50" cy="26" rx="11" ry="22" fill="#fff" stroke="#e8dfd0" strokeWidth="1.5" transform={`rotate(${r} 50 50)`} />)}
+    <circle cx="50" cy="50" r="10" fill="#f5cf5c" />
+  </svg>
+);
+
+function Surprise() {
+  const [step, setStep] = useState(0), [no, setNo] = useState(0);
+  return (
+    <main className="wrap stage surprise">
+      {step === 0 && <div className="rise">
+        <Stk t="gatos" k={4} size={120} className="mx" />
+        <p className="kicker">Antes do show</p>
+        <h1 style={{ fontSize: "clamp(38px,8vw,68px)", marginTop: 14 }}>Tenho uma surpresa. <em>Quer ver?</em></h1>
+        <div className="row">
+          <button className="btn" style={{ transform: `scale(${1 + no * 0.08})` }} onClick={() => setStep(1)}>Quero!</button>
+          <button className="ghost" onClick={() => (no === nos.length - 1 ? setStep(1) : setNo(no + 1))}>{nos[no]}</button>
+        </div>
+      </div>}
+      {step === 1 && <div className="rise">
+        <p className="kicker">Primeiro, o bolo</p>
+        <button className="cake" onClick={() => setStep(2)} aria-label="Tocar no bolo para abrir o presente"><Cake lit /></button>
+        <p className="lead" style={{ margin: "0 auto" }}>Toque no bolo para abrir o presente.</p>
+      </div>}
+      {step === 2 && <div className="rise">
+        <div className="msg">
+          <img className="circ a" src={photos[0].src} alt="" />
+          <img className="circ b" src={photos[1].src} alt="" />
+          <span className="stk"><Cake /></span>
+          <Stk t="gatos" k={7} size={84} className="msg-sk" />
+          <Typed text={wish} />
+        </div>
+        <button className="btn" onClick={() => go("setlist")}>Entrar no show <Icon n="arrow" /></button>
+      </div>}
+    </main>
+  );
+}
+
 const Top = ({ back }) => (
   <header className="wrap top">
     <a className="mark" href="#/">Giovanna <i>2026</i></a>
@@ -82,17 +138,21 @@ const Top = ({ back }) => (
 const Welcome = () => (
   <main className="wrap hero">
     <div className="rise">
-      <p className="kicker">Para a Giovanna</p>
-      <h1 style={{ marginTop: 18 }}>Feliz aniversário, <em>Giovanna.</em></h1>
-      <p className="lead">Fiz isso para guardar o que a gente viveu e dizer, com calma, o quanto você importa pra mim. Antes de abrir, cinco perguntas sobre a gente. Errar não tem problema. Só quero ver quem lembra mais do rolê da igreja.</p>
-      <button className="btn" onClick={() => go("perguntas")}>Começar <Icon n="arrow" /></button>
+      <p className="kicker">Abre as cortinas</p>
+      <h1 style={{ marginTop: 18 }}>Giovanna, hoje o show é <em>seu.</em></h1>
+      <p className="lead">Antes de abrir o palco, um soundcheck rápido: cinco perguntas sobre a gente. Errar não barra ninguém. Só quero ver quem lembra mais do rolê da igreja.</p>
+      <button className="btn" onClick={() => go("soundcheck")}>Começar o soundcheck <Icon n="arrow" /></button>
     </div>
-    <div className="polaroid rise">
+    <div className="oval rise">
       <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" fetchPriority="high" />
       <span>desde 27.11.21</span>
-      <Sticker name="rubi-safira" className="hero-sticker hero-sticker-love" eager />
-      <Sticker name="gato-volei" className="hero-sticker hero-sticker-cat" eager />
-      <Sticker name="stardew-estrela" className="hero-sticker hero-sticker-star" eager />
+      <i className="st st1"><Icon n="spark" size={38} /></i>
+      <i className="st st2"><Icon n="spark" size={30} /></i>
+      <i className="st st3"><Icon n="spark" size={22} /></i>
+      <Stk t="taylor" k={1} size={92} className="fl f1" />
+      <Stk t="gatos" k={3} size={84} className="fl f2" />
+      <Stk t="kate" k={2} size={96} className="fl f3" />
+      <Stk t="volei" k={1} size={80} className="fl f4" />
     </div>
   </main>
 );
@@ -103,11 +163,11 @@ function Quiz() {
     const r = results.find((x) => score >= x.min);
     return (
       <main className="wrap stage rise">
-        <p className="kicker">Perguntas respondidas</p>
+        <p className="kicker">Soundcheck concluído</p>
         <div className="score">{score}<small>/{quiz.length}</small></div>
-        <h1 style={{ fontSize: "clamp(36px,7vw,60px)" }}><em>{r.t}</em></h1>
+        <h1 style={{ fontSize: "clamp(36px,7vw,60px)" }}>Ingresso: <em>{r.t}</em></h1>
         <p className="lead" style={{ margin: "16px 0 30px" }}>{r.d}</p>
-        <div><button className="btn" onClick={() => go("presente")}>Abrir o envelope <Icon n="arrow" /></button></div>
+        <div><button className="btn" onClick={() => go("surpresa")}>Abrir o presente <Icon n="arrow" /></button></div>
       </main>
     );
   }
@@ -115,7 +175,6 @@ function Quiz() {
   const choose = (k) => { if (locked) return; setPick(k); if (k === q.c) setScore((s) => s + 1); };
   return (
     <main className="wrap stage" key={i}>
-      <StickerStrip names={["gato-rdr", "minecraft-bolo"]} className="quiz-stickers" />
       <div className="meta"><span>Pergunta {i + 1} de {quiz.length}</span><span>sem pressão</span></div>
       <div className="bars" aria-hidden="true">{quiz.map((_, k) => <i key={k} className={k <= i ? "on" : ""} />)}</div>
       <h1 className="qh rise">{q.q}</h1>
@@ -129,7 +188,7 @@ function Quiz() {
       </div>
       {locked && (
         <div aria-live="polite">
-          <p className="react rise">{pick === q.c ? q.ok : q.no}</p>
+          <div className="react rise"><Stk t={RX[i % RX.length]} k={i * 2 + (pick === q.c ? 0 : 1)} size={72} /><p>{pick === q.c ? q.ok : q.no}</p></div>
           <button className="btn" onClick={() => { setPick(null); setI(i + 1); }}>{i + 1 === quiz.length ? "Ver resultado" : "Próxima"} <Icon n="arrow" /></button>
         </div>
       )}
@@ -137,90 +196,53 @@ function Quiz() {
   );
 }
 
-function Gift() {
-  const [open, setOpen] = useState(false);
-  return (
-    <main className="wrap gift">
-      <header className="rise">
-        <p className="kicker">{gift.kicker}</p>
-        <h1 style={{ marginTop: 14 }}>{gift.title} <em>{gift.em}</em></h1>
-      </header>
-      <button type="button" className={"envelope" + (open ? " open" : "")} onClick={() => setOpen((o) => !o)}
-        aria-expanded={open} aria-label={open ? "Fechar o envelope" : "Abrir o envelope"}>
-        <span className="env-flap" /><span className="env-pocket" />
-        <Sticker name="gato-morango" className="envelope-sticker" eager />
-        <span className="env-seal"><Icon n="heart" size={22} /></span>
-      </button>
-      <p className="env-hint" aria-hidden={open}>{open ? "\u00a0" : gift.hint}</p>
-      {open && (
-        <article className="note rise" aria-live="polite">
-          <figure className="oval">
-            <img src={gift.photo} alt={gift.alt} />
-            <i className="st1"><Icon n="spark" size={20} /></i><i className="st2"><Icon n="spark" size={14} /></i>
-          </figure>
-          <div className="note-copy">
-            <span className="hand">{gift.to}</span>
-            {gift.text.map((t, k) => <p key={k}>{t}</p>)}
-            <button className="btn" onClick={() => go("nos")}>Entrar no presente <Icon n="arrow" /></button>
-          </div>
-        </article>
-      )}
-    </main>
-  );
-}
-
-function Scroll() {
+function Setlist() {
   const days = useMemo(() => {
     const n = new Date();
     return Math.max(0, Math.floor((new Date(n.getFullYear(), n.getMonth(), n.getDate()) - SINCE) / 86400000));
   }, []);
   return (
-    <main className="wrap scroll">
-      <section className="intro rise">
-        <p className="kicker">{intro.kicker}</p>
-        <h1 style={{ marginTop: 14 }}>{intro.title} <em>{intro.em}</em></h1>
-        <p className="lead">{intro.lead}</p>
-        <StickerStrip names={["luz", "gato-coca", "stardew-estrela"]} className="intro-stickers" />
-        <div className="count"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
+    <main className="wrap">
+      <section className="set-hero rise">
+        <p className="kicker">Ingresso liberado</p>
+        <h1 style={{ marginTop: 14 }}>Seu <em>setlist.</em></h1>
+        <p className="lead">{chapters.length} faixas. Começa pela primeira ou pula direto para o refrão. A carta fica para o final.</p>
+        <div className="stub"><b>{days.toLocaleString("pt-BR")}</b><span>dias desde o rolê da igreja<br />e o contador não para</span></div>
+        <div className="collage" aria-hidden="true">
+          {[["taylor", 2], ["su", 1], ["kate", 0], ["toh", 4], ["tlou", 1]].map(([t, k], n) => <Stk key={t} t={t} k={k} style={{ "--i": n }} />)}
+        </div>
       </section>
-      {chapters.map((c) => {
-        const Body = BODY[c.id];
-        return (
-          <section className="part" id={c.id} key={c.id} aria-labelledby={"t-" + c.id}>
-            <header>
-              {chapterStickers[c.id] && <StickerStrip names={chapterStickers[c.id]} className="chapter-stickers" />}
-              <span className={"chip c-" + c.c}><Icon n={c.i} size={26} /></span>
-              <h2 className="part-title" id={"t-" + c.id}>{c.title}</h2>
-              <p className="lead">{c.lead}</p>
-            </header>
-            <Body />
-          </section>
-        );
-      })}
+      <ol className="tracks">
+        {chapters.map((c, k) => (
+          <li key={c.id}>
+            <a className={"track c-" + c.c} href={"#/faixa/" + c.id}>
+              <span className="tk-ic"><Icon n={c.i} /></span>
+              <span className="tk-n">{String(k + 1).padStart(2, "0")}</span>
+              <span className="tk-t"><strong>{c.title}</strong><small>{c.hint}</small></span>
+              <Stk t={c.th} k={k} size={56} className="tk-st" />
+              <Icon n="arrow" />
+            </a>
+          </li>
+        ))}
+      </ol>
     </main>
   );
 }
 
 const Story = () => (
-  <ol className="story">{story.map((s) => (
-    <li key={s.d}>
-      <span className="hand">{s.d}</span>
-      <div><h2>{s.t}</h2><p>{s.p}</p>{s.img && <figure className="photo story-photo"><img src={s.img} alt={s.alt} loading="lazy" /><figcaption>{s.cap}</figcaption></figure>}</div>
-    </li>
-  ))}</ol>
+  <ol className="story">{story.map((s) => <li key={s.d}><span className="hand">{s.d}</span><div><h2>{s.t}</h2><p>{s.p}</p></div></li>)}</ol>
 );
-const Photo = ({ p }) => <figure className="photo"><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>;
 function Photos() {
   const [mural, setMural] = useState(false);
   return (
     <>
-      <div className="seg" role="group" aria-label="Modo de ver as fotos">
-        <button type="button" aria-pressed={!mural} onClick={() => setMural(false)}>Carrossel</button>
-        <button type="button" aria-pressed={mural} onClick={() => setMural(true)}>Mural</button>
+      <div className="seg" role="group" aria-label="Modo de exibição">
+        <button aria-pressed={!mural} onClick={() => setMural(false)}>Carrossel</button>
+        <button aria-pressed={mural} onClick={() => setMural(true)}>Mural</button>
       </div>
       {mural
-        ? <div className="mural">{photos.map((p) => <Photo key={p.src} p={p} />)}</div>
-        : <Carousel label="Fotos" items={photos} render={(p) => <Photo p={p} />} />}
+        ? <div className="mural">{photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>)}</div>
+        : <Carousel label="Fotos" items={photos} render={(p) => <figure className="photo"><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>} />}
     </>
   );
 }
@@ -237,23 +259,91 @@ const Videos = () => (
 );
 const Mixtape = () => (
   <>
-    <div className="mix-head"><span className="vinyl" aria-hidden="true" /><p>Toque na seta de cada música para ouvir. Nada começa sozinho.</p></div>
+    <div className="deck"><span className="vinyl" /><div><strong>Lado A</strong><small>{tracks.length} faixas escolhidas para você</small></div></div>
+    {FEATURED_SONG && <div className="feat">
+      <p className="kicker">Nossa música</p>
+      <h2>{FEATURED_SONG.t} <small>{FEATURED_SONG.a}</small></h2>
+      {FEATURED_SONG.note && <p>{FEATURED_SONG.note}</p>}
+      {FEATURED_SONG.youtubeId && <iframe title={FEATURED_SONG.t} loading="lazy" allow="encrypted-media; picture-in-picture" allowFullScreen src={`https://www.youtube-nocookie.com/embed/${FEATURED_SONG.youtubeId}`} />}
+    </div>}
     {SPOTIFY_PLAYLIST_ID && <iframe className="spot" title="Playlist da Giovanna" loading="lazy"
       src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator`}
       allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" />}
-    <ol className="songs">{tracks.map(([t, a, r], k) => <li key={t}><span>{k + 1}</span><div><strong>{t}</strong><small>{a}</small></div><em>{r}</em><a className="song-link" href={"https://www.youtube.com/results?search_query=" + encodeURIComponent(t + " " + a)} target="_blank" rel="noreferrer" aria-label={`Ouvir ${t}, de ${a}`}><Icon n="arrow" size={18} /></a></li>)}</ol>
+    <ol className="songs">{tracks.map(([t, a, r], k) => <li key={t}><span>{k + 1}</span><div><strong>{t}</strong><small>{a}</small></div><em>{r}</em></li>)}</ol>
   </>
 );
 const Universe = () => (
-  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}>
-    <StickerStrip names={universeStickers[u.t] || []} className="universe-stickers" />
-    <h3>{u.t}</h3><p>{u.d}</p>
-  </article>)}</div>
+  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}>{u.th ? <Stk t={u.th} k={u.k || 0} size={84} className="card-sk" /> : <Icon n={u.i} />}<h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
 );
-const Letter = () => (
-  <article className="letter"><figure className="polaroid"><img src={letterPhoto.src} alt={letterPhoto.alt} loading="lazy" /><span>{letterPhoto.cap}</span></figure>{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span><StickerStrip names={["gato-jiu", "volei", "f1"]} className="letter-stickers" /></article>
-);
-const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, carta: Letter };
+function Letter() {
+  const [open, setOpen] = useState(false);
+  if (!open) return (
+    <div className="env-wrap">
+      <button className="env" onClick={() => setOpen(true)} aria-label="Abrir o envelope">
+        <span className="flap" /><span className="seal"><Icon n="heart" /></span><em>Para Giovanna</em>
+      </button>
+      <p className="hint">toque no envelope para abrir</p>
+    </div>
+  );
+  return (
+    <div className="scene rise">
+      <article className="letter">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
+      <figure className="pol"><img src={photos[0].src} alt="" /></figure>
+      <Flower />
+      <Stk t="sdpm" k={3} size={88} className="sc a" />
+      <Stk t="kate" k={1} size={88} className="sc b" />
+    </div>
+  );
+}
+function Album() {
+  const [t, setT] = useState("todos"), [n, setN] = useState(48), [sel, setSel] = useState(null);
+  const all = t === "todos" ? themes.flatMap((k) => items(k).map((i) => [k, i])) : items(t).map((i) => [t, i]);
+  const pickTheme = (k) => { setT(k); setN(48); };
+  return (
+    <>
+      <div className="chips" role="group" aria-label="Filtrar por tema">
+        <button aria-pressed={t === "todos"} onClick={() => pickTheme("todos")}>Todos</button>
+        {themes.map((k) => <button key={k} aria-pressed={t === k} onClick={() => pickTheme(k)}>{label(k)}</button>)}
+      </div>
+      <div className="album">
+        {all.slice(0, n).map(([k, i], x) => (
+          <button key={k + i.f} className="tile" style={{ "--r": ((x * 7) % 9) - 4 + "deg" }} onClick={() => setSel([k, i])} aria-label={"Ampliar figurinha de " + label(k)}>
+            <img src={src(k, i.f)} alt="" loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+      {n < all.length && <button className="btn more" onClick={() => setN(n + 48)}>Mostrar mais ({all.length - n})</button>}
+      {sel && (
+        <div className="lightbox" role="dialog" aria-modal="true" aria-label="Figurinha ampliada" onClick={() => setSel(null)}>
+          <img src={src(sel[0], sel[1].f)} alt="" /><p>{label(sel[0])}</p>
+          <button className="btn" onClick={() => setSel(null)}>Fechar</button>
+        </div>
+      )}
+    </>
+  );
+}
+const BODY = { historia: Story, fotos: Photos, recados: Videos, mixtape: Mixtape, universo: Universe, album: Album, carta: Letter };
+
+function Track({ id }) {
+  const k = chapters.findIndex((c) => c.id === id);
+  if (k < 0) return <Setlist />;
+  const c = chapters[k], next = chapters[k + 1], Body = BODY[id];
+  return (
+    <main className="wrap chap">
+      <header className="rise">
+        <span className={"chip c-" + c.c}><Icon n={c.i} size={26} /></span>
+        <p className="kicker">Faixa {k + 1} de {chapters.length}</p>
+        <h1>{c.title}</h1>
+        <p className="lead">{c.lead}</p>
+      </header>
+      <Body />
+      <nav className="pager" aria-label="Navegação entre faixas">
+        <a href="#/setlist">← setlist</a>
+        {next && <a href={"#/faixa/" + next.id}>{next.title} →</a>}
+      </nav>
+    </main>
+  );
+}
 
 function Foot() {
   const [m, setM] = useState(false);
@@ -268,13 +358,18 @@ function Foot() {
 }
 
 export default function App() {
-  const [a] = useRoute();
-  const light = a === "nos";
-  const back = a === "perguntas" ? "" : a === "presente" ? "perguntas" : light ? "presente" : null;
+  const [a, b] = useRoute();
+  const light = a === "faixa";
+  const cls = light ? "paper" : a === "surpresa" ? "paper stars" : "night";
+  useEffect(() => {
+    const c = chapters.find((x) => x.id === b);
+    document.title = light && c ? c.title + " · Giovanna 2026" : "Giovanna 2026";
+  }, [a, b]);
+  const back = a === "soundcheck" ? "" : light ? "setlist" : null;
   return (
-    <div className={"app " + (light ? "paper" : "night")}>
+    <div className={"app " + cls}>
       <Top back={back} />
-      {a === "perguntas" ? <Quiz /> : a === "presente" ? <Gift /> : light ? <Scroll /> : <Welcome />}
+      {a === "soundcheck" ? <Quiz /> : a === "surpresa" ? <Surprise /> : a === "setlist" ? <Setlist /> : light ? <Track id={b} /> : <Welcome />}
       <Foot />
     </div>
   );
