@@ -1,4 +1,4 @@
-// Todo o texto e os dados do site ficam aqui. Edite sem mexer no layout.
+í÷]çw´ï¾ûÕ®5k­ïßãÖµÛÆ¸Ñ§|ç§Þ// Todo o texto e os dados do site ficam aqui. Edite sem mexer no layout.
 
 export const SINCE = new Date(2021, 10, 27);
 
@@ -109,8 +109,19 @@ export const photos = [
 
 // Os recados aparecem nesta ordem; ela escolhe quando passar ao prÃ³ximo.
 export const videos = [
+  { who: "Alice", src: "./media/recados/alice.mp4" },
   { who: "Laura", src: "https://raw.githubusercontent.com/VitorMateus016/PresenteGiovanna/main/videoLaura.mp4" },
   { who: "Bia", src: "./media/recado-bia.mp4" },
+  { who: "Ana", src: "./media/recados/ana.mp4" },
+  { who: "Clara", src: "./media/recados/clara.mp4" },
+  { who: "Elisa", src: "./media/recados/elisa.mp4" },
+  { who: "Evelin", src: "./media/recados/evelin.mp4" },
+  { who: "Fernanda", src: "./media/recados/fernanda.mp4" },
+  { who: "Helo", src: "./media/recados/helo.mp4" },
+  { who: "Julia e Isabela", src: "./media/recados/julia-e-isabela.mp4" },
+  { who: "Marina", src: "./media/recados/marina.mp4" },
+  { who: "Portal", src: "./media/recados/portal.mp4" },
+  { who: "Elaine", src: "./media/recados/elaine.mp4" },
 ];
 
 export const universe = [
