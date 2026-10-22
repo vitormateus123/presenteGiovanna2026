@@ -7,21 +7,23 @@ export const SPOTIFY_PLAYLIST_ID = "2XWt8iUCquygGzLPqjuRKM";
 
 // o: opções | c: índice da correta | ok/no: reação ao acertar/errar
 export const quiz = [
-  { q: "Qual rolê abriu o nosso contador?", o: ["O rolê da igreja", "Uma viagem da escola", "Um show", "Uma ida ao cinema"], c: 0,
-    ok: "O rolê da igreja, 27/11/2021. É dali que o contador começa a contar.", no: "Foi o rolê da igreja, 27/11/2021. É dali que o contador começa a contar." },
-  { q: "Qual jogo roubou várias horas nossas?", o: ["Stardew Valley", "Minecraft", "Red Dead Redemption", "Friday Night Funkin’"], c: 1,
-    ok: "Minecraft. Horas que ninguém devolve, e eu faria tudo de novo.", no: "Foi o Minecraft. Stardew e Red Dead ficam para o próximo save." },
-  { q: "Qual filme eu te apresentei?", o: ["Jogos Vorazes", "Sociedade dos Poetas Mortos", "Como Treinar o Seu Dragão", "Percy Jackson"], c: 1,
-    ok: "Sociedade dos Poetas Mortos. Carpe diem, capitã.", no: "Foi Sociedade dos Poetas Mortos. Hora de rever, capitã." },
-  { q: "Que bebida tem a sua cara?", o: ["Água de coco", "Chá", "Coquinha gelada", "Suco de laranja"], c: 2,
-    ok: "Coquinha gelada. Nem precisava de pergunta.", no: "Era coquinha gelada. Pergunta de graça." },
-  { q: "Qual era a desculpa clássica para a gente sair?", o: ["Tomar um café", "Comprar pão", "Ir ao parque", "Passear com um gato"], c: 0,
-    ok: "Um café. Nunca foi só o café, né?", no: "Era o café. Nunca foi só o café." },
+  { q: "O que marcou o início do contador da nossa amizade no outro site?", o: ["Uma ida ao cinema", "O rolê da igreja", "Uma viagem da escola", "Um show"], c: 1,
+    ok: "O rolê da igreja, 27/11/2021. Foi ali que começou a contagem.", no: "Foi o rolê da igreja, em 27/11/2021. É dali que o contador parte." },
+  { q: "Qual jogo a gente mais jogou junto?", o: ["Stardew Valley", "Minecraft", "Red Dead Redemption", "Friday Night Funkin’"], c: 1,
+    ok: "Minecraft. Foram muitas horas — e eu faria tudo de novo.", no: "Foi Minecraft. Ainda dá vontade de abrir aquele mundo de novo." },
+  { q: "Qual filme eu te apresentei e te traumatizou? Rs", o: ["Jogos Vorazes", "Como Treinar o Seu Dragão", "Sociedade dos Poetas Mortos", "Percy Jackson"], c: 2,
+    ok: "Sociedade dos Poetas Mortos. Um clássico… e um trauma também, pelo visto.", no: "Foi Sociedade dos Poetas Mortos. Esse trauma tem nome, rs." },
+  { q: "Qual era o apelido da Natani?", o: ["Duvidosa", "Amorosa", "Bondosa", "Preciosa"], c: 0,
+    ok: "Duvidosa. Esse apelido não dá para esquecer.", no: "Era Duvidosa. Os outros até parecem elogios, mas não são o apelido." },
+  { q: "O que seus gatos fazem comigo?", o: ["Alisam", "Mordem", "Miam", "Coagem"], c: 3,
+    ok: "Coagem. Eles sabem exatamente como conseguir o que querem.", no: "Eles me coagem. Os gatos já entenderam como funciona." },
+  { q: "É um plano do governo para…", o: ["Enganar todo mundo", "Vender alho-poró", "Vender sabão em pó", "Vender sabonete"], c: 2,
+    ok: "Vender sabão em pó. Finalmente alguém percebeu o plano.", no: "É para vender sabão em pó. Agora o plano foi revelado." },
 ];
 
 export const results = [
-  { min: 5, t: "Memória de elefante", d: "Cinco de cinco. Você guarda tudo, até o que eu já tinha esquecido." },
-  { min: 3, t: "Quase lá", d: "Nada mal. O que escapou eu conto daqui para frente." },
+  { min: 6, t: "Memória de elefante", d: "Seis de seis! Você lembra de tudo, até do que eu já tinha esquecido." },
+  { min: 4, t: "Quase lá", d: "Mandou bem! O que escapou eu conto daqui para frente." },
   { min: 0, t: "Hora de relembrar", d: "Tudo bem. Esse site existe justamente para lembrar." },
 ];
 
@@ -39,7 +41,7 @@ export const chapters = [
 
 // Prólogo: etapas antes das partes (aparecem no sumário final)
 export const prologue = [
-  { href: "#/", title: "O quiz", hint: "Cinco perguntas sobre a gente", th: "volei" },
+  { href: "#/", title: "O quiz", hint: "Seis perguntas sobre a gente", th: "volei" },
   { href: "#/surpresa", title: "A surpresa", hint: "O bolo e a mensagem", th: "coca" },
 ];
 
