@@ -3,7 +3,7 @@
 export const SINCE = new Date(2021, 10, 27);
 
 // Crie a playlist no Spotify > Compartilhar > Copiar link. O ID é o trecho depois de /playlist/ e antes do "?".
-export const SPOTIFY_PLAYLIST_ID = "";
+export const SPOTIFY_PLAYLIST_ID = "2XWt8iUCquygGzLPqjuRKM";
 
 // o: opções | c: índice da correta | ok/no: reação ao acertar/errar
 export const quiz = [
