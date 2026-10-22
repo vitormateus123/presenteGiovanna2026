@@ -130,8 +130,9 @@ function Quiz() {
     <main className="wrap hero">
       <div className="rise">
         <p className="kicker">Feliz aniversário</p>
-        <h1>Giovanna, isto é <em>para você.</em></h1>
-        <p className="lead">Um manifesto do meu amor por você, em forma de site. Para entrar, cinco perguntas sobre a gente. Errar não barra ninguém. Só quero ver quem lembra mais do rolê da igreja.</p>
+        <h1>Giovanna, isso é <em>para você.</em></h1>
+        <p className="hero-note">18tou bb.</p>
+        <p className="lead">Um manifesto do meu amor por você, em forma de site. Para iniciar, algumas perguntas sobre a gente. Aproveite com calma cada espaço e volte sempre que quiser.</p>
         <button className="btn" onClick={() => setStarted(true)}>Começar o quiz <Icon n="arrow" /></button>
       </div>
       <div className="frame rise">
@@ -408,6 +409,7 @@ function Summary() {
       <ol>{prologue.map((p, k) => <TocItem key={p.href} {...p} n="–" k={k} />)}</ol>
       <h2>As partes</h2>
       <ol>{chapters.map((c, k) => <TocItem key={c.id} href={"#/parte/" + c.id} n={k + 1} title={c.title} hint={c.hint} th={c.th} k={k} c={c.c} seen={seen.includes(c.id)} />)}</ol>
+      <div className="toc-home"><a className="btn" href="#/">Voltar ao início</a></div>
     </main>
   );
 }
