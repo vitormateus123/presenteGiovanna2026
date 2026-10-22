@@ -1,4 +1,4 @@
-í÷]çw´ï¾ûÕ®5k­ïßãÖµÛÆ¸Ñ§|ç§Þ// Todo o texto e os dados do site ficam aqui. Edite sem mexer no layout.
+// Todo o texto e os dados do site ficam aqui. Edite sem mexer no layout.
 
 export const SINCE = new Date(2021, 10, 27);
 
