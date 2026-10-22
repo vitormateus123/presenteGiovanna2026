@@ -258,13 +258,22 @@ function Videos({ done, onDone, onReset, next }) {
   const [i, setI] = useState(0), [finished, setFinished] = useState(false), [failed, setFailed] = useState(false), [ar, setAr] = useState(9 / 16);
   const v = videos[i];
   const nextVideo = () => {
+    document.querySelector(".rec video")?.pause();
     setFinished(false);
     setFailed(false);
     setAr(9 / 16);
     if (i < videos.length - 1) setI((n) => n + 1);
     else onDone();
   };
-  const again = () => { onReset(); setFinished(false); setFailed(false); setAr(9 / 16); setI(0); };
+  const selectVideo = (k) => {
+    document.querySelector(".rec video")?.pause();
+    onReset();
+    setFinished(false);
+    setFailed(false);
+    setAr(9 / 16);
+    setI(k);
+  };
+  const again = () => selectVideo(0);
   return (
     <>
       <figure key={i} className="photo rec rec-switch">
@@ -275,12 +284,26 @@ function Videos({ done, onDone, onReset, next }) {
         <Stk t="su" k={0} size={64} className="rec-sk a" />
         <Stk t="gatos" k={7} size={64} className="rec-sk b" />
       </figure>
+      {!done && !finished && i < videos.length - 1 && <button className="rec-skip" onClick={nextVideo} aria-label={"Pular o recado de " + v.who + " e ir para o próximo"}>Pular este recado <Icon n="arrow" size={16} /></button>}
       {finished && !done && <div className="rec-next" aria-live="polite">
         <p>{failed ? "Este recado não carregou. Você pode tentar reproduzir de novo ou seguir." : i < videos.length - 1 ? "Quando quiser, o próximo recado está aqui." : "Você viu todos os recados."}</p>
         <button className="btn" onClick={nextVideo}>{i < videos.length - 1 ? "Assistir próximo recado" : "Finalizar recados"} <Icon n="arrow" size={20} /></button>
       </div>}
       {done
-        ? <p className="rec-end">Esses foram os recados.<button className="ghost" onClick={again}>Rever do começo</button></p>
+        ? <section className="rec-library" aria-labelledby="rec-library-title">
+            <p className="rec-end">Esses foram os recados.</p>
+            <div className="rec-list-wrap">
+              <h2 id="rec-library-title">Rever um recado</h2>
+              <nav aria-label="Navegação pelos recados">
+                <ol className="rec-list">{videos.map((item, k) => <li key={item.who}>
+                  <button className="rec-choice" onClick={() => selectVideo(k)} aria-label={"Assistir ao recado de " + item.who}>
+                    <span>{String(k + 1).padStart(2, "0")}</span>{item.who}<Icon n="arrow" size={17} />
+                  </button>
+                </li>)}</ol>
+              </nav>
+              <button className="ghost rec-restart" onClick={again}>Rever do começo</button>
+            </div>
+          </section>
         : next && <a className="btn skip-fab" href={"#/parte/" + next.id}>Pular <Icon n="arrow" size={20} /></a>}
     </>
   );
