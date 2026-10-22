@@ -87,6 +87,19 @@ h1 em{font-style:italic;color:var(--accent);padding-right:.08em}
 .rec-next{display:grid;justify-items:center;gap:16px;margin:26px auto 0;text-align:center;animation:rise .45s both}.rec-next p{color:var(--muted);line-height:1.5}.rec-next .btn{justify-content:center}
 .rec-end{display:grid;justify-items:center;gap:14px;margin-top:28px;font-family:var(--hand);font-size:28px;color:var(--fusion);text-align:center}
 .rec-end .ghost{font-family:var(--ui);font-size:16px;color:var(--ink)}
+.rec-skip{display:flex;align-items:center;gap:7px;margin:10px 0 0 auto;padding:8px 2px;color:var(--muted);font-size:14px;text-decoration:underline;text-decoration-color:rgba(98,90,122,.4);text-underline-offset:4px}
+.rec-skip:hover{color:var(--ink);text-decoration-color:currentColor}
+.rec-library{max-width:540px;margin:38px auto 12px;animation:rise .45s both}
+.rec-library .rec-end{display:block;margin:0 0 22px}
+.rec-list-wrap{padding:22px;border:1px solid var(--line);border-radius:20px;background:rgba(255,255,255,.7)}
+.rec-list-wrap h2{margin:0 0 14px;font-family:var(--display);font-size:24px;font-weight:600}
+.rec-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;list-style:none;margin:0;padding:0}
+.rec-choice{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;padding:9px 11px;border:1px solid var(--line);border-radius:12px;background:#fff;text-align:left;font-size:14px;transition:border-color .18s,transform .18s}
+.rec-choice:hover{transform:translateY(-1px);border-color:var(--fusion)}
+.rec-choice span{flex:none;font-variant-numeric:tabular-nums;color:var(--fusion);font-size:12px;font-weight:700}
+.rec-choice svg{flex:none;margin-left:auto;color:var(--muted)}
+.rec-restart{margin-top:18px}
+@media(max-width:520px){.rec-list-wrap{padding:17px}.rec-list{grid-template-columns:1fr;gap:7px}.rec-library{margin-top:30px}}
 .mural{columns:2;column-gap:clamp(12px,2.5vw,22px);padding:4px 5px 12px}
 @media(min-width:700px){.mural{columns:3}}
 @media(min-width:1020px){.mural{columns:4}}
