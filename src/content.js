@@ -32,7 +32,7 @@ export const results = [
 export const chapters = [
   { id: "historia", th: "sdpm", i: "feather", c: "fusion", title: "Nossa história", hint: "Do rolê da igreja às nossas conversas", lead: "Toda história tem uma primeira data. A nossa tem dia, mês e ano, e muitas conversas no meio." },
   { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Nossas lembranças reunidas", lead: "Algumas das fotos que guardo com carinho. Um mural de momentos para ver com calma." },
-  { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo te desejar parabéns. Os recados tocam em sequência, é só assistir." },
+  { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo te desejar parabéns. Assista a cada recado no seu tempo." },
   { id: "universo", th: "su", i: "spark", c: "gold", title: "Seu universo", hint: "Tudo que me lembra você", lead: "As coisas que me fazem pensar em você na hora." },
   { id: "album", i: "gem", c: "teal", th: "arcane", title: "Álbum de figurinhas", hint: "Tudo o que é a sua cara, em figurinha", lead: "Uma coleção inteira por tema. Toque em uma figurinha para ver maior." },
   { id: "playlist", th: "taylor", i: "note", c: "bubble", title: "Playlist", hint: "Para ouvir no fone e tocar na guitarra", lead: "Algumas músicas com a sua cara." },
@@ -107,50 +107,32 @@ export const photos = [
   { src: "./media/fotos-giovanna/selfie-etec.webp", st: ["sdpm", "31"], alt: "Giovanna e Vitor juntos na Etec", cap: "na Etec" },
 ];
 
-// Os recados tocam em sequência, na ordem abaixo
+// Os recados aparecem nesta ordem; ela escolhe quando passar ao próximo.
 export const videos = [
   { who: "Laura", src: "https://raw.githubusercontent.com/VitorMateus016/PresenteGiovanna/main/videoLaura.mp4" },
   { who: "Bia", src: "./media/recado-bia.mp4" },
 ];
 
-// [música, artista, referência] — a playlist é só mais um elemento do site
-export const tracks = [
-  ["Cruel Summer", "Taylor Swift", "Taylor"],
-  ["Mirrorball", "Taylor Swift", "Taylor"],
-  ["Espresso", "Sabrina Carpenter", "Sabrina"],
-  ["Please Please Please", "Sabrina Carpenter", "Sabrina"],
-  ["Pink Pony Club", "Chappell Roan", "Chappell"],
-  ["Good Luck, Babe!", "Chappell Roan", "Chappell"],
-  ["Gnarly", "KATSEYE", "KATSEYE"],
-  ["Touch", "KATSEYE", "KATSEYE"],
-  ["Starving", "Hailee Steinfeld", "Hailee"],
-  ["Future Days", "Pearl Jam", "Ellie"],
-  ["Running Up That Hill", "Kate Bush", "Stranger Things"],
-  ["Enemy", "Imagine Dragons & JID", "Arcane"],
-  ["Stronger Than You", "Estelle", "Steven Universo"],
-  ["Rebelde", "RBD", "Rebelde"],
-];
-
 export const universe = [
-  { c: "ruby", th: "su", t: "Rubi & Safira", d: "Duas cores, uma fusão, zero medo. Steven Universo inteiro cabe nelas." },
-  { c: "teal", th: "toh", t: "Luz & Amity", d: "Começou em rivalidade, terminou em Lumity. Final feliz merecido." },
+  { c: "ruby", art: "./media/icons/rubi-safira.jpg", t: "Rubi & Safira", d: "Duas cores, uma fusão, zero medo. Igual tu e o teu amor." },
+  { c: "teal", th: "toh", t: "Luz & Amity", d: "Começou em rivalidade, terminou em Lumity. Sapatonas no topo uhul" },
   { c: "fusion", th: "kate", t: "Kate Bishop", d: "A mira mais certeira da Marvel e a que você mais defende." },
   { c: "gold", th: "tlou", t: "Ellie", d: "Violão no colo, humor afiado e coragem de sobra. Combina." },
   { c: "bubble", th: "taylor", t: "Trilha oficial", d: "Taylor, Sabrina, Chappell, KATSEYE. E a guitarra para tocar junto." },
-  { c: "sapphire", i: "wave", t: "Praia", d: "Lugar bom é perto da água. Percy Jackson concorda." },
-  { c: "gold", th: "gatos", t: "Gatos", d: "Se tem gato por perto, o resto do assunto espera." },
+  { c: "sapphire", art: "./media/icons/praia.svg", t: "Praia", d: "Lugar bom é perto da água. Percy Jackson concorda." },
+  { c: "gold", th: "gatos", t: "Gatos", d: "Meio óbvio. Deve ter pelo de gato até no seu pulmão." },
   { c: "ruby", th: "coca", t: "Coquinha gelada", d: "A resposta certa para quase toda pergunta." },
-  { c: "fusion", th: "volei", t: "Vôlei", d: "A seleção feminina em quadra e o gato de bola de vôlei em casa." },
-  { c: "sapphire", th: "jiu", k: 2, t: "Jiu-jitsu", d: "Kimono, faixa e a calma de quem sabe cair." },
-  { c: "teal", th: "f1", t: "Fórmula 1", d: "Eu aprendi a gostar por sua causa. Box, box." },
+  { c: "fusion", th: "volei", t: "Vôlei", d: "A seleção feminina em quadra: Rosamaria, Júlia Bergmann, Gabi e etc." },
+  { c: "sapphire", art: "./media/icons/gato-jiu-jitsu.jpg", t: "Jiu-jitsu", d: "Kimono, faixa e a calma de quem sabe cair." },
+  { c: "teal", th: "f1", t: "Fórmula 1", d: "Box box, baby. Bagre, Dando Mollis e Menino Piastri." },
   { c: "bubble", th: "stardew", t: "Stardew, FNF e Red Dead", d: "Três jeitos diferentes de perder a tarde jogando." },
-  { c: "gold", th: "minecraft", t: "Minecraft", d: "O servidor mais longo da nossa história." },
-  { c: "bubble", th: "sdpm", t: "Dickinson e os Poetas", d: "“Hope is the thing with feathers.” Carpe diem, Giovanna." },
-  { c: "ruby", th: "rebelde", t: "Rebelde", d: "Elite Way School, gravata vermelha e todas as músicas decoradas." },
-  { c: "fusion", th: "arcane", t: "Arcane", d: "Piltover, Zaun e uma temporada que ninguém esquece." },
-  { c: "teal", th: "hg", t: "Jogos Vorazes", d: "Katniss, tordo e a mira que não erra." },
+  { c: "gold", th: "minecraft", t: "Minecraft", d: "Minezin nunca é demais." },
+  { c: "bubble", th: "sdpm", t: "Dickinson e os Poetas Mortos", d: "“Hope is the thing with feathers.” Carpe diem, Giovanna." },
+  { c: "ruby", th: "rebelde", t: "Rebelde", d: "Elite Way School, gravata vermelha e todas as músicas decoradas (principalmente as do CEL)." },
+  { c: "fusion", th: "arcane", t: "Arcane", d: "Nunca assisti, mas sei que tem lésbicas no topo. Logo, tu." },
+  { c: "teal", th: "hg", t: "Jogos Vorazes", d: "Katniss, morta de fome e com o Cóccix quebrado. A prr daquele gato e o Peeta camuflado." },
   { c: "gold", th: "httyd", t: "Como Treinar o Seu Dragão", d: "Para quem sabe que todo bicho merece um amigo." },
-  { c: "ruby", th: "st", t: "Stranger Things", d: "Hawkins, Onze e noite de maratona." },
+  { c: "ruby", th: "st", t: "Stranger Things", d: "Hawkins, Kate Bush, vocês me obrigando e o pior final de todos." },
   { c: "sapphire", th: "b99", t: "Brooklyn Nine-Nine", d: "Humor de delegacia e um corgi que roubou a cena." },
 ];
 
@@ -168,6 +150,3 @@ export const letter = [
 // Mensagem digitada na surpresa do bolo (leva ao início das partes)
 export const wish = "Feliz aniversário, Giovanna. Juntei aqui a nossa história, fotos, recados de quem te ama, o seu universo e uma carta no final. Vem comigo.";
 export const nos = ["Agora não", "Tem certeza?", "Pensa de novo…", "Tá bom, mostra"];
-
-// Opcional: música da gente em destaque na Playlist. Exemplo: { t: "Título", a: "Artista", note: "Por que é nossa", youtubeId: "ID_DO_VIDEO" }
-export const FEATURED_SONG = null;

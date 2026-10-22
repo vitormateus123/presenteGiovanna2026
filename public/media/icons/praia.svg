@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Praia com guarda-sol e mar">
+  <path d="M8 70c10-6 20-6 30 0s20 6 30 0 16-6 24 0" fill="none" stroke="#2667bd" stroke-width="4" stroke-linecap="round"/>
+  <path d="M8 80c10-6 20-6 30 0s20 6 30 0 16-6 24 0" fill="none" stroke="#45afd0" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="77" cy="20" r="10" fill="#f5cf5c" stroke="#dd9850" stroke-width="2"/>
+  <path d="M15 49c7-18 26-25 44-18 9 4 15 10 18 18-8-4-14-4-20 0-7-4-14-4-21 0-7-4-14-4-21 0Z" fill="#e23b5a" stroke="#1c1533" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M36 49c4-10 11-16 23-18M57 49c1-7 2-12 2-18" fill="none" stroke="#fff4ea" stroke-width="2"/>
+  <path d="m47 48-7 23" fill="none" stroke="#1c1533" stroke-width="3" stroke-linecap="round"/>
+  <path d="M17 91c19-5 44-5 66 0" fill="none" stroke="#d09a62" stroke-width="4" stroke-linecap="round"/>
+</svg>

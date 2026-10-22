@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, videos, tracks, universe, letter, wish, nos, FEATURED_SONG } from "./content.js";
+import React, { useEffect, useMemo, useState } from "react";
+import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, videos, universe, letter, wish, nos } from "./content.js";
 import { themes, label, items, src, sticker } from "./stickers.js";
 
 const PATHS = {
@@ -249,65 +249,69 @@ function Photos() {
     </div>
   );
 }
-// Recados: um player só, toca um vídeo atrás do outro assim que a parte abre. No fim, libera o botão de continuar.
-// Se o navegador bloquear o autoplay (comum no iPhone), aparece um botão para começar.
-function Videos({ done, onDone, next }) {
-  const [i, setI] = useState(0), [round, setRound] = useState(0), [blocked, setBlocked] = useState(false), [ar, setAr] = useState(9 / 16);
-  const ref = useRef(null), v = videos[i];
-  useEffect(() => {
-    ref.current?.play().then(() => setBlocked(false)).catch(() => setBlocked(true));
-  }, [i, round]);
-  const end = () => { if (i < videos.length - 1) setI(i + 1); else onDone(); };
-  const again = () => { setI(0); setRound((r) => r + 1); };
+// Cada recado termina antes de oferecer o próximo. A troca fica nas mãos de quem assiste.
+function Videos({ done, onDone, onReset }) {
+  const [i, setI] = useState(0), [finished, setFinished] = useState(false), [failed, setFailed] = useState(false), [ar, setAr] = useState(9 / 16);
+  const v = videos[i];
+  const nextVideo = () => {
+    setFinished(false);
+    setFailed(false);
+    setAr(9 / 16);
+    if (i < videos.length - 1) setI((n) => n + 1);
+    else onDone();
+  };
+  const again = () => { onReset(); setFinished(false); setFailed(false); setAr(9 / 16); setI(0); };
   return (
     <>
-      <figure className="photo rec">
-        <video key={i} ref={ref} src={v.src + "#t=0.001"} controls playsInline preload="auto" aria-label={"Recado em vídeo de " + v.who}
+      <figure key={i} className="photo rec rec-switch">
+        <video src={v.src + "#t=0.001"} controls playsInline preload="metadata" aria-label={"Recado em vídeo de " + v.who}
           style={{ aspectRatio: ar }} onLoadedMetadata={(e) => e.target.videoWidth && setAr(e.target.videoWidth / e.target.videoHeight)}
-          onPlay={() => setBlocked(false)} onEnded={end} onError={end} />
-        {blocked && <button className="btn rec-play" onClick={() => ref.current?.play()}>Toque para assistir <Icon n="arrow" size={20} /></button>}
+          onEnded={() => setFinished(true)} onError={() => { setFailed(true); setFinished(true); }} />
         <figcaption>Recado {i + 1} de {videos.length} · {v.who}</figcaption>
         <Stk t="su" k={0} size={64} className="rec-sk a" />
         <Stk t="gatos" k={7} size={64} className="rec-sk b" />
       </figure>
+      {finished && !done && <div className="rec-next" aria-live="polite">
+        <p>{failed ? "Este recado não carregou. Você pode tentar reproduzir de novo ou seguir." : i < videos.length - 1 ? "Quando quiser, o próximo recado está aqui." : "Você viu todos os recados."}</p>
+        <button className="btn" onClick={nextVideo}>{i < videos.length - 1 ? "Assistir próximo recado" : "Finalizar recados"} <Icon n="arrow" size={20} /></button>
+      </div>}
       {done
         ? <p className="rec-end">Esses foram os recados.<button className="ghost" onClick={again}>Rever do começo</button></p>
-        : next && <a className="btn skip-fab" href={"#/parte/" + next.id}>Pular <Icon n="arrow" size={20} /></a>}
+        : null}
     </>
   );
 }
 const Playlist = () => (
   <>
-    {FEATURED_SONG && <div className="feat">
-      <p className="kicker">Nossa música</p>
-      <h2>{FEATURED_SONG.t} <small>{FEATURED_SONG.a}</small></h2>
-      {FEATURED_SONG.note && <p>{FEATURED_SONG.note}</p>}
-      {FEATURED_SONG.youtubeId && <iframe title={FEATURED_SONG.t} loading="lazy" allow="encrypted-media; picture-in-picture" allowFullScreen src={`https://www.youtube-nocookie.com/embed/${FEATURED_SONG.youtubeId}`} />}
-    </div>}
     {SPOTIFY_PLAYLIST_ID && <iframe className="spot" title="Playlist da Giovanna" loading="lazy"
       src={`https://open.spotify.com/embed/playlist/${SPOTIFY_PLAYLIST_ID}?utm_source=generator`}
       allow="encrypted-media; clipboard-write; fullscreen; picture-in-picture" />}
-    <ol className="songs">{tracks.map(([t, a, r], k) => <li key={t}><span>{k + 1}</span><div><strong>{t}</strong><small>{a}</small></div><em>{r}</em></li>)}</ol>
   </>
 );
 const Universe = () => (
-  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}>{u.th ? <Stk t={u.th} k={u.k || 0} size={84} className="card-sk" /> : <Icon n={u.i} />}<h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
+  <div className="uni">{universe.map((u) => <article key={u.t} className={"card c-" + u.c}>{u.art ? <img className="card-art" src={u.art} alt="" loading="lazy" decoding="async" /> : u.th ? <Stk t={u.th} k={u.k || 0} size={84} className="card-sk" /> : <Icon n={u.i} />}<h2>{u.t}</h2><p>{u.d}</p></article>)}</div>
 );
 function Letter() {
-  const [open, setOpen] = useState(false);
-  if (!open) return (
+  const [stage, setStage] = useState("closed");
+  useEffect(() => {
+    if (stage !== "opening") return;
+    const timer = setTimeout(() => setStage("open"), 760);
+    return () => clearTimeout(timer);
+  }, [stage]);
+  const openLetter = () => setStage(window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "open" : "opening");
+  if (stage !== "open") return (
     <div className="env-wrap">
-      <button className="env" onClick={() => setOpen(true)} aria-label="Abrir o envelope">
+      <button className={"env" + (stage === "opening" ? " env-opening" : "")} onClick={openLetter} disabled={stage === "opening"} aria-label="Abrir o envelope">
         <span className="flap" /><span className="seal"><Icon n="heart" /></span><em>Para Giovanna</em>
       </button>
-      <p className="hint">toque no envelope para abrir</p>
+      <p className="hint">{stage === "opening" ? "abrindo a carta…" : "toque no envelope para abrir"}</p>
     </div>
   );
   return (
-    <div className="scene rise">
+    <div className="scene letter-unfold">
       <article className="letter">
         <figure className="pol"><img src={photos[0].src} alt="Giovanna e Vitor juntos" loading="lazy" /></figure>
-        <div className="letter-text">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></div>
+        <div className="letter-text">{letter.map((p, k) => <React.Fragment key={k}><p>{p}</p>{[1, 3, 5].includes(k) && <div className={"letter-inline-sticker " + (k === 3 ? "right" : "left")} aria-hidden="true"><Stk t={k === 1 ? "gatos" : k === 3 ? "su" : "kate"} k={k === 1 ? 9 : k === 3 ? 5 : 1} size={68} /></div>}</React.Fragment>)}<span className="sign">— Vitor</span></div>
       </article>
       <div className="letter-decor" aria-hidden="true">
         <Stk t="kate" k={1} size={76} className="sc b" />
@@ -362,7 +366,7 @@ function Part({ id }) {
         <h1>{c.title}</h1>
         <p className="lead">{c.lead}</p>
       </header>
-      <Body done={done} onDone={() => setDone(true)} next={next} />
+      <Body done={done} onDone={() => setDone(true)} onReset={() => setDone(false)} next={next} />
       <nav id="fim" className="pager" aria-label="Navegação entre partes">
         <a className="pv" href={prev ? "#/parte/" + prev.id : "#/surpresa"}>← {prev ? prev.title : "A surpresa"}</a>
         {(id !== "recados" || done) && <a className="btn" href={next ? "#/parte/" + next.id : "#/sumario"}>{next ? "Continuar: " + next.title : "Ver o sumário"} <Icon n="arrow" /></a>}
