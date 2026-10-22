@@ -111,6 +111,7 @@ export const photos = [
 export const videos = [
   { who: "Alice", src: "./media/recados/alice.mp4" },
   { who: "Laura", src: "https://raw.githubusercontent.com/VitorMateus016/PresenteGiovanna/main/videoLaura.mp4" },
+  { who: "Guilherme", src: "./media/recados/guilherme.mp4" },
   { who: "Bia", src: "./media/recado-bia.mp4" },
   { who: "Ana", src: "./media/recados/ana.mp4" },
   { who: "Clara", src: "./media/recados/clara.mp4" },
