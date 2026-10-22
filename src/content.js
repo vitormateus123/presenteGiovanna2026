@@ -98,13 +98,17 @@ export const photos = [
   { src: "./media/fotos-giovanna/maio-2025.webp", st: ["gatos", "18"], alt: "Giovanna e Vitor em uma selfie descontraída", cap: "de cabeça pra baixo" },
   { src: "./media/fotos-giovanna/junho-2025.webp", alt: "Giovanna e Vitor em uma selfie vista de cima", cap: "outro ângulo" },
   { src: "./media/fotos-giovanna/julho-2025.webp", st: ["taylor", "20"], alt: "Giovanna e Vitor juntos à noite", cap: "uma noite nossa" },
-  { src: "./media/fotos-giovanna/outubro-2026-passeio.webp", st: ["volei", "02"], alt: "Giovanna e Vitor em uma selfie durante um passeio", cap: "por aí" },
   { src: "./media/fotos-giovanna/outubro-2026-dinossauro.webp", st: ["httyd", "06"], alt: "Giovanna e Vitor com outras pessoas e um dinossauro ao fundo", cap: "até o dinossauro apareceu" },
-  { src: "./media/fotos-giovanna/selfie-casa.webp", alt: "Giovanna e Vitor em uma selfie sentados juntos", cap: "bem pertinho" },
+  { src: "./media/fotos-giovanna/selfie-casa.webp", st: ["volei", "02"], alt: "Giovanna e Vitor em uma selfie sentados juntos", cap: "bem pertinho" },
   { src: "./media/fotos-giovanna/selfie-noite.webp", alt: "Giovanna e Vitor sorrindo à noite", cap: "mais uma noite" },
   { src: "./media/fotos-giovanna/selfie-espelho-1.webp", st: ["sabrina", "07"], alt: "Giovanna e Vitor em uma selfie no espelho", cap: "no espelho" },
   { src: "./media/fotos-giovanna/selfie-espelho-2.webp", alt: "Giovanna e Vitor sorrindo em outra selfie no espelho", cap: "mais um reflexo" },
   { src: "./media/fotos-giovanna/selfie-etec.webp", st: ["sdpm", "31"], alt: "Giovanna e Vitor juntos na Etec", cap: "na Etec" },
+];
+
+export const photoComparison = [
+  { src: "./media/fotos-giovanna/primeiras-fotos-juntos.webp", alt: "Giovanna e Vitor em uma de suas primeiras selfies juntos", cap: "Uma de nossas primeiras fotos juntos", st: ["gatos", "13"] },
+  { src: "./media/fotos-giovanna/outubro-2026-passeio.webp", alt: "Giovanna e Vitor em uma selfie durante um passeio", cap: "Nossa foto mais recente", st: ["kate", "03"] },
 ];
 
 // Os recados aparecem nesta ordem; ela escolhe quando passar ao próximo.
