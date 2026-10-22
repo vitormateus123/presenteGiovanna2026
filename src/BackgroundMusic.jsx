@@ -11,14 +11,15 @@ export default function BackgroundMusic() {
   const playPendingRef = useRef(false);
   mutedRef.current = muted;
 
-  const play = useCallback(() => {
+  const play = useCallback((fromUserGesture = false) => {
     const audio = audioRef.current;
-    if (!audio || mutedRef.current || playPendingRef.current) return;
+    if (!audio || mutedRef.current) return;
     if (Array.from(document.querySelectorAll("video")).some(v => !v.paused && !v.ended)) return;
     if (!audio.paused) {
       setBlocked(false);
       return;
     }
+    if (playPendingRef.current && !fromUserGesture) return;
 
     let request;
     try {
@@ -43,9 +44,11 @@ export default function BackgroundMusic() {
   useEffect(() => {
     const audio = audioRef.current;
     audio.volume = 0.2;
+    const startFromQuiz = () => play(true);
     const pauseForVideo = e => { if (e.target.tagName === "VIDEO") audio.pause(); };
     const resumeAfterVideo = e => { if (e.target.tagName === "VIDEO") play(); };
     play();
+    window.addEventListener("giovanna:quiz-start", startFromQuiz);
     document.addEventListener("pointerdown", play);
     document.addEventListener("touchend", play, { passive: true });
     document.addEventListener("click", play);
@@ -54,6 +57,7 @@ export default function BackgroundMusic() {
     document.addEventListener("pause", resumeAfterVideo, true);
     document.addEventListener("ended", resumeAfterVideo, true);
     return () => {
+      window.removeEventListener("giovanna:quiz-start", startFromQuiz);
       document.removeEventListener("pointerdown", play);
       document.removeEventListener("touchend", play);
       document.removeEventListener("click", play);

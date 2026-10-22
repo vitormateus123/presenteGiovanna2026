@@ -133,7 +133,10 @@ function Quiz() {
         <h1>Giovanna, isso é <em>para você.</em></h1>
         <p className="hero-note">18tou bb.</p>
         <p className="lead">Um manifesto do meu amor por você, em forma de site. Para iniciar, algumas perguntas sobre a gente. Aproveite com calma cada espaço e volte sempre que quiser.</p>
-        <button className="btn" onClick={() => setStarted(true)}>Começar o quiz <Icon n="arrow" /></button>
+        <button className="btn" onClick={() => {
+          window.dispatchEvent(new Event("giovanna:quiz-start"));
+          setStarted(true);
+        }}>Começar o quiz <Icon n="arrow" /></button>
       </div>
       <div className="frame rise">
         <img src="./media/fotos-giovanna/outubro-2024-fantasia.webp" alt="Giovanna e Vitor sorrindo juntos, fantasiados" fetchPriority="high" />
