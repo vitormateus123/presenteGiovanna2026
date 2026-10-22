@@ -29,7 +29,6 @@ const Stk = ({ t, k = 0, size, className = "", style }) => (
   <img className={"sk " + className} src={sticker(t, k)} alt="" decoding="async" loading="lazy"
     style={size ? { width: size, height: size, ...style } : style} />
 );
-const RX = ["volei", "gatos", "coca", "gatos", "jiu"];
 
 const hash = () => location.hash.replace(/^#\/?/, "");
 const go = (p) => { location.hash = "/" + p; };
@@ -196,7 +195,7 @@ function Quiz() {
       </div>
       {locked && (
         <div aria-live="polite">
-          <div className="react rise"><Stk t={RX[i % RX.length]} k={i * 2 + (pick === q.c ? 0 : 1)} size={72} /><p>{pick === q.c ? q.ok : q.no}</p></div>
+          <div className="react rise"><Stk t={q.st[0]} k={q.st[1]} size={72} /><p>{pick === q.c ? q.ok : q.no}</p></div>
           <button className="btn" onClick={() => { setPick(null); setI(i + 1); }}>{i + 1 === quiz.length ? "Ver resultado" : "Próxima"} <Icon n="arrow" /></button>
         </div>
       )}

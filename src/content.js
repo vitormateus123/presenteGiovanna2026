@@ -7,17 +7,17 @@ export const SPOTIFY_PLAYLIST_ID = "2XWt8iUCquygGzLPqjuRKM";
 
 // o: opções | c: índice da correta | ok/no: reação ao acertar/errar
 export const quiz = [
-  { q: "O que marcou o início do contador da nossa amizade no outro site?", o: ["Uma ida ao cinema", "O rolê da igreja", "Uma viagem da escola", "Um show"], c: 1,
+  { st: ["su", "14"], q: "O que marcou o início do contador da nossa amizade no outro site?", o: ["Uma ida ao cinema", "O rolê da igreja", "Uma viagem da escola", "Um show"], c: 1,
     ok: "O rolê da igreja, 27/11/2021. Foi ali que começou a contagem.", no: "Foi o rolê da igreja, em 27/11/2021. É dali que o contador parte." },
-  { q: "Qual jogo a gente mais jogou junto?", o: ["Stardew Valley", "Minecraft", "Red Dead Redemption", "Friday Night Funkin’"], c: 1,
+  { st: ["minecraft", "05"], q: "Qual jogo a gente mais jogou junto?", o: ["Stardew Valley", "Minecraft", "Red Dead Redemption", "Friday Night Funkin’"], c: 1,
     ok: "Minecraft. Foram muitas horas — e eu faria tudo de novo.", no: "Foi Minecraft. Ainda dá vontade de abrir aquele mundo de novo." },
-  { q: "Qual filme eu te apresentei e te traumatizou? Rs", o: ["Jogos Vorazes", "Como Treinar o Seu Dragão", "Sociedade dos Poetas Mortos", "Percy Jackson"], c: 2,
+  { st: ["sdpm", "31"], q: "Qual filme eu te apresentei e te traumatizou? Rs", o: ["Jogos Vorazes", "Como Treinar o Seu Dragão", "Sociedade dos Poetas Mortos", "Percy Jackson"], c: 2,
     ok: "Sociedade dos Poetas Mortos. Um clássico… e um trauma também, pelo visto.", no: "Foi Sociedade dos Poetas Mortos. Esse trauma tem nome, rs." },
-  { q: "Qual era o apelido da Natani?", o: ["Duvidosa", "Amorosa", "Bondosa", "Preciosa"], c: 0,
+  { st: ["gatos", "13"], q: "Qual era o apelido da Natani?", o: ["Duvidosa", "Amorosa", "Bondosa", "Preciosa"], c: 0,
     ok: "Duvidosa. Esse apelido não dá para esquecer.", no: "Era Duvidosa. Os outros até parecem elogios, mas não são o apelido." },
-  { q: "O que seus gatos fazem comigo?", o: ["Alisam", "Mordem", "Miam", "Coagem"], c: 3,
+  { st: ["gatos", "03"], q: "O que seus gatos fazem comigo?", o: ["Alisam", "Mordem", "Miam", "Coagem"], c: 3,
     ok: "Coagem. Eles sabem exatamente como conseguir o que querem.", no: "Eles me coagem. Os gatos já entenderam como funciona." },
-  { q: "É um plano do governo para…", o: ["Enganar todo mundo", "Vender alho-poró", "Vender sabão em pó", "Vender sabonete"], c: 2,
+  { st: ["b99", "30"], q: "É um plano do governo para…", o: ["Enganar todo mundo", "Vender alho-poró", "Vender sabão em pó", "Vender sabonete"], c: 2,
     ok: "Vender sabão em pó. Finalmente alguém percebeu o plano.", no: "É para vender sabão em pó. Agora o plano foi revelado." },
 ];
 
@@ -66,24 +66,24 @@ export const hist = {
 };
 
 export const memories = [
-  { d: "29.01.2022", t: "Minha criança", big: 1, st: ["b99", 0], p: "Você me chamou de “minha criança”, agradeceu pelos momentos do dia a dia e fechou com uma ameaça de martelo. O carinho entre a gente já vinha com brincadeira desde o começo." },
-  { d: "09.07.2022", t: "Pode contar comigo", big: 1, st: ["kate", 1], p: "Eu te disse que você era única para mim e que sempre poderia contar comigo. Você respondeu que eu era o melhor amigo que você poderia ter e que eu também podia contar com você." },
-  { d: "13.07.2022", t: "Qualquer assunto", p: "Eu disse que você podia me mandar qualquer coisa, até o assunto mais aleatório. Continua valendo." },
+  { d: "29.01.2022", st: ["gatos", "03"], t: "Minha criança", big: 1, p: "Você me chamou de “minha criança”, agradeceu pelos momentos do dia a dia e fechou com uma ameaça de martelo. O carinho entre a gente já vinha com brincadeira desde o começo." },
+  { d: "09.07.2022", st: ["su", "14"], t: "Pode contar comigo", big: 1, p: "Eu te disse que você era única para mim e que sempre poderia contar comigo. Você respondeu que eu era o melhor amigo que você poderia ter e que eu também podia contar com você." },
+  { d: "13.07.2022", st: ["gatos", "18"], t: "Qualquer assunto", p: "Eu disse que você podia me mandar qualquer coisa, até o assunto mais aleatório. Continua valendo." },
   { d: "15.10.2022", t: "Melhor amigo", p: "Você me chamou de melhor amigo numa conversa descontraída, dessas em que a confiança aparece sem esforço." },
-  { d: "29.01.2023", t: "Escola, cidade ou país", big: 1, st: ["sdpm", 3], p: "No meu aniversário, você disse que eu era seu melhor amigo, que estaria ao meu lado e que me seguiria se eu mudasse de escola, cidade ou país. Tudo com o seu humor de sempre." },
-  { d: "22.10.2024", t: "Confidentes", big: 1, st: ["gatos", 5], p: "No seu aniversário, escrevi que você era minha confidente e que eu gostava de dividir minhas alegrias e dores com você. Você respondeu que eu também era seu confidente, seu melhor amigo e uma das suas pessoas favoritas." },
-  { d: "18.11.2024", t: "Você percebeu", big: 1, st: ["su", 2], p: "Você notou que eu não estava bem, disse que se preocupava comigo e que estaria ali até para as coisas pequenas." },
-  { d: "29.01.2025", t: "Porto seguro", big: 1, st: ["toh", 1], p: "Você me chamou de um dos seus portos seguros e disse que eu te faço rir como ninguém. Essa eu guardo com muito carinho." },
+  { d: "29.01.2023", st: ["sdpm", "31"], t: "Escola, cidade ou país", big: 1, p: "No meu aniversário, você disse que eu era seu melhor amigo, que estaria ao meu lado e que me seguiria se eu mudasse de escola, cidade ou país. Tudo com o seu humor de sempre." },
+  { d: "22.10.2024", st: ["toh", "12"], t: "Confidentes", big: 1, p: "No seu aniversário, escrevi que você era minha confidente e que eu gostava de dividir minhas alegrias e dores com você. Você respondeu que eu também era seu confidente, seu melhor amigo e uma das suas pessoas favoritas." },
+  { d: "18.11.2024", st: ["gatos", "05"], t: "Você percebeu", big: 1, p: "Você notou que eu não estava bem, disse que se preocupava comigo e que estaria ali até para as coisas pequenas." },
+  { d: "29.01.2025", st: ["su", "03"], t: "Porto seguro", big: 1, p: "Você me chamou de um dos seus portos seguros e disse que eu te faço rir como ninguém. Essa eu guardo com muito carinho." },
   { d: "28.09.2025", t: "Sua validação", p: "Você disse que a minha validação era muito importante para você. Eu guardei." },
-  { d: "23.01.2026", t: "Juntinhos", st: ["gatos", 2], p: "“A gente já tá a tanto tempo juntinhos” e “Amo você amigo”. Curto, natural e do jeito que a gente é." },
-  { d: "29.01.2026", t: "Dia de ser fofinha", p: "No meu aniversário, você brincou que aquela era a ocasião anual para ser fofinha comigo e falar de sentimentos." },
+  { d: "23.01.2026", st: ["gatos", "42"], t: "Juntinhos", p: "“A gente já tá a tanto tempo juntinhos” e “Amo você amigo”. Curto, natural e do jeito que a gente é." },
+  { d: "29.01.2026", st: ["sabrina", "07"], t: "Dia de ser fofinha", p: "No meu aniversário, você brincou que aquela era a ocasião anual para ser fofinha comigo e falar de sentimentos." },
 ];
 
 export const trio = [
-  { d: "11.11.2023", t: "Saiu o rolê", big: 1, st: ["volei", 1], p: "Você comemorou que, finalmente, tinha saído o rolê do nosso trio." },
-  { d: "03.07.2024", t: "Fazer de tudo", big: 1, p: "Você disse que faria de tudo para o trio continuar existindo." },
-  { d: "07.12.2025", t: "A foto favorita", big: 1, st: ["taylor", 2], p: "Você chamou uma foto dos três de a sua favorita." },
-  { d: "05.04.2026", t: "Sempre seus favoritos", big: 1, p: "Você disse que eu e a Laura sempre seríamos seus favoritos." },
+  { d: "11.11.2023", st: ["volei", "01"], t: "Saiu o rolê", big: 1, p: "Você comemorou que, finalmente, tinha saído o rolê do nosso trio." },
+  { d: "03.07.2024", st: ["kate", "03"], t: "Fazer de tudo", big: 1, p: "Você disse que faria de tudo para o trio continuar existindo." },
+  { d: "07.12.2025", st: ["st", "21"], t: "A foto favorita", big: 1, p: "Você chamou uma foto dos três de a sua favorita." },
+  { d: "05.04.2026", st: ["gatos", "04"], t: "Sempre seus favoritos", big: 1, p: "Você disse que eu e a Laura sempre seríamos seus favoritos." },
 ];
 
 export const photos = [
