@@ -206,3 +206,10 @@ h1 em{font-style:italic;color:var(--accent);padding-right:.08em}
 }
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.car-track{scroll-behavior:auto}}
+
+/* Trilha sonora: controle no cabeçalho, sem cobrir as imagens. */
+.top{padding-right:clamp(128px,20vw,174px)}
+.sound-toggle{position:absolute;top:16px;right:max(16px,calc((100vw - 1080px)/2));z-index:5;display:flex;align-items:center;gap:8px;min-height:40px;padding:8px 12px;border:1px solid var(--line);border-radius:28px;background:#fff;color:var(--ink);font-size:12px;font-weight:650;box-shadow:0 4px 14px rgba(28,21,51,.06)}
+.sound-toggle:hover{border-color:var(--fusion)}
+.sound-toggle>span:first-child{font-size:19px;line-height:1}
+@media(max-width:520px){.top{padding-right:135px}.mark{font-size:16px}.sound-toggle{right:16px;top:17px;padding:8px 10px;font-size:11px}}
