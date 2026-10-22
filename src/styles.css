@@ -109,6 +109,19 @@ h1 em{font-style:italic;color:var(--accent);padding-right:.08em}
 .mural-sk{position:absolute;top:-16px;right:-10px;z-index:1;width:clamp(46px,13vw,64px)!important;height:clamp(46px,13vw,64px)!important;transform:rotate(8deg)}.mural figure:nth-child(3n+2) .mural-sk{right:auto;left:-10px;transform:rotate(-8deg)}
 .mural img{display:block;width:100%;height:auto;border-radius:3px}
 .mural figcaption{margin-top:7px;font-family:var(--hand);font-size:clamp(18px,2.4vw,23px);line-height:1.1;color:var(--fusion);overflow-wrap:anywhere}
+.photo-comparison{min-width:0;margin:clamp(30px,6vw,64px) 0 4px;padding:clamp(26px,4vw,42px) clamp(8px,3vw,30px) 10px;border-top:1.5px solid var(--line)}
+.photo-comparison h2{margin:0 0 clamp(22px,4vw,36px);font-family:var(--display);font-size:clamp(27px,4vw,38px);text-align:center;color:var(--ink)}
+.photo-comparison h2 span{color:var(--ruby)}
+.photo-comparison-pair{display:grid;grid-template-columns:minmax(0,1fr) clamp(24px,5vw,52px) minmax(0,1fr);gap:clamp(8px,1.5vw,20px);align-items:center;max-width:930px;margin:auto}
+.photo-comparison-card{position:relative;min-width:0;margin:0;padding:clamp(7px,1vw,12px) clamp(7px,1vw,12px) 12px;background:#fff;border-radius:7px;box-shadow:0 15px 30px -18px rgba(28,21,51,.45)}
+.photo-comparison-card:first-child{transform:rotate(-1.5deg)}
+.photo-comparison-card:last-child{transform:rotate(1.5deg)}
+.photo-comparison-card > img:first-child{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px}
+.photo-comparison-card figcaption{margin:10px 6px 2px;font-family:var(--hand);font-size:clamp(22px,3vw,30px);line-height:1.15;text-align:center;color:var(--fusion);overflow-wrap:anywhere}
+.photo-comparison-times{font-family:var(--hand);font-size:clamp(36px,6vw,64px);line-height:1;text-align:center;color:var(--ruby)}
+.photo-comparison-sticker{position:absolute;top:-24px;left:-22px;width:clamp(48px,7vw,72px)!important;height:clamp(48px,7vw,72px)!important;transform:rotate(-14deg)}
+.photo-comparison-card:last-child .photo-comparison-sticker{left:auto;right:-22px;transform:rotate(14deg)}
+@media(max-width:620px){.photo-comparison{padding-inline:16px}.photo-comparison-pair{grid-template-columns:minmax(0,1fr);gap:16px;max-width:390px}.photo-comparison-times{font-size:44px}.photo-comparison-sticker{top:-13px;left:-13px}.photo-comparison-card:last-child .photo-comparison-sticker{right:-13px}}
 .uni{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr))}
 .card{padding:20px;border-radius:20px;border-left:5px solid var(--c);background:color-mix(in srgb,var(--c) 16%,#fff)}
 .card svg{margin-bottom:12px}.card h2{font-family:var(--display);font-size:22px;font-weight:600;margin-bottom:6px}.card p{line-height:1.55;color:var(--muted);font-size:15px}

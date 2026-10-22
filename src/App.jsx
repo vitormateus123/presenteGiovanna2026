@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
-import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, videos, universe, letter, wish, nos } from "./content.js";
+import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, photoComparison, videos, universe, letter, wish, nos } from "./content.js";
 import { themes, label, items, src, sticker } from "./stickers.js";
 
 const PATHS = {
@@ -252,9 +252,26 @@ function History() {
 }
 function Photos() {
   return (
-    <div className="mural" aria-label="Mural de fotos de Giovanna e Vitor">
-      {photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" decoding="async" /><figcaption>{p.cap}</figcaption>{p.st && <Stk t={p.st[0]} k={p.st[1]} size={60} className="mural-sk" />}</figure>)}
-    </div>
+    <>
+      <div className="mural" aria-label="Mural de fotos de Giovanna e Vitor">
+        {photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" decoding="async" /><figcaption>{p.cap}</figcaption>{p.st && <Stk t={p.st[0]} k={p.st[1]} size={60} className="mural-sk" />}</figure>)}
+      </div>
+      <section className="photo-comparison" aria-labelledby="photo-comparison-title">
+        <h2 id="photo-comparison-title">De lá pra cá <span aria-hidden="true">♡</span></h2>
+        <div className="photo-comparison-pair">
+          {photoComparison.map((p, i) => (
+            <React.Fragment key={p.src}>
+              {i > 0 && <span className="photo-comparison-times" aria-hidden="true">×</span>}
+              <figure className="photo-comparison-card">
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" />
+                <figcaption>{p.cap}</figcaption>
+                <Stk t={p.st[0]} k={p.st[1]} size={72} className="photo-comparison-sticker" />
+              </figure>
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 // Cada recado termina antes de oferecer o próximo. A troca fica nas mãos de quem assiste.
