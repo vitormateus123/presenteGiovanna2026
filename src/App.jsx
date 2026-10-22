@@ -35,10 +35,11 @@ const go = (p) => { location.hash = "/" + p; };
 function useRoute() {
   const [h, setH] = useState(hash);
   useEffect(() => {
-    const f = () => { setH(hash()); window.scrollTo(0, 0); };
+    const f = () => setH(hash());
     window.addEventListener("hashchange", f);
     return () => window.removeEventListener("hashchange", f);
   }, []);
+  useLayoutEffect(() => { window.scrollTo(0, 0); }, [h]);
   return h.split("/");
 }
 
