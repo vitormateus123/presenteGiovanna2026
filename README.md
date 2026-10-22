@@ -15,7 +15,11 @@ npm run dev
 npm run build
 ```
 
-A galeria reutiliza três fotos do presente anterior e os recados em vídeo de Laura e Bia. O vídeo da Laura é servido diretamente pelo repositório público original. As cinco perguntas são provisórias e podem ser ajustadas em `src/main.jsx`.
+A galeria reutiliza três fotos do presente anterior e os recados em vídeo de Laura e Bia. O vídeo da Laura é servido diretamente pelo repositório público original. As cinco perguntas, os textos e a ordem das partes ficam em `src/content.js`.
+
+## Fluxo de navegação
+
+Quiz (`#/`) → surpresa do bolo (`#/surpresa`) → partes em ordem (`#/parte/<id>`, cada uma com botão "Continuar") → sumário (`#/sumario`), de onde tudo pode ser revisitado. A ordem das partes é a do array `chapters` em `src/content.js`; para incluir uma parte nova, adicione um item ali e o componente correspondente em `BODY`, em `src/App.jsx`.
 
 ## GitHub Pages
 
