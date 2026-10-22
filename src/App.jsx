@@ -47,33 +47,6 @@ const SEEN = "pg26-vistos";
 const readSeen = () => { try { return JSON.parse(localStorage.getItem(SEEN)) || []; } catch { return []; } };
 const markSeen = (id) => { try { const s = readSeen(); if (!s.includes(id)) localStorage.setItem(SEEN, JSON.stringify([...s, id])); } catch { /* sem storage: segue sem marcar */ } };
 
-function Carousel({ items, render, label, wide }) {
-  const ref = useRef(null);
-  const [i, setI] = useState(0);
-  const to = (k) => {
-    const el = ref.current, ch = el.children[Math.max(0, Math.min(items.length - 1, k))];
-    el.scrollTo({ left: ch.offsetLeft - (el.clientWidth - ch.offsetWidth) / 2, behavior: "smooth" });
-  };
-  const onScroll = () => {
-    const el = ref.current, mid = el.scrollLeft + el.clientWidth / 2;
-    let best = 0, dist = Infinity;
-    [...el.children].forEach((c, k) => { const d = Math.abs(c.offsetLeft + c.offsetWidth / 2 - mid); if (d < dist) { dist = d; best = k; } });
-    setI(best);
-  };
-  return (
-    <div className="car" role="region" aria-roledescription="carrossel" aria-label={label}>
-      <div className={"car-track" + (wide ? " wide" : "")} ref={ref} onScroll={onScroll} tabIndex={0}>
-        {items.map((it, k) => <div className="slide" key={k} aria-label={`${k + 1} de ${items.length}`}>{render(it)}</div>)}
-      </div>
-      <div className="car-ui">
-        <button className="prev" onClick={() => to(i - 1)} disabled={i === 0} aria-label="Anterior"><Icon n="arrow" /></button>
-        <span className="car-count" aria-live="polite">{i + 1} / {items.length}</span>
-        <button onClick={() => to(i + 1)} disabled={i === items.length - 1} aria-label="Próximo"><Icon n="arrow" /></button>
-      </div>
-    </div>
-  );
-}
-
 function Typed({ text }) {
   const [n, setN] = useState(0);
   useEffect(() => {
@@ -230,16 +203,14 @@ function SkipEnd() {
 }
 
 const COLORS = ["ruby", "sapphire", "fusion", "teal", "gold", "bubble"];
-// big: cartão aberto | sem big: nota que abre ao tocar. st: figurinha grudada no canto.
+// st: figurinha grudada no canto do cartão.
 function Timeline({ items }) {
   return (
     <ol className="tl">
       {items.map((m, k) => (
         <li key={m.d} className={"c-" + COLORS[k % COLORS.length]}>
           <span className="hand">{m.d}</span>
-          {m.big
-            ? <article className="card"><h2>{m.t}</h2><p>{m.p}</p></article>
-            : <details className="tl-note"><summary>{m.t}</summary><p>{m.p}</p></details>}
+          <article className="card"><h2>{m.t}</h2><p>{m.p}</p></article>
           {m.st && <Stk t={m.st[0]} k={m.st[1]} size={68} className={"tl-sk" + (k % 2 ? " r" : "")} />}
         </li>
       ))}
@@ -274,21 +245,37 @@ function History() {
 function Photos() {
   return (
     <div className="mural" aria-label="Mural de fotos de Giovanna e Vitor">
-      {photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" decoding="async" /><figcaption>{p.cap}</figcaption></figure>)}
+      {photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" decoding="async" /><figcaption>{p.cap}</figcaption>{p.st && <Stk t={p.st[0]} k={p.st[1]} size={60} className="mural-sk" />}</figure>)}
     </div>
   );
 }
-const Videos = () => (
-  <Carousel wide label="Recados em vídeo" items={videos} render={(v) => (
-    <figure className="photo">
-      <video controls playsInline preload="none" aria-label={"Recado em vídeo de " + v.who}
-        onPlay={(e) => document.querySelectorAll("video").forEach((o) => o !== e.target && o.pause())}>
-        <source src={v.src} type="video/mp4" />
-      </video>
-      <figcaption>{v.who}</figcaption>
-    </figure>
-  )} />
-);
+// Recados: um player só, toca um vídeo atrás do outro assim que a parte abre. No fim, libera o botão de continuar.
+// Se o navegador bloquear o autoplay (comum no iPhone), aparece um botão para começar.
+function Videos({ done, onDone, next }) {
+  const [i, setI] = useState(0), [round, setRound] = useState(0), [blocked, setBlocked] = useState(false), [ar, setAr] = useState(9 / 16);
+  const ref = useRef(null), v = videos[i];
+  useEffect(() => {
+    ref.current?.play().then(() => setBlocked(false)).catch(() => setBlocked(true));
+  }, [i, round]);
+  const end = () => { if (i < videos.length - 1) setI(i + 1); else onDone(); };
+  const again = () => { setI(0); setRound((r) => r + 1); };
+  return (
+    <>
+      <figure className="photo rec">
+        <video key={i} ref={ref} src={v.src + "#t=0.001"} controls playsInline preload="auto" aria-label={"Recado em vídeo de " + v.who}
+          style={{ aspectRatio: ar }} onLoadedMetadata={(e) => e.target.videoWidth && setAr(e.target.videoWidth / e.target.videoHeight)}
+          onPlay={() => setBlocked(false)} onEnded={end} onError={end} />
+        {blocked && <button className="btn rec-play" onClick={() => ref.current?.play()}>Toque para assistir <Icon n="arrow" size={20} /></button>}
+        <figcaption>Recado {i + 1} de {videos.length} · {v.who}</figcaption>
+        <Stk t="su" k={0} size={64} className="rec-sk a" />
+        <Stk t="gatos" k={7} size={64} className="rec-sk b" />
+      </figure>
+      {done
+        ? <p className="rec-end">Esses foram os recados.<button className="ghost" onClick={again}>Rever do começo</button></p>
+        : next && <a className="btn skip-fab" href={"#/parte/" + next.id}>Pular <Icon n="arrow" size={20} /></a>}
+    </>
+  );
+}
 const Playlist = () => (
   <>
     {FEATURED_SONG && <div className="feat">
@@ -362,6 +349,7 @@ const BODY = { historia: History, fotos: Photos, recados: Videos, universo: Univ
 // Uma parte do site: progresso no topo, conteúdo e botão para a próxima (a última leva ao sumário).
 function Part({ id }) {
   const k = chapters.findIndex((c) => c.id === id);
+  const [done, setDone] = useState(false);
   useEffect(() => { if (k >= 0) markSeen(id); }, [id, k]);
   if (k < 0) return <Summary />;
   const c = chapters[k], prev = chapters[k - 1], next = chapters[k + 1], Body = BODY[id];
@@ -374,10 +362,10 @@ function Part({ id }) {
         <h1>{c.title}</h1>
         <p className="lead">{c.lead}</p>
       </header>
-      <Body />
+      <Body done={done} onDone={() => setDone(true)} next={next} />
       <nav id="fim" className="pager" aria-label="Navegação entre partes">
         <a className="pv" href={prev ? "#/parte/" + prev.id : "#/surpresa"}>← {prev ? prev.title : "A surpresa"}</a>
-        <a className="btn" href={next ? "#/parte/" + next.id : "#/sumario"}>{next ? "Continuar: " + next.title : "Ver o sumário"} <Icon n="arrow" /></a>
+        {(id !== "recados" || done) && <a className="btn" href={next ? "#/parte/" + next.id : "#/sumario"}>{next ? "Continuar: " + next.title : "Ver o sumário"} <Icon n="arrow" /></a>}
       </nav>
     </main>
   );
@@ -438,7 +426,7 @@ export default function App() {
   return (
     <div className="app">
       <Top toc={a === "parte"} />
-      {a === "surpresa" ? <Surprise /> : a === "parte" ? <Part id={b} /> : a === "sumario" ? <Summary /> : <Quiz />}
+      {a === "surpresa" ? <Surprise /> : a === "parte" ? <Part key={b} id={b} /> : a === "sumario" ? <Summary /> : <Quiz />}
       <Foot />
     </div>
   );

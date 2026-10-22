@@ -32,7 +32,7 @@ export const results = [
 export const chapters = [
   { id: "historia", th: "sdpm", i: "feather", c: "fusion", title: "Nossa história", hint: "Do rolê da igreja às nossas conversas", lead: "Toda história tem uma primeira data. A nossa tem dia, mês e ano, e muitas conversas no meio." },
   { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Nossas lembranças reunidas", lead: "Algumas das fotos que guardo com carinho. Um mural de momentos para ver com calma." },
-  { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo te desejar parabéns. Aperte o play." },
+  { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo te desejar parabéns. Os recados tocam em sequência, é só assistir." },
   { id: "universo", th: "su", i: "spark", c: "gold", title: "Seu universo", hint: "Tudo que me lembra você", lead: "As coisas que me fazem pensar em você na hora." },
   { id: "album", i: "gem", c: "teal", th: "arcane", title: "Álbum de figurinhas", hint: "Tudo o que é a sua cara, em figurinha", lead: "Uma coleção inteira por tema. Toque em uma figurinha para ver maior." },
   { id: "playlist", th: "taylor", i: "note", c: "bubble", title: "Playlist", hint: "Para ouvir no fone e tocar na guitarra", lead: "Algumas músicas com a sua cara." },
@@ -51,7 +51,7 @@ export const story = [
   { d: "Desde então", t: "Minecraft, fofoca e abraço apertado", p: "Conversa que começa pequena e vai longe, dentro ou fora do jogo." },
 ];
 
-// Nossa história: texto principal + linha do tempo (big = cartão aberto; sem big = nota que abre ao tocar)
+// Nossa história: texto principal + linha do tempo
 // st = [tema, k] da figurinha que "gruda" no cartão
 export const hist = {
   lead: "Eu fui rever nossas conversas no WhatsApp, pedi para a IA analisar e ela trouxe algumas lembranças...",
@@ -66,47 +66,48 @@ export const hist = {
 };
 
 export const memories = [
-  { d: "29.01.2022", st: ["gatos", "03"], t: "Minha criança", big: 1, p: "Você me chamou de “minha criança”, agradeceu pelos momentos do dia a dia e fechou com uma ameaça de martelo. O carinho entre a gente já vinha com brincadeira desde o começo." },
-  { d: "09.07.2022", st: ["su", "14"], t: "Pode contar comigo", big: 1, p: "Eu te disse que você era única para mim e que sempre poderia contar comigo. Você respondeu que eu era o melhor amigo que você poderia ter e que eu também podia contar com você." },
+  { d: "29.01.2022", st: ["gatos", "03"], t: "Minha criança", p: "Você me chamou de “minha criança”, agradeceu pelos momentos do dia a dia e fechou com uma ameaça de martelo. O carinho entre a gente já vinha com brincadeira desde o começo." },
+  { d: "09.07.2022", st: ["su", "14"], t: "Pode contar comigo", p: "Eu te disse que você era única para mim e que sempre poderia contar comigo. Você respondeu que eu era o melhor amigo que você poderia ter e que eu também podia contar com você." },
   { d: "13.07.2022", st: ["gatos", "18"], t: "Qualquer assunto", p: "Eu disse que você podia me mandar qualquer coisa, até o assunto mais aleatório. Continua valendo." },
   { d: "15.10.2022", t: "Melhor amigo", p: "Você me chamou de melhor amigo numa conversa descontraída, dessas em que a confiança aparece sem esforço." },
-  { d: "29.01.2023", st: ["sdpm", "31"], t: "Escola, cidade ou país", big: 1, p: "No meu aniversário, você disse que eu era seu melhor amigo, que estaria ao meu lado e que me seguiria se eu mudasse de escola, cidade ou país. Tudo com o seu humor de sempre." },
-  { d: "22.10.2024", st: ["toh", "12"], t: "Confidentes", big: 1, p: "No seu aniversário, escrevi que você era minha confidente e que eu gostava de dividir minhas alegrias e dores com você. Você respondeu que eu também era seu confidente, seu melhor amigo e uma das suas pessoas favoritas." },
-  { d: "18.11.2024", st: ["gatos", "05"], t: "Você percebeu", big: 1, p: "Você notou que eu não estava bem, disse que se preocupava comigo e que estaria ali até para as coisas pequenas." },
-  { d: "29.01.2025", st: ["su", "03"], t: "Porto seguro", big: 1, p: "Você me chamou de um dos seus portos seguros e disse que eu te faço rir como ninguém. Essa eu guardo com muito carinho." },
+  { d: "29.01.2023", st: ["sdpm", "31"], t: "Escola, cidade ou país", p: "No meu aniversário, você disse que eu era seu melhor amigo, que estaria ao meu lado e que me seguiria se eu mudasse de escola, cidade ou país. Tudo com o seu humor de sempre." },
+  { d: "22.10.2024", st: ["toh", "12"], t: "Confidentes", p: "No seu aniversário, escrevi que você era minha confidente e que eu gostava de dividir minhas alegrias e dores com você. Você respondeu que eu também era seu confidente, seu melhor amigo e uma das suas pessoas favoritas." },
+  { d: "18.11.2024", st: ["gatos", "05"], t: "Você percebeu", p: "Você notou que eu não estava bem, disse que se preocupava comigo e que estaria ali até para as coisas pequenas." },
+  { d: "29.01.2025", st: ["su", "03"], t: "Porto seguro", p: "Você me chamou de um dos seus portos seguros e disse que eu te faço rir como ninguém. Essa eu guardo com muito carinho." },
   { d: "28.09.2025", t: "Sua validação", p: "Você disse que a minha validação era muito importante para você. Eu guardei." },
   { d: "23.01.2026", st: ["gatos", "42"], t: "Juntinhos", p: "“A gente já tá a tanto tempo juntinhos” e “Amo você amigo”. Curto, natural e do jeito que a gente é." },
   { d: "29.01.2026", st: ["sabrina", "07"], t: "Dia de ser fofinha", p: "No meu aniversário, você brincou que aquela era a ocasião anual para ser fofinha comigo e falar de sentimentos." },
 ];
 
 export const trio = [
-  { d: "11.11.2023", st: ["volei", "01"], t: "Saiu o rolê", big: 1, p: "Você comemorou que, finalmente, tinha saído o rolê do nosso trio." },
-  { d: "03.07.2024", st: ["kate", "03"], t: "Fazer de tudo", big: 1, p: "Você disse que faria de tudo para o trio continuar existindo." },
-  { d: "07.12.2025", st: ["st", "21"], t: "A foto favorita", big: 1, p: "Você chamou uma foto dos três de a sua favorita." },
-  { d: "05.04.2026", st: ["gatos", "04"], t: "Sempre seus favoritos", big: 1, p: "Você disse que eu e a Laura sempre seríamos seus favoritos." },
+  { d: "11.11.2023", st: ["volei", "01"], t: "Saiu o rolê", p: "Você comemorou que, finalmente, tinha saído o rolê do nosso trio." },
+  { d: "03.07.2024", st: ["kate", "03"], t: "Fazer de tudo", p: "Você disse que faria de tudo para o trio continuar existindo." },
+  { d: "07.12.2025", st: ["st", "21"], t: "A foto favorita", p: "Você chamou uma foto dos três de a sua favorita." },
+  { d: "05.04.2026", st: ["gatos", "04"], t: "Sempre seus favoritos", p: "Você disse que eu e a Laura sempre seríamos seus favoritos." },
 ];
 
 export const photos = [
-  { src: "./media/juntos-1.jpg", alt: "Giovanna e Vitor juntos em um passeio", cap: "memória 01" },
-  { src: "./media/juntos-2.jpg", alt: "Giovanna e Vitor em uma selfie", cap: "memória 02" },
-  { src: "./media/juntos-3.jpg", alt: "Giovanna e Vitor em uma foto ao ar livre", cap: "memória 03" },
-  { src: "./media/fotos-giovanna/outubro-2024-pintura.webp", alt: "Giovanna e Vitor sorrindo juntos, com pintura no rosto", cap: "um dia colorido" },
-  { src: "./media/fotos-giovanna/outubro-2024-fantasia.webp", alt: "Giovanna e Vitor fantasiados, sorrindo em uma selfie", cap: "fantasiados" },
+  { src: "./media/juntos-1.jpg", st: ["gatos", "13"], alt: "Giovanna e Vitor juntos em um passeio", cap: "Em SP" },
+  { src: "./media/juntos-2.jpg", st: ["su", "14"], alt: "Giovanna e Vitor em uma selfie", cap: "nós dois" },
+  { src: "./media/juntos-3.jpg", st: ["st", "55"], alt: "Giovanna e Vitor em uma foto ao ar livre", cap: "rolê de bike" },
+  { src: "./media/fotos-giovanna/outubro-2024-pintura.webp", st: ["gatos", "42"], alt: "Giovanna e Vitor sorrindo juntos, com pintura no rosto", cap: "um dia colorido" },
+  { src: "./media/fotos-giovanna/outubro-2024-fantasia.webp", st: ["sdpm", "09"], alt: "Giovanna e Vitor fantasiados, sorrindo em uma selfie", cap: "fantasiados" },
   { src: "./media/fotos-giovanna/outubro-2024-sala.webp", alt: "Giovanna e Vitor sentados juntos em uma sala", cap: "na sala" },
   { src: "./media/fotos-giovanna/dezembro-2024.webp", alt: "Giovanna e Vitor em uma selfie dentro de casa", cap: "mais uma selfie" },
-  { src: "./media/fotos-giovanna/janeiro-2025.webp", alt: "Giovanna e Vitor sentados juntos em um evento", cap: "a gente junto" },
-  { src: "./media/fotos-giovanna/maio-2025.webp", alt: "Giovanna e Vitor em uma selfie descontraída", cap: "de cabeça pra baixo" },
+  { src: "./media/fotos-giovanna/janeiro-2025.webp", st: ["kate", "03"], alt: "Giovanna e Vitor sentados juntos em um evento", cap: "a gente junto" },
+  { src: "./media/fotos-giovanna/maio-2025.webp", st: ["gatos", "18"], alt: "Giovanna e Vitor em uma selfie descontraída", cap: "de cabeça pra baixo" },
   { src: "./media/fotos-giovanna/junho-2025.webp", alt: "Giovanna e Vitor em uma selfie vista de cima", cap: "outro ângulo" },
-  { src: "./media/fotos-giovanna/julho-2025.webp", alt: "Giovanna e Vitor juntos à noite", cap: "uma noite nossa" },
-  { src: "./media/fotos-giovanna/outubro-2026-passeio.webp", alt: "Giovanna e Vitor em uma selfie durante um passeio", cap: "por aí" },
-  { src: "./media/fotos-giovanna/outubro-2026-dinossauro.webp", alt: "Giovanna e Vitor com outras pessoas e um dinossauro ao fundo", cap: "até o dinossauro apareceu" },
+  { src: "./media/fotos-giovanna/julho-2025.webp", st: ["taylor", "20"], alt: "Giovanna e Vitor juntos à noite", cap: "uma noite nossa" },
+  { src: "./media/fotos-giovanna/outubro-2026-passeio.webp", st: ["volei", "02"], alt: "Giovanna e Vitor em uma selfie durante um passeio", cap: "por aí" },
+  { src: "./media/fotos-giovanna/outubro-2026-dinossauro.webp", st: ["httyd", "06"], alt: "Giovanna e Vitor com outras pessoas e um dinossauro ao fundo", cap: "até o dinossauro apareceu" },
   { src: "./media/fotos-giovanna/selfie-casa.webp", alt: "Giovanna e Vitor em uma selfie sentados juntos", cap: "bem pertinho" },
   { src: "./media/fotos-giovanna/selfie-noite.webp", alt: "Giovanna e Vitor sorrindo à noite", cap: "mais uma noite" },
-  { src: "./media/fotos-giovanna/selfie-espelho-1.webp", alt: "Giovanna e Vitor em uma selfie no espelho", cap: "no espelho" },
+  { src: "./media/fotos-giovanna/selfie-espelho-1.webp", st: ["sabrina", "07"], alt: "Giovanna e Vitor em uma selfie no espelho", cap: "no espelho" },
   { src: "./media/fotos-giovanna/selfie-espelho-2.webp", alt: "Giovanna e Vitor sorrindo em outra selfie no espelho", cap: "mais um reflexo" },
-  { src: "./media/fotos-giovanna/selfie-etec.webp", alt: "Giovanna e Vitor juntos na Etec", cap: "na Etec" },
+  { src: "./media/fotos-giovanna/selfie-etec.webp", st: ["sdpm", "31"], alt: "Giovanna e Vitor juntos na Etec", cap: "na Etec" },
 ];
 
+// Os recados tocam em sequência, na ordem abaixo
 export const videos = [
   { who: "Laura", src: "https://raw.githubusercontent.com/VitorMateus016/PresenteGiovanna/main/videoLaura.mp4" },
   { who: "Bia", src: "./media/recado-bia.mp4" },
