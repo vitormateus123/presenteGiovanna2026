@@ -43,9 +43,11 @@ export default function BackgroundMusic() {
   useEffect(() => {
     const audio = audioRef.current;
     audio.volume = 0.2;
+    const startFromQuiz = () => play();
     const pauseForVideo = e => { if (e.target.tagName === "VIDEO") audio.pause(); };
     const resumeAfterVideo = e => { if (e.target.tagName === "VIDEO") play(); };
     play();
+    window.addEventListener("giovanna:quiz-start", startFromQuiz);
     document.addEventListener("pointerdown", play);
     document.addEventListener("touchend", play, { passive: true });
     document.addEventListener("click", play);
@@ -54,6 +56,7 @@ export default function BackgroundMusic() {
     document.addEventListener("pause", resumeAfterVideo, true);
     document.addEventListener("ended", resumeAfterVideo, true);
     return () => {
+      window.removeEventListener("giovanna:quiz-start", startFromQuiz);
       document.removeEventListener("pointerdown", play);
       document.removeEventListener("touchend", play);
       document.removeEventListener("click", play);
