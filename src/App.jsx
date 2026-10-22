@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, videos, universe, letter, wish, nos } from "./content.js";
 import { themes, label, items, src, sticker } from "./stickers.js";
 
@@ -123,6 +123,9 @@ const Progress = ({ k, n }) => (
 function Quiz() {
   const [started, setStarted] = useState(false);
   const [i, setI] = useState(0), [pick, setPick] = useState(null), [score, setScore] = useState(0);
+  useLayoutEffect(() => {
+    if (started) window.scrollTo(0, 0);
+  }, [started, i]);
   if (!started) return (
     <main className="wrap hero">
       <div className="rise">
