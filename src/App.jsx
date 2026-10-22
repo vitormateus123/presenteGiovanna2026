@@ -68,7 +68,7 @@ function Carousel({ items, render, label, wide }) {
       </div>
       <div className="car-ui">
         <button className="prev" onClick={() => to(i - 1)} disabled={i === 0} aria-label="Anterior"><Icon n="arrow" /></button>
-        <span className="dots">{items.map((_, k) => <i key={k} className={k === i ? "on" : ""} />)}</span>
+        <span className="car-count" aria-live="polite">{i + 1} / {items.length}</span>
         <button onClick={() => to(i + 1)} disabled={i === items.length - 1} aria-label="Próximo"><Icon n="arrow" /></button>
       </div>
     </div>
@@ -160,7 +160,7 @@ function Quiz() {
         <button className="btn" onClick={() => setStarted(true)}>Começar o quiz <Icon n="arrow" /></button>
       </div>
       <div className="frame rise">
-        <img src="./media/juntos-3.jpg" alt="Giovanna e Vitor em uma foto ao ar livre" fetchPriority="high" />
+        <img src="./media/fotos-giovanna/outubro-2024-fantasia.webp" alt="Giovanna e Vitor sorrindo juntos, fantasiados" fetchPriority="high" />
         <span>desde 27.11.21</span>
         <Stk t="gatos" k={3} size={84} className="fl f1" />
         <Stk t="kate" k={2} size={92} className="fl f2" />
@@ -261,8 +261,7 @@ function Letter() {
   );
   return (
     <div className="scene rise">
-      <article className="letter">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
-      <figure className="pol"><img src={photos[0].src} alt="" /></figure>
+      <article className="letter"><figure className="pol"><img src={photos[0].src} alt="Giovanna e Vitor juntos" loading="lazy" /></figure>{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
       <Flower />
       <Stk t="sdpm" k={3} size={88} className="sc a" />
       <Stk t="kate" k={1} size={88} className="sc b" />

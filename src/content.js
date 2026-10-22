@@ -29,7 +29,7 @@ export const results = [
 // c = cor (paleta no styles.css) | i = ícone | th = tema da figurinha
 export const chapters = [
   { id: "historia", th: "sdpm", i: "feather", c: "fusion", title: "Como começou", hint: "27.11.2021, o rolê da igreja", lead: "Toda história tem uma primeira data. A nossa tem dia, mês e ano." },
-  { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Passa o dedo, tem mais", lead: "Algumas das fotos que guardei do nosso primeiro presente." },
+  { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Passa o dedo, tem mais", lead: "Algumas das fotos que guardo com carinho. Passe para o lado ou abra o mural." },
   { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo te desejar parabéns. Aperte o play." },
   { id: "universo", th: "su", i: "spark", c: "gold", title: "Seu universo", hint: "Tudo que me lembra você", lead: "As coisas que me fazem pensar em você na hora." },
   { id: "album", i: "gem", c: "teal", th: "arcane", title: "Álbum de figurinhas", hint: "Tudo o que é a sua cara, em figurinha", lead: "Uma coleção inteira por tema. Toque em uma figurinha para ver maior." },
@@ -53,6 +53,21 @@ export const photos = [
   { src: "./media/juntos-1.jpg", alt: "Giovanna e Vitor juntos em um passeio", cap: "memória 01" },
   { src: "./media/juntos-2.jpg", alt: "Giovanna e Vitor em uma selfie", cap: "memória 02" },
   { src: "./media/juntos-3.jpg", alt: "Giovanna e Vitor em uma foto ao ar livre", cap: "memória 03" },
+  { src: "./media/fotos-giovanna/outubro-2024-pintura.webp", alt: "Giovanna e Vitor sorrindo juntos, com pintura no rosto", cap: "um dia colorido" },
+  { src: "./media/fotos-giovanna/outubro-2024-fantasia.webp", alt: "Giovanna e Vitor fantasiados, sorrindo em uma selfie", cap: "fantasiados" },
+  { src: "./media/fotos-giovanna/outubro-2024-sala.webp", alt: "Giovanna e Vitor sentados juntos em uma sala", cap: "na sala" },
+  { src: "./media/fotos-giovanna/dezembro-2024.webp", alt: "Giovanna e Vitor em uma selfie dentro de casa", cap: "mais uma selfie" },
+  { src: "./media/fotos-giovanna/janeiro-2025.webp", alt: "Giovanna e Vitor sentados juntos em um evento", cap: "a gente junto" },
+  { src: "./media/fotos-giovanna/maio-2025.webp", alt: "Giovanna e Vitor em uma selfie descontraída", cap: "de cabeça pra baixo" },
+  { src: "./media/fotos-giovanna/junho-2025.webp", alt: "Giovanna e Vitor em uma selfie vista de cima", cap: "outro ângulo" },
+  { src: "./media/fotos-giovanna/julho-2025.webp", alt: "Giovanna e Vitor juntos à noite", cap: "uma noite nossa" },
+  { src: "./media/fotos-giovanna/outubro-2026-passeio.webp", alt: "Giovanna e Vitor em uma selfie durante um passeio", cap: "por aí" },
+  { src: "./media/fotos-giovanna/outubro-2026-dinossauro.webp", alt: "Giovanna e Vitor com outras pessoas e um dinossauro ao fundo", cap: "até o dinossauro apareceu" },
+  { src: "./media/fotos-giovanna/selfie-casa.webp", alt: "Giovanna e Vitor em uma selfie sentados juntos", cap: "bem pertinho" },
+  { src: "./media/fotos-giovanna/selfie-noite.webp", alt: "Giovanna e Vitor sorrindo à noite", cap: "mais uma noite" },
+  { src: "./media/fotos-giovanna/selfie-espelho-1.webp", alt: "Giovanna e Vitor em uma selfie no espelho", cap: "no espelho" },
+  { src: "./media/fotos-giovanna/selfie-espelho-2.webp", alt: "Giovanna e Vitor sorrindo em outra selfie no espelho", cap: "mais um reflexo" },
+  { src: "./media/fotos-giovanna/selfie-etec.webp", alt: "Giovanna e Vitor juntos na Etec", cap: "na Etec" },
 ];
 
 export const videos = [
@@ -102,10 +117,14 @@ export const universe = [
 ];
 
 export const letter = [
-  "Giovanna, feliz aniversário.",
-  "Obrigado pelos dias na 9 de Julho, pelos encontros na Etec e por cada café que era só desculpa. Obrigado por rir comigo, por me ouvir quando precisei e por confiar em mim também.",
-  "Gosto muito de ter você por perto. Que o seu próximo ano venha cheio de história para contar, música para tocar e motivo para rir.",
-  "Te amo.",
+  "Giovanna, minha querida,",
+  "Inicio esta carta manifestando todo o carinho, amor e admiração que sinto por ti. Sou e serei eternamente grato a Deus por ter me dado você como amiga, correspondente e, acima de tudo, como alguém que considero uma verdadeira irmã.",
+  "Saiba que guardo com imenso carinho todos os nossos momentos e lembranças, desde as conversas mais simples até as ocasiões mais especiais, desejando, profundamente, que possamos continuar construindo essas memórias por toda as nossas vidas. São recordações que levarei sempre comigo e que representam o quanto tua amizade é especial para mim.",
+  "Te agradeço por todos esses anos em que esteve ao meu lado, nos momentos bons e ruins, sempre me apoiando, aconselhando e auxiliando quando precisei. Sou imensamente feliz por poder compartilhar contigo tantas experiências e, sobretudo, por saber que tenho em você alguém com quem posso contar. Tua amizade é, sem dúvidas, uma dádiva, e tê-la ao meu lado me torna mais feliz.",
+  "Não sei ao certo o que será do meu futuro, tampouco quais caminhos a vida nos reserva, mas, entre tantas incertezas, uma das poucas certezas que carrego é a de que desejo, profundamente, tê-la sempre comigo. Espero que, independentemente do tempo, da distância ou das circunstâncias, nossa amizade permaneça tão bonita e verdadeira quanto é hoje.",
+  "Que esse novo ciclo que se inicia em tua vida seja repleto de sucessos, alegrias, conquistas e realizações, pois sei que tu é capaz de alcançar tudo aquilo que almejas. Rogo a Deus que continue iluminando teus caminhos, abençoando tuas escolhas e te concedendo sabedoria para enfrentar os desafios que surgirem. Que nunca te faltem motivos para sorrir, sonhos para realizar e pessoas que reconheçam o ser humano extraordinário que você é.",
+  "Eu te amo demais, Giovanna, e desejo, do fundo do meu coração, que alcance tudo aquilo que anseia. Que as melhores coisas desta vida recaiam sobre ti e que a felicidade esteja sempre presente em teus dias. Saiba que, independentemente dos rumos que nossas vidas tomarem, sempre estarei torcendo por você, por tua felicidade e por cada uma de tuas conquistas.",
+  "Um feliz aniversário, meu bem! Que Deus te abençoe imensamente e que ainda tenhamos muitos anos, histórias e momentos para compartilhar. 🤍",
 ];
 
 // Mensagem digitada na surpresa do bolo (leva ao início das partes)
