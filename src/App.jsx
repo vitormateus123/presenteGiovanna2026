@@ -250,7 +250,7 @@ function Photos() {
   );
 }
 // Cada recado termina antes de oferecer o próximo. A troca fica nas mãos de quem assiste.
-function Videos({ done, onDone, onReset }) {
+function Videos({ done, onDone, onReset, next }) {
   const [i, setI] = useState(0), [finished, setFinished] = useState(false), [failed, setFailed] = useState(false), [ar, setAr] = useState(9 / 16);
   const v = videos[i];
   const nextVideo = () => {
@@ -277,7 +277,7 @@ function Videos({ done, onDone, onReset }) {
       </div>}
       {done
         ? <p className="rec-end">Esses foram os recados.<button className="ghost" onClick={again}>Rever do começo</button></p>
-        : null}
+        : next && <a className="btn skip-fab" href={"#/parte/" + next.id}>Pular <Icon n="arrow" size={20} /></a>}
     </>
   );
 }
