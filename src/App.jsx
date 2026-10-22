@@ -208,17 +208,10 @@ const Story = () => (
   <ol className="story">{story.map((s) => <li key={s.d}><span className="hand">{s.d}</span><div><h2>{s.t}</h2><p>{s.p}</p></div></li>)}</ol>
 );
 function Photos() {
-  const [mural, setMural] = useState(false);
   return (
-    <>
-      <div className="seg" role="group" aria-label="Modo de exibição">
-        <button aria-pressed={!mural} onClick={() => setMural(false)}>Carrossel</button>
-        <button aria-pressed={mural} onClick={() => setMural(true)}>Mural</button>
-      </div>
-      {mural
-        ? <div className="mural">{photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>)}</div>
-        : <Carousel label="Fotos" items={photos} render={(p) => <figure className="photo"><img src={p.src} alt={p.alt} loading="lazy" /><figcaption>{p.cap}</figcaption></figure>} />}
-    </>
+    <div className="mural" aria-label="Mural de fotos de Giovanna e Vitor">
+      {photos.map((p) => <figure key={p.src}><img src={p.src} alt={p.alt} loading="lazy" decoding="async" /><figcaption>{p.cap}</figcaption></figure>)}
+    </div>
   );
 }
 const Videos = () => (
@@ -261,10 +254,15 @@ function Letter() {
   );
   return (
     <div className="scene rise">
-      <article className="letter"><figure className="pol"><img src={photos[0].src} alt="Giovanna e Vitor juntos" loading="lazy" /></figure>{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></article>
-      <Flower />
-      <Stk t="sdpm" k={3} size={88} className="sc a" />
-      <Stk t="kate" k={1} size={88} className="sc b" />
+      <article className="letter">
+        <figure className="pol"><img src={photos[0].src} alt="Giovanna e Vitor juntos" loading="lazy" /></figure>
+        <div className="letter-text">{letter.map((p, k) => <p key={k}>{p}</p>)}<span className="sign">— Vitor</span></div>
+      </article>
+      <div className="letter-decor" aria-hidden="true">
+        <Stk t="kate" k={1} size={76} className="sc b" />
+        <Flower />
+        <Stk t="sdpm" k={3} size={76} className="sc a" />
+      </div>
     </div>
   );
 }

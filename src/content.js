@@ -29,7 +29,7 @@ export const results = [
 // c = cor (paleta no styles.css) | i = ícone | th = tema da figurinha
 export const chapters = [
   { id: "historia", th: "sdpm", i: "feather", c: "fusion", title: "Como começou", hint: "27.11.2021, o rolê da igreja", lead: "Toda história tem uma primeira data. A nossa tem dia, mês e ano." },
-  { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Passa o dedo, tem mais", lead: "Algumas das fotos que guardo com carinho. Passe para o lado ou abra o mural." },
+  { id: "fotos", th: "gatos", i: "camera", c: "ruby", title: "Nós, em foto", hint: "Nossas lembranças reunidas", lead: "Algumas das fotos que guardo com carinho. Um mural de momentos para ver com calma." },
   { id: "recados", th: "toh", i: "mic", c: "sapphire", title: "Recados", hint: "Gente que gosta de você, em vídeo", lead: "Eu não sou o único querendo te desejar parabéns. Aperte o play." },
   { id: "universo", th: "su", i: "spark", c: "gold", title: "Seu universo", hint: "Tudo que me lembra você", lead: "As coisas que me fazem pensar em você na hora." },
   { id: "album", i: "gem", c: "teal", th: "arcane", title: "Álbum de figurinhas", hint: "Tudo o que é a sua cara, em figurinha", lead: "Uma coleção inteira por tema. Toque em uma figurinha para ver maior." },
