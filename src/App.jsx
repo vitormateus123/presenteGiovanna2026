@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, photos, videos, tracks, universe, letter, wish, nos, FEATURED_SONG } from "./content.js";
+import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, videos, tracks, universe, letter, wish, nos, FEATURED_SONG } from "./content.js";
 import { themes, label, items, src, sticker } from "./stickers.js";
 
 const PATHS = {
@@ -207,6 +207,71 @@ function Quiz() {
 const Story = () => (
   <ol className="story">{story.map((s) => <li key={s.d}><span className="hand">{s.d}</span><div><h2>{s.t}</h2><p>{s.p}</p></div></li>)}</ol>
 );
+
+// Pular o texto longo: botão no início + atalho flutuante enquanto o fim não aparece na tela.
+const jumpEnd = () => document.getElementById("fim")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
+function SkipEnd() {
+  const [fab, setFab] = useState(false);
+  useEffect(() => {
+    const f = () => { const r = document.getElementById("fim")?.getBoundingClientRect(); setFab(window.scrollY > 600 && !!r && r.top > window.innerHeight); };
+    f();
+    window.addEventListener("scroll", f, { passive: true });
+    window.addEventListener("resize", f);
+    return () => { window.removeEventListener("scroll", f); window.removeEventListener("resize", f); };
+  }, []);
+  return (
+    <>
+      <div className="skip-box">
+        <p>É bastante coisa. Se preferir, dá para pular direto para o fim.</p>
+        <button className="ghost" onClick={jumpEnd}>Pular para o fim <span className="dn"><Icon n="arrow" size={20} /></span></button>
+      </div>
+      {fab && <button className="btn skip-fab" onClick={jumpEnd} aria-label="Pular para o fim desta parte">Pular <span className="dn"><Icon n="arrow" size={20} /></span></button>}
+    </>
+  );
+}
+
+const COLORS = ["ruby", "sapphire", "fusion", "teal", "gold", "bubble"];
+// big: cartão aberto | sem big: nota que abre ao tocar. st: figurinha grudada no canto.
+function Timeline({ items }) {
+  return (
+    <ol className="tl">
+      {items.map((m, k) => (
+        <li key={m.d} className={"c-" + COLORS[k % COLORS.length]}>
+          <span className="hand">{m.d}</span>
+          {m.big
+            ? <article className="card"><h2>{m.t}</h2><p>{m.p}</p></article>
+            : <details className="tl-note"><summary>{m.t}</summary><p>{m.p}</p></details>}
+          {m.st && <Stk t={m.st[0]} k={m.st[1]} size={68} className={"tl-sk" + (k % 2 ? " r" : "")} />}
+        </li>
+      ))}
+    </ol>
+  );
+}
+function History() {
+  return (
+    <>
+      <SkipEnd />
+      <article className="letter hist">
+        <div className="letter-text">
+          <p><strong>{hist.lead}</strong> {hist.text[0]}</p>
+          {hist.text.slice(1).map((p, k) => <p key={k}>{p}</p>)}
+          <span className="sign">— Vitor</span>
+        </div>
+      </article>
+      <div className="letter-decor" aria-hidden="true">
+        <Stk t="gatos" k={9} size={76} className="sc b" />
+        <Flower />
+        <Stk t="su" k={5} size={76} className="sc a" />
+      </div>
+      <h2 className="hsub">Como começou</h2>
+      <Story />
+      <h2 className="hsub">Lembranças de nós dois</h2>
+      <Timeline items={memories} />
+      <h2 className="hsub">E tinha o nosso trio também</h2>
+      <Timeline items={trio} />
+    </>
+  );
+}
 function Photos() {
   return (
     <div className="mural" aria-label="Mural de fotos de Giovanna e Vitor">
@@ -293,7 +358,7 @@ function Album() {
     </>
   );
 }
-const BODY = { historia: Story, fotos: Photos, recados: Videos, universo: Universe, album: Album, playlist: Playlist, carta: Letter };
+const BODY = { historia: History, fotos: Photos, recados: Videos, universo: Universe, album: Album, playlist: Playlist, carta: Letter };
 
 // Uma parte do site: progresso no topo, conteúdo e botão para a próxima (a última leva ao sumário).
 function Part({ id }) {
@@ -311,7 +376,7 @@ function Part({ id }) {
         <p className="lead">{c.lead}</p>
       </header>
       <Body />
-      <nav className="pager" aria-label="Navegação entre partes">
+      <nav id="fim" className="pager" aria-label="Navegação entre partes">
         <a className="pv" href={prev ? "#/parte/" + prev.id : "#/surpresa"}>← {prev ? prev.title : "A surpresa"}</a>
         <a className="btn" href={next ? "#/parte/" + next.id : "#/sumario"}>{next ? "Continuar: " + next.title : "Ver o sumário"} <Icon n="arrow" /></a>
       </nav>
