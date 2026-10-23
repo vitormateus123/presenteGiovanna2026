@@ -195,7 +195,12 @@ h1 em{font-style:italic;color:var(--accent);padding-right:.08em}
 .toc-t svg{vertical-align:-2px;margin-left:8px;color:#1f9d86}
 .toc-home{margin-top:36px}
 .toc-st{transform:rotate(6deg)}
-@media(max-width:520px){.toc-link{grid-template-columns:28px 1fr auto}.toc-link .toc-st{display:none}}
+@media(max-width:520px){
+  .toc-link{grid-template-columns:24px minmax(0,1fr) 36px 18px;gap:8px;padding:12px 11px}
+  .toc-t{min-width:0}.toc-t strong{font-size:clamp(18px,5vw,21px);overflow-wrap:anywhere}.toc-t small{display:block;line-height:1.35}
+  .toc-link .toc-st{width:36px!important;height:36px!important;justify-self:center}
+  .toc-link > svg:last-child{width:18px;height:18px}
+}
 
 /* figurinhas */
 .sk{display:block;object-fit:contain;filter:drop-shadow(0 6px 10px rgba(19,15,42,.3));pointer-events:none;user-select:none}
