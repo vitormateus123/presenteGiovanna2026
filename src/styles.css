@@ -57,6 +57,11 @@ h1 em{font-style:italic;color:var(--accent);padding-right:.08em}
 .opt:disabled{cursor:default;opacity:.55}
 .opt.right{opacity:1;border-color:#1f9d86;background:rgba(60,207,180,.18)}.opt.wrong{opacity:1;border-color:var(--ruby);background:rgba(226,59,90,.12)}
 .react{display:flex;gap:14px;align-items:center;margin:18px 0 20px;padding:16px 18px;border-radius:16px;background:rgba(28,21,51,.05);line-height:1.5}.react p{margin:0}.react .sk{flex:none}
+.quiz-modal{width:min(410px,calc(100vw - 32px));max-width:none;margin:auto;padding:32px 28px;border:1px solid var(--line);border-radius:24px;background:var(--paper);color:var(--ink);text-align:center;box-shadow:0 24px 70px rgba(28,21,51,.25)}
+.quiz-modal::backdrop{background:rgba(28,21,51,.55)}
+.quiz-modal h2{font-family:var(--display);font-size:clamp(26px,7vw,34px);line-height:1.15}
+.quiz-modal p{margin:14px 0 0;color:var(--muted);font-size:13px;line-height:1.5}
+.quiz-modal .btn{justify-content:center;margin-top:26px}
 .score{font-family:var(--display);font-size:clamp(90px,24vw,160px);line-height:1;letter-spacing:-.05em;margin:6px 0 10px}.score small{font-size:.35em;opacity:.5}
 
 /* surpresa */

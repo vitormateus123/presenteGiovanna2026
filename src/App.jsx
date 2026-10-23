@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { SINCE, SPOTIFY_PLAYLIST_ID, quiz, results, chapters, prologue, story, hist, memories, trio, photos, photoComparison, videos, universe, letter, wish, nos } from "./content.js";
 import { themes, label, items, src, sticker } from "./stickers.js";
 
@@ -120,6 +120,47 @@ const Progress = ({ k, n }) => (
   </div>
 );
 
+function FavoriteChoices({ options, onDone }) {
+  const [changed, setChanged] = useState([true, false, false, false]);
+  const [modal, setModal] = useState(null);
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    if (modal && !dialogRef.current?.open) dialogRef.current?.showModal();
+  }, [modal]);
+
+  const choose = (k) => {
+    if (changed[k]) {
+      setModal(changed.every(Boolean) ? "done" : "aww");
+      return;
+    }
+    const next = changed.map((wasChanged, index) => index === k || wasChanged);
+    setChanged(next);
+    setModal(next.every(Boolean) ? "done" : "wrong");
+  };
+
+  return (
+    <>
+      <div className="opts" role="group" aria-label="Escolha uma resposta">
+        {options.map((option, k) => (
+          <button key={k} className="opt" onClick={() => choose(k)}>
+            <b>{"abcd"[k]}</b>{changed[k] ? "Vitor" : option}
+          </button>
+        ))}
+      </div>
+      {modal && (
+        <dialog ref={dialogRef} className="quiz-modal" onClose={() => setModal(null)} aria-labelledby="quiz-modal-title">
+          <h2 id="quiz-modal-title">{modal === "wrong" ? "Ops! Resposta errada." : modal === "aww" ? "Awwn, sério?" : "AGORA SIM! Escolheu certinho"}</h2>
+          {modal === "done" && <p>Brincadeirakkk (se não for a Alice, você apanha)</p>}
+          <button className="btn" onClick={modal === "done" ? onDone : () => dialogRef.current?.close()}>
+            {modal === "wrong" ? "Tente novamente" : modal === "aww" ? "Voltar às opções" : "Ver resultado"}
+          </button>
+        </dialog>
+      )}
+    </>
+  );
+}
+
 // Primeira tela do site: apresentação curta + quiz. Ao terminar, segue para a surpresa.
 function Quiz() {
   const [started, setStarted] = useState(false);
@@ -166,14 +207,15 @@ function Quiz() {
       <div className="meta"><span>Pergunta {i + 1} de {quiz.length}</span><span>sem pressão</span></div>
       <div className="bars" aria-hidden="true">{quiz.map((_, k) => <i key={k} className={k <= i ? "on" : ""} />)}</div>
       <h1 className="qh rise">{q.q}</h1>
-      <div className="opts" role="group" aria-label="Escolha uma resposta">
-        {q.o.map((o, k) => (
-          <button key={o} disabled={locked} onClick={() => choose(k)}
-            className={"opt" + (locked && k === q.c ? " right" : "") + (locked && k === pick && k !== q.c ? " wrong" : "")}>
-            <b>{"abcd"[k]}</b>{o}
-          </button>
-        ))}
-      </div>
+      {q.kind === "favorite" ? <FavoriteChoices options={q.o} onDone={() => { setScore((s) => s + 1); setI(i + 1); }} /> :
+        <div className="opts" role="group" aria-label="Escolha uma resposta">
+          {q.o.map((o, k) => (
+            <button key={o} disabled={locked} onClick={() => choose(k)}
+              className={"opt" + (locked && k === q.c ? " right" : "") + (locked && k === pick && k !== q.c ? " wrong" : "")}>
+              <b>{"abcd"[k]}</b>{o}
+            </button>
+          ))}
+        </div>}
       {locked && (
         <div aria-live="polite">
           <div className="react rise"><Stk t={q.st[0]} k={q.st[1]} size={72} /><p>{pick === q.c ? q.ok : q.no}</p></div>

@@ -19,10 +19,11 @@ export const quiz = [
     ok: "Coagem. Eles sabem exatamente como conseguir o que querem.", no: "Eles me coagem. Os gatos já entenderam como funciona." },
   { st: ["b99", "30"], q: "É um plano do governo para…", o: ["Enganar todo mundo", "Vender alho-poró", "Vender sabão em pó", "Vender sabonete"], c: 2,
     ok: "Vender sabão em pó. Finalmente alguém percebeu o plano.", no: "É para vender sabão em pó. Agora o plano foi revelado." },
+  { kind: "favorite", q: "Quem é sua pessoa favorita?", o: ["Vitor", "Guilherme", "Alice", "Laura"] },
 ];
 
 export const results = [
-  { min: 6, t: "Memória de elefante", d: "Seis de seis! Você lembra de tudo, até do que eu já tinha esquecido." },
+  { min: 7, t: "Memória de elefante", d: "Sete de sete! Você lembra de tudo, até do que eu já tinha esquecido." },
   { min: 4, t: "Quase lá", d: "Mandou bem! O que escapou eu conto daqui para frente." },
   { min: 0, t: "Hora de relembrar", d: "Tudo bem. Esse site existe justamente para lembrar." },
 ];
@@ -41,7 +42,7 @@ export const chapters = [
 
 // Prólogo: etapas antes das partes (aparecem no sumário final)
 export const prologue = [
-  { href: "#/", title: "O quiz", hint: "Seis perguntas sobre a gente", th: "volei" },
+  { href: "#/", title: "O quiz", hint: "Sete perguntas sobre a gente", th: "volei" },
   { href: "#/surpresa", title: "A surpresa", hint: "O bolo e a mensagem", th: "coca" },
 ];
 
