@@ -123,6 +123,7 @@ const Progress = ({ k, n }) => (
 function FavoriteChoices({ options, onDone }) {
   const [changed, setChanged] = useState([true, false, false, false]);
   const [modal, setModal] = useState(null);
+  const [completed, setCompleted] = useState(false);
   const dialogRef = useRef(null);
 
   useEffect(() => {
@@ -136,7 +137,7 @@ function FavoriteChoices({ options, onDone }) {
     }
     const next = changed.map((wasChanged, index) => index === k || wasChanged);
     setChanged(next);
-    setModal(next.every(Boolean) ? "done" : "wrong");
+    setModal("wrong");
   };
 
   return (
@@ -148,12 +149,13 @@ function FavoriteChoices({ options, onDone }) {
           </button>
         ))}
       </div>
+      {completed && <div className="favorite-result"><button className="btn" onClick={onDone}>Ver resultado <Icon n="arrow" /></button></div>}
       {modal && (
-        <dialog ref={dialogRef} className="quiz-modal" onClose={() => setModal(null)} aria-labelledby="quiz-modal-title">
+        <dialog ref={dialogRef} className="quiz-modal" onClose={() => { if (modal === "done") setCompleted(true); setModal(null); }} aria-labelledby="quiz-modal-title">
           <h2 id="quiz-modal-title">{modal === "wrong" ? "Ops! Resposta errada." : modal === "aww" ? "Awwn, sério?" : "AGORA SIM! Escolheu certinho"}</h2>
           {modal === "done" && <p>Brincadeirakkk (se não for a Alice, você apanha)</p>}
-          <button className="btn" onClick={modal === "done" ? onDone : () => dialogRef.current?.close()}>
-            {modal === "wrong" ? "Tente novamente" : modal === "aww" ? "Voltar às opções" : "Ver resultado"}
+          <button className="btn" onClick={() => dialogRef.current?.close()}>
+            {modal === "wrong" ? "Tente novamente" : "Voltar às opções"}
           </button>
         </dialog>
       )}
